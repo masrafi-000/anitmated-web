@@ -1,56 +1,122 @@
-import Balancer from "react-wrap-balancer";
+"use client";
+
 import { Container, Section } from "@/components/ds";
+import { cn } from "@/lib/utils";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { useRef } from "react";
+import Balancer from "react-wrap-balancer";
 import { Button } from "../ui/button";
 
-// 1. Define the base props common to all headers
+type Alignment = "center" | "left";
+
 interface BaseHeaderProps {
   title: string;
   desc: string;
+  align?: Alignment;
 }
 
-// 2. Define the primary button logic: 
-// If showPrimary is true, primaryText is REQUIRED. Otherwise, both are optional/never.
-type PrimaryButtonProps = 
+type PrimaryButtonProps =
   | { showPrimary: true; primaryText: string; onPrimaryClick?: () => void }
   | { showPrimary?: false; primaryText?: never; onPrimaryClick?: never };
 
-// 3. Define the secondary button logic independently
-type SecondaryButtonProps = 
-  | { showSecondary: true; secondaryText: string; onSecondaryClick?: () => void }
+type SecondaryButtonProps =
+  | {
+      showSecondary: true;
+      secondaryText: string;
+      onSecondaryClick?: () => void;
+    }
   | { showSecondary?: false; secondaryText?: never; onSecondaryClick?: never };
 
-// 4. Combine them into the final Props type
-type PageHeaderProps = BaseHeaderProps & PrimaryButtonProps & SecondaryButtonProps;
+type PageHeaderProps = BaseHeaderProps &
+  PrimaryButtonProps &
+  SecondaryButtonProps;
 
-const PageHeader = ({ 
-  title, 
-  desc, 
-  showPrimary, 
-  primaryText, 
+const PageHeader = ({
+  title,
+  desc,
+  align = "center",
+  showPrimary,
+  primaryText,
   onPrimaryClick,
-  showSecondary, 
+  showSecondary,
   secondaryText,
-  onSecondaryClick 
+  onSecondaryClick,
 }: PageHeaderProps) => {
+  const isLeft = align === "left";
+
+  // Reference for the h1 tag specifically
+  const headerRef = useRef<HTMLHeadingElement>(null);
+
+  useGSAP(() => {
+    // Animate ONLY the h1
+    gsap.fromTo(
+      headerRef.current,
+      {
+        y: 30,
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
+        delay: 0.1,
+      },
+    );
+  }, []); // Empty dependency array means it runs once on mount
+
   return (
     <Section>
-      <Container className="flex flex-col text-center">
-        <h1 className="mb-4 text-4xl font-bold tracking-tight">{title}</h1>
-        <h3 className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          <Balancer>{desc}</Balancer>
+      <Container
+        className={cn(
+          "flex flex-col",
+          isLeft
+            ? "text-center md:text-left items-center md:items-start"
+            : "text-center items-center",
+        )}
+      >
+        {/* Animated H1 */}
+        <h1
+          ref={headerRef}
+          className="mb-8 text-4xl font-bold  tracking-tighter md:text-6xl lg:text-7xl"
+        >
+          {title}
+        </h1>
+
+        {/* Description (No animation) */}
+        <h3
+          className={cn(
+            "text-lg text-muted-foreground md:text-xl",
+            isLeft ? "mx-auto md:mx-0 max-w-3xl" : "mx-auto max-w-3xl",
+          )}
+        >
+          <Balancer ratio={0.5}>{desc}</Balancer>
         </h3>
-        
-        {/* Render the button group only if at least one button is toggled on */}
+
+        {/* Buttons (No animation) */}
         {(showPrimary || showSecondary) && (
-          <div className="mx-auto mt-8 flex flex-wrap items-center justify-center gap-4">
+          <div
+            className={cn(
+              "mt-10 flex flex-wrap items-center gap-3",
+              isLeft ? "justify-center md:justify-start" : "justify-center",
+            )}
+          >
             {showPrimary && (
-              <Button onClick={onPrimaryClick}>
+              <Button
+                onClick={onPrimaryClick}
+                className="rounded-full h-11 px-8"
+              >
                 {primaryText}
               </Button>
             )}
-            
+
             {showSecondary && (
-              <Button variant="outline" onClick={onSecondaryClick}>
+              <Button
+                variant="outline"
+                onClick={onSecondaryClick}
+                className="rounded-full h-11 px-8"
+              >
                 {secondaryText}
               </Button>
             )}

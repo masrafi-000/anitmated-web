@@ -1,12 +1,12 @@
 import { Container, Main, Section } from "@/components/ds";
-import PageHeader from "@/components/parts/pageHeader";
+import HeroSection from "@/components/landing/hero";
 
 export default function Page() {
   return (
     <Main>
       <Section>
         <Container>
-          <PageHeader title="This is header Page" desc="ajsdfafi" />
+          <HeroSection />
         </Container>
       </Section>
     </Main>

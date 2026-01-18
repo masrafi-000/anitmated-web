@@ -8,10 +8,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import Logo from "@/public/logo.png";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Menu } from "lucide-react";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -45,18 +47,24 @@ export default function Navbar() {
           stagger: 0.08,
           ease: "power3.out",
           delay: 0.2,
-        }
+        },
       );
     }
   }, [isOpen]);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8">
+      <nav className="mx-auto flex h-16  items-center justify-between px-6 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group z-50">
-          <div className="h-5 w-5 rounded-full bg-foreground transition-transform group-hover:rotate-180 duration-500" />
-          <span className="text-lg font-bold tracking-tighter">BRAND</span>
+        <Link href="/" className="flex items-center gap-2 group z-50 text-2xl font-medium tracking-wide text-secondary-foreground">
+          <Image
+            src={Logo}
+            alt="Logo"
+            width={30}
+            height={22}
+            className="transition-all hover:opacity-75 dark:invert"
+          ></Image>
+          Ruby
         </Link>
 
         {/* Desktop Navigation */}
@@ -87,7 +95,7 @@ export default function Navbar() {
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="h-9 w-9">
-                <Menu className="h-5 w-5" />
+                <Menu className="size-6" />
               </Button>
             </SheetTrigger>
             {/* 

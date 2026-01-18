@@ -28,6 +28,7 @@ type DSProps = {
   containerClassName?: string;
   isArticle?: boolean;
   isSpaced?: boolean;
+  
 };
 
 /**
@@ -56,7 +57,7 @@ export const Section = ({ children, className, id, style }: DSProps) => (
  * @param {React.CSSProperties} [props.style] - Inline styles.
  * @returns {JSX.Element} A div element acting as a container.
  */
-export const Container = ({ children, className, id, style }: DSProps) => (
+export const Container = ({ children, className, id, style,  }: DSProps) => (
   <div
     className={cn("container mx-auto p-4 sm:p-6", className)}
     id={id}
@@ -246,7 +247,7 @@ export const Prose = ({
         isSpaced ? "[&_h4:not(:first-child)]:mt-6 [&_h4]:mb-3" : "",
         isSpaced ? "[&_h5:not(:first-child)]:mt-6 [&_h5]:mb-2" : "",
         isSpaced ? "[&_h6:not(:first-child)]:mt-4 [&_h6]:mb-2" : "",
-        className
+        className,
       )}
       id={id}
       dangerouslySetInnerHTML={dangerouslySetInnerHTML}

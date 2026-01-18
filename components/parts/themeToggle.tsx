@@ -40,9 +40,9 @@ export default function ThemeToggle() {
     >
       <div ref={iconRef} className="flex items-center justify-center">
         {resolvedTheme === "dark" ? (
-          <Sun className="size-4" />
+          <Sun className="size-6" />
         ) : (
-          <Moon className="size-4" />
+          <Moon className="size-6" />
         )}
       </div>
     </Button>

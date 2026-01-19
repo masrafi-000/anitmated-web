@@ -1,12 +1,12 @@
-import Balancer from "react-wrap-balancer";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CircleCheck } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
+import Balancer from "react-wrap-balancer";
 import { Container, Section } from "../ds";
 
 interface PricingCardProps {
-  title: "Basic" | "Standard" | "Pro";
+  title: "Essential" | "Growth" | "Enterprise";
   price: string;
   description?: string;
   features: string[];
@@ -18,39 +18,39 @@ interface PricingCardProps {
 // Dummy pricing data
 const pricingData: PricingCardProps[] = [
   {
-    title: "Basic",
-    price: "$29/month",
-    description: "Perfect for small businesses and individuals.",
-    features: ["3 Pages", "Basic SEO", "Email Support", "Responsive Design"],
-    cta: "Choose Basic",
-    href: "https://stripe.com/",
+    title: "Essential",
+    price: "$2,999",
+    description: "Perfect for startups looking to make a strong first impression.",
+    features: ["Brand Identity System", "Responsive Landing Page", "Basic SEO Setup", "Email Support"],
+    cta: "Start Essential",
+    href: "/contact",
   },
   {
-    title: "Standard",
-    price: "$59/month",
-    description: "Best for growing businesses with more needs.",
+    title: "Growth",
+    price: "$5,999",
+    description: "Ideal for scaling businesses needing comprehensive digital solutions.",
     features: [
-      "10 Pages",
-      "Advanced SEO",
+      "Full Website Design",
+      "Advanced Interactive Elements",
       "CMS Integration",
-      "24/7 Chat Support",
+      "Priority Chat Support",
     ],
-    cta: "Choose Standard",
-    href: "https://stripe.com/",
+    cta: "Go for Growth",
+    href: "/contact",
     isPopular: true,
   },
   {
-    title: "Pro",
-    price: "$99/month",
-    description: "Ideal for larger businesses that need scalability.",
+    title: "Enterprise",
+    price: "Custom",
+    description: "For industry leaders requiring bespoke, high-scale digital ecosystems.",
     features: [
-      "Unlimited Pages",
-      "E-commerce Integration",
-      "Priority Support",
-      "Custom API Integration",
+      "Custom Web Application",
+      "Full-Stack Development",
+      "Dedicated Project Manager",
+      "24/7 Priority Support",
     ],
-    cta: "Choose Pro",
-    href: "https://stripe.com/",
+    cta: "Contact Enterprise",
+    href: "/contact",
   },
 ];
 
@@ -58,9 +58,9 @@ const Pricing = () => {
   return (
     <Section>
       <Container className="flex flex-col items-center gap-4 text-center">
-        <h2 className="my-0! text-4xl tracking-wide font-semibold">Pricing</h2>
+        <h2 className="my-0! text-4xl tracking-wide font-semibold">Invest in Excellence</h2>
         <p className="text-lg opacity-70 md:text-2xl">
-          <Balancer>Select the plan that best suits your needs.</Balancer>
+          <Balancer>Flexible engagement models tailored to elevate your brand's digital presence.</Balancer>
         </p>
 
         <div className=" mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">

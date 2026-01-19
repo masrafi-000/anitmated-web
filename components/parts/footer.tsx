@@ -9,13 +9,13 @@ import Balancer from "react-wrap-balancer";
 import * as z from "zod";
 
 import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Logo from "@/public/logo.png";
@@ -59,12 +59,11 @@ export default function Footer() {
                 height={22}
                 className="transition-all hover:opacity-75 dark:invert"
               ></Image>
-              Ruby
+              Ruby Studio
             </Link>
             <p>
               <Balancer>
-                brijr/components is a collection of Next.js, React, Typescript
-                components for building landing pages and websites.
+                Ruby Studio is a premier creative agency dedicated to crafting exceptional digital experiences that inspire and engage.
               </Balancer>
             </p>
             <div className="flex gap-2">
@@ -90,16 +89,16 @@ export default function Footer() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Subscribe for Company Updates</FormLabel>
+                    <FormLabel>Stay in the Loop</FormLabel>
                     <FormControl>
                       <Input
                         className="md:w-96"
-                        placeholder="example@fjord.dev"
+                        placeholder="example@rubystudio.com"
                         {...field}
                       />
                     </FormControl>
                     <FormDescription>
-                      Lorem ipsum dolor sit amet.
+                      Get the latest insights on design trends and agency news.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -116,7 +115,7 @@ export default function Footer() {
             <Link href="/cookie-policy">Cookie Policy</Link>
           </div>
           <p className="text-muted-foreground">
-            © <a href="https://github.com/brijr/components">brijr/components</a>
+            © <a href="/">Ruby Studio</a>
             . All rights reserved. 2024-present.
           </p>
         </Container>

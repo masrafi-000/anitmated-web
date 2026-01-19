@@ -1,15 +1,14 @@
 "use client"
 
-import * as React from "react"
 import Image from "next/image"
 
 import { Card, CardContent } from "@/components/ui/card"
 import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
 } from "@/components/ui/carousel"
 import { Container, Section } from "../ds"
 
@@ -26,12 +25,11 @@ const FeatureNine = () => {
     <Section>
       <Container>
         <h2 className="mt-0! mb-4 text-3xl md:text-5xl font-medium tracking-wide">
-          This is a Feature with an Image Carousel
+          Visual Tales of Innovation
         </h2>
 
         <p className="text-base font-normal text-gray-700 dark:text-gray-400">
-          Use it to showcase your latest images. Get started at
-          components.bridgher.to and make sure to install brijr/craft for styling.
+          Explore a curated collection of our most impact-driven projects, where every pixel tells a story of brand evolution and digital mastery.
         </p>
 
         <Carousel className="mt-6 w-full">

@@ -3,10 +3,10 @@
 
 import { Button } from "@/components/ui/button";
 import {
-  Sheet,
-  SheetContent,
-  SheetTitle,
-  SheetTrigger,
+    Sheet,
+    SheetContent,
+    SheetTitle,
+    SheetTrigger,
 } from "@/components/ui/sheet";
 import Logo from "@/public/logo.png";
 import { useGSAP } from "@gsap/react";
@@ -64,7 +64,7 @@ export default function Navbar() {
             height={22}
             className="transition-all hover:opacity-75 dark:invert"
           ></Image>
-          Ruby
+          Ruby Studio
         </Link>
 
         {/* Desktop Navigation */}
@@ -84,7 +84,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3 border-l pl-6 border-border/60">
             <ThemeToggle />
             <Button size="sm" className="rounded-full px-5 h-9 font-medium">
-              Get Started
+              Let's Talk
             </Button>
           </div>
         </div>
@@ -118,7 +118,7 @@ export default function Navbar() {
                   >
                     <div className="size-5 rounded-full bg-foreground" />
                     <span className="text-xl font-bold tracking-tighter italic">
-                      BRAND
+                      Ruby Studio
                     </span>
                   </Link>
                 </div>

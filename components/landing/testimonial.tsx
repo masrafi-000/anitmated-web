@@ -7,28 +7,28 @@ const items = [
     title: "Product Designer, TechCorp",
     image:
       "https://cdn.badtz-ui.com/images/components/avatar-proof/avatar-2.webp",
-    body: "This design system has transformed our workflow. The components are intuitive and well-documented.",
+    body: "Ruby Studio transformed our digital presence. Their attention to detail is unmatched and the results speak for themselves.",
   },
   {
     name: "Lucas Chen",
     title: "Frontend Developer, WebFlow",
     image:
       "https://cdn.badtz-ui.com/images/components/avatar-proof/avatar-1.webp",
-    body: "The components are well-structured and customizable. They've significantly reduced our development time.",
+    body: "A true partnership. They understood our vision and delivered a product that exceeded our wildest expectations.",
   },
   {
     name: "Sophia Martinez",
     title: "UI/UX Lead, DesignHub",
     image:
       "https://cdn.badtz-ui.com/images/components/avatar-proof/avatar-5.webp",
-    body: "Every component feels polished and professional. It's become our go-to resource for all projects.",
+    body: "The team at Ruby Studio is incredible. Professional, creative, and technically brilliant. Highly recommended.",
   },
   {
     name: "Oliver Thompson",
     title: "Creative Director, StudioX",
     image:
       "https://cdn.badtz-ui.com/images/components/avatar-proof/avatar-4.webp",
-    body: "This design system brings consistency and efficiency to our creative process. Beautiful and functional.",
+    body: "Our conversion rates skyrocketed after the redesign. Ruby Studio brings both beauty and performance to the table.",
   },
 ]
 

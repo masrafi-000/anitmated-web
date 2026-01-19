@@ -3,10 +3,10 @@
 import { ArrowUpRight } from "lucide-react";
 
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Container, Section } from "../ds";
 
@@ -18,25 +18,24 @@ type FAQItem = {
 
 const content: FAQItem[] = [
   {
-    question: "Lorem ipsum dolor sit amet?",
+    question: "What is your design process?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    link: "https://google.com",
+      "We follow a user-centric approach, starting with deep research, followed by iterative design and prototyping, and finishing with pixel-perfect implementation and testing.",
   },
   {
-    question: "Ut enim ad minim veniam?",
+    question: "How long does a typical project take?",
     answer:
-      "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "Timelines vary by scope, but a standard branding and web project typically takes 4-8 weeks from kickoff to launch. We will provide a detailed timeline during our initial consultation.",
   },
   {
-    question: "Duis aute irure dolor in reprehenderit?",
+    question: "Do you offer post-launch support?",
     answer:
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "Yes, we provide comprehensive maintenance packages to ensure your digital asset remains secure, updated, and performing at its best long after launch.",
   },
   {
-    question: "Excepteur sint occaecat cupidatat non proident?",
+    question: "Can you work with existing brand guidelines?",
     answer:
-      "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "Absolutely. We can strictly adhere to your existing guidelines or help evolve them to meet new digital standards if you look to refresh your brand.",
   },
 ];
 

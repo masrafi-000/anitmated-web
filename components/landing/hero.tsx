@@ -11,12 +11,12 @@ const HeroSection = () => {
     <>
       <PageHeader
         align="center"
-        title="Crafting Digital Excellence"
-        desc="A boutique design studio focusing on high-end interactions and classic typography."
+        title="We Architect Digital Dreams"
+        desc="Ruby Studio is a premier creative agency. We merge art with technology to create stunning, high-performance digital experiences that captivate and convert."
         showPrimary={true}
-        primaryText="Start Project"
+        primaryText="Start Your Project"
         showSecondary={true}
-        secondaryText="View Pricing"
+        secondaryText="Explore Our Work"
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-6 w-full">

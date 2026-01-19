@@ -1,15 +1,17 @@
 "use client"
 
-import * as React from "react"
 import { AnimatePresence, motion } from "motion/react"
+import * as React from "react"
 
 import { cn } from "@/lib/utils"
+import NextImage from "next/image"
 
 interface ExpandableCardProps {
   title: string
   src: string
   description: string
   children?: React.ReactNode
+  content?: React.ReactNode
   className?: string
   classNameExpanded?: string
   [key: string]: any
@@ -20,6 +22,7 @@ export function ExpandableCard({
   src,
   description,
   children,
+  content,
   className,
   classNameExpanded,
   ...props
@@ -80,11 +83,41 @@ export function ExpandableCard({
               )}
               {...props}
             >
+              <motion.button
+                aria-label="Close card"
+                layoutId={`button-${title}-${id}`}
+                className="absolute top-4 right-4 z-[60] flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gray-200/90 bg-zinc-50 text-neutral-700 transition-colors duration-300 hover:border-gray-300/90 hover:bg-neutral-50 hover:text-black focus:outline-none dark:border-zinc-900 dark:bg-zinc-950 dark:text-white/70 dark:hover:border-zinc-800 dark:hover:bg-neutral-950 dark:hover:text-white shadow-sm"
+                onClick={() => setActive(false)}
+              >
+                <div className="bg-white/50 backdrop-blur-sm rounded-full p-2">
+                  <motion.div
+                    animate={{ rotate: active ? 45 : 0 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="M12 5v14" />
+                    </svg>
+                  </motion.div>
+                </div>
+              </motion.button>
               <motion.div layoutId={`image-${title}-${id}`}>
                 <div className="relative before:absolute before:inset-x-0 before:bottom-[-1px] before:z-50 before:h-[70px] before:bg-gradient-to-t before:from-zinc-50 dark:before:from-zinc-950">
-                  <img
+                  <NextImage
                     src={src}
                     alt={title}
+                    width={1000}
+                    height={1000}
                     className="h-80 w-full object-cover object-center"
                   />
                 </div>
@@ -105,32 +138,6 @@ export function ExpandableCard({
                       {title}
                     </motion.h3>
                   </div>
-                  <motion.button
-                    aria-label="Close card"
-                    layoutId={`button-${title}-${id}`}
-                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gray-200/90 bg-zinc-50 text-neutral-700 transition-colors duration-300 hover:border-gray-300/90 hover:bg-neutral-50 hover:text-black focus:outline-none dark:border-zinc-900 dark:bg-zinc-950 dark:text-white/70 dark:hover:border-zinc-800 dark:hover:bg-neutral-950 dark:hover:text-white"
-                    onClick={() => setActive(false)}
-                  >
-                    <motion.div
-                      animate={{ rotate: active ? 45 : 0 }}
-                      transition={{ duration: 0.4 }}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M5 12h14" />
-                        <path d="M12 5v14" />
-                      </svg>
-                    </motion.div>
-                  </motion.button>
                 </div>
                 <div className="relative px-6 sm:px-8">
                   <motion.div
@@ -162,10 +169,12 @@ export function ExpandableCard({
       >
         <div className="flex flex-col gap-4">
           <motion.div layoutId={`image-${title}-${id}`}>
-            <img
+            <NextImage
               src={src}
               alt={title}
-              className="h-56 w-64 rounded-lg object-cover object-center"
+              width={1000}
+              height={1000}
+              className="h-60 w-full rounded-lg object-cover object-center"
             />
           </motion.div>
           <div className="flex items-center justify-between">
@@ -182,6 +191,14 @@ export function ExpandableCard({
               >
                 {title}
               </motion.h3>
+              {content && (
+                <motion.div
+                  layoutId={`content-${title}-${id}`}
+                  className="mt-2 text-sm text-zinc-500"
+                >
+                  {content}
+                </motion.div>
+              )}
             </div>
             <motion.button
               aria-label="Open card"

@@ -8,6 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
 import Logo from "@/public/logo.png";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -15,6 +16,7 @@ import { Menu } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 // Use Method 2 from before: Dynamic import to kill hydration errors
@@ -37,6 +39,7 @@ const navItems = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   // GSAP Stagger animation for mobile links
   useGSAP(() => {
@@ -72,15 +75,23 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-8 lg:flex">
           <ul className="flex gap-8">
             {navItems.map((item) => (
               <li key={item.name}>
                 <Link
                   href={item.href}
-                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                  className={cn(
+                    "text-sm font-medium transition-colors hover:text-foreground relative",
+                    pathname === item.href
+                      ? "text-foreground font-semibold"
+                      : "text-muted-foreground"
+                  )}
                 >
                   {item.name}
+                  {pathname === item.href && (
+                    <span className="absolute -bottom-[21px] left-0 h-[2px] w-full bg-primary" />
+                  )}
                 </Link>
               </li>
             ))}
@@ -94,7 +105,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Controls */}
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="flex items-center gap-2 lg:hidden">
           <ThemeToggle />
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
@@ -104,11 +115,11 @@ export default function Navbar() {
             </SheetTrigger>
             {/* 
                 FIX: p-0 removes default shadcn padding. 
-                w-full makes it feel more "editorial" on mobile.
+                Optimized width for mobile devices.
             */}
             <SheetContent
               side="left"
-              className="w-full sm:w-100 p-0 border-r-0"
+              className="w-[300px] sm:w-[400px] p-0 border-r-0"
             >
               <SheetTitle className="sr-only">Menu</SheetTitle>
 
@@ -129,16 +140,22 @@ export default function Navbar() {
 
                 {/* Nav Links */}
                 <div className="flex flex-col space-y-4">
-                  {navItems.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      onClick={() => setIsOpen(false)}
-                      className="mobile-link text-4xl font-light tracking-tighter text-foreground/90 transition-all duration-300 hover:italic hover:translate-x-2"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
+                  {navItems.map((item) => {
+                    const isActive = pathname === item.href;
+                    return (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        onClick={() => setIsOpen(false)}
+                        className={cn(
+                          "mobile-link text-4xl font-light tracking-tighter transition-all duration-300 hover:italic hover:translate-x-2",
+                          isActive ? "text-primary font-normal translate-x-2 italic" : "text-foreground/90"
+                        )}
+                      >
+                        {item.name}
+                      </Link>
+                    );
+                  })}
                 </div>
 
                 {/* Footer Info */}

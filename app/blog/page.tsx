@@ -6,10 +6,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ExpandableCard } from "@/components/ui/expandable-card";
 import { ArrowRight, Calendar, Clock, User } from "lucide-react";
-import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { blogPosts } from "./data";
 
 export default function BlogPage() {
+  const router = useRouter();
+
   return (
     <>
       <PageHeader
@@ -30,8 +33,16 @@ export default function BlogPage() {
                 classNameExpanded="bg-background dark:bg-background [&_h4]:text-foreground dark:[&_h4]:text-foreground [&_h4]:font-medium flex flex-col"
                 content={
                   <div className="flex items-center gap-2 mt-2">
-                    <img src={post.author.avatar} alt={post.author.name} className="h-6 w-6 rounded-full object-cover" />
-                    <span className="text-xs font-medium text-muted-foreground">{post.author.name} • {post.date}</span>
+                    <Image
+                      height={24}
+                      width={24}
+                      src={post.author.avatar}
+                      alt={post.author.name}
+                      className=" rounded-full object-cover"
+                    />
+                    <span className="text-xs font-medium text-muted-foreground">
+                      {post.author.name} • {post.date}
+                    </span>
                   </div>
                 }
               >
@@ -49,24 +60,28 @@ export default function BlogPage() {
                     </span>
                   </div>
 
-                   {/* Tags */}
-                   <div className="flex gap-2">
-                    {post.tags.map(tag => (
-                        <Badge key={tag} variant="secondary" className="text-xs">{tag}</Badge>
+                  {/* Tags */}
+                  <div className="flex gap-2">
+                    {post.tags.map((tag) => (
+                      <Badge key={tag} variant="secondary" className="text-xs">
+                        {tag}
+                      </Badge>
                     ))}
-                   </div>
+                  </div>
 
                   {/* HTML Content Preview (Safe because we strip tags) */}
                   <div className="prose dark:prose-invert max-w-none text-muted-foreground leading-relaxed">
-                    {post.content.replace(/<[^>]*>?/gm, '').substring(0, 300)}...
+                    {post.content.replace(/<[^>]*>?/gm, "").substring(0, 300)}
+                    ...
                   </div>
 
                   {/* CTA */}
-                  <div className="mt-auto pt-4 flex justify-end">
-                    <Button asChild className="w-full sm:w-auto">
-                      <Link href={`/blog/${post.id}`}>
-                        Read Full Article <ArrowRight className="ml-2 h-4 w-4" />
-                      </Link>
+                  <div
+                    className="mt-auto pt-6 flex justify-end mb-4"
+                    onClick={() => router.push(`/blog/${post.id}`)}
+                  >
+                    <Button  className="w-full sm:w-auto cursor-pointer">
+                      Read Full Article <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   </div>
                 </div>

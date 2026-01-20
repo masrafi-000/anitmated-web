@@ -1,5 +1,6 @@
 "use client";
 
+import { getFounders } from "@/app/team/data";
 import { Benefits } from "@/components/contact/benefits";
 import { FAQ } from "@/components/contact/faq";
 import { Socials } from "@/components/contact/socials";
@@ -7,6 +8,7 @@ import { Support } from "@/components/contact/support";
 import { Container, Section } from "@/components/ds";
 import StepForm from "@/components/multistep-form";
 import PageHeader from "@/components/parts/pageHeader";
+import { Button } from "@/components/ui/button";
 import {
   Map,
   MapControls,
@@ -15,6 +17,7 @@ import {
   MarkerTooltip,
 } from "@/components/ui/map";
 import { Mail, MapPin, Phone } from "lucide-react";
+import Link from "next/link";
 
 export default function ContactPage() {
   return (
@@ -121,6 +124,47 @@ export default function ContactPage() {
                 </div>
               </div>
             </div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* Founders Section */}
+      <Section className="bg-muted/30">
+        <Container>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Meet Our Founders
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              The visionaries behind Ruby Studio, dedicated to creating exceptional digital experiences.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-12">
+            {getFounders().map((founder) => (
+              <div key={founder.id} className="text-center">
+                <div className="relative h-48 w-48 mx-auto mb-4 rounded-full overflow-hidden">
+                  <img
+                    src={founder.image}
+                    alt={founder.name}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <h3 className="text-xl font-bold mb-1">{founder.name}</h3>
+                <p className="text-sm text-primary mb-3">{founder.role}</p>
+                <p className="text-sm text-muted-foreground">
+                  {founder.bio.substring(0, 120)}...
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <Link href="/team">
+              <Button size="lg" className="rounded-full">
+                Meet the Full Team
+              </Button>
+            </Link>
           </div>
         </Container>
       </Section>

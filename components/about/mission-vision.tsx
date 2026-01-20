@@ -24,7 +24,7 @@ export function Mission() {
     <Section className="py-16 md:py-24 bg-secondary/20">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {values.map((item, idx) => (
+          {values.map((item) => (
             <div
               key={item.title}
               className="group p-8 rounded-2xl bg-background border border-border shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1"

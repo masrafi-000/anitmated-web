@@ -3,10 +3,10 @@
 
 import { Button } from "@/components/ui/button";
 import {
-    Sheet,
-    SheetContent,
-    SheetTitle,
-    SheetTrigger,
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
 } from "@/components/ui/sheet";
 import Logo from "@/public/logo.png";
 import { useGSAP } from "@gsap/react";
@@ -25,6 +25,8 @@ const ThemeToggle = dynamic(() => import("./themeToggle"), {
 
 const navItems = [
   { name: "Home", href: "/" },
+  { name: "Portfolio", href: "/portfolio" },
+  { name: "Pricing", href: "/pricing" },
   { name: "About", href: "/about" },
   { name: "Services", href: "/services" },
   { name: "Blog", href: "/blog" },
@@ -84,7 +86,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3 border-l pl-6 border-border/60">
             <ThemeToggle />
             <Button size="sm" className="rounded-full px-5 h-9 font-medium">
-              Let's Talk
+              Let&apos;s Talk
             </Button>
           </div>
         </div>

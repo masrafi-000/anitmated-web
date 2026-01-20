@@ -41,7 +41,7 @@ export function FAQ() {
               Common Questions
             </h2>
             <p className="text-muted-foreground">
-              Everything you need to know about working with us. Can't find the answer you're looking for? Chat with our team.
+              {`Everything you need to know about working with us. Can't find the answer you're looking for? Chat with our team.`}
             </p>
           </div>
           <div className="md:col-span-8">

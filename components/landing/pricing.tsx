@@ -60,7 +60,7 @@ const Pricing = () => {
       <Container className="flex flex-col items-center gap-4 text-center">
         <h2 className="my-0! text-4xl tracking-wide font-semibold">Invest in Excellence</h2>
         <p className="text-lg opacity-70 md:text-2xl">
-          <Balancer>Flexible engagement models tailored to elevate your brand's digital presence.</Balancer>
+          <Balancer>{`Flexible engagement models tailored to elevate your brand's digital presence.`}</Balancer>
         </p>
 
         <div className=" mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">

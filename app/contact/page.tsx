@@ -35,8 +35,8 @@ export default function ContactPage() {
                   Tell us about your project
                 </h3>
                 <p className="text-muted-foreground">
-                  We'd love to hear more about your goals. Please fill out the
-                  form below and we'll get back to you within 24 hours.
+                  {`We'd love to hear more about your goals. Please fill out the
+                  form below and we'll get back to you within 24 hours.`}
                 </p>
               </div>
 

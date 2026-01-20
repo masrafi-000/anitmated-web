@@ -13,7 +13,7 @@ export function AboutCTA() {
             <span className="text-primary italic font-serif">extraordinary?</span>
           </h2>
           <p className="text-xl text-muted-foreground">
-            Whether you have a fully formed idea or just a spark of inspiration, we're ready to help you bring it to life.
+            {`Whether you have a fully formed idea or just a spark of inspiration, we're ready to help you bring it to life.`}
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
              <Link href="/contact">

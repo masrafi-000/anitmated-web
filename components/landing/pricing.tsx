@@ -23,7 +23,7 @@ const pricingData: PricingCardProps[] = [
     description: "Perfect for startups needing a solid brand foundation and web presence.",
     features: ["Logo & Brand Guidelines", "UI/UX Design for Landing Page", "Next.js Implementation", "SEO Best Practices"],
     cta: "Start Essential",
-    href: "/contact",
+    href: "/checkout?package=essential",
   },
   {
     title: "Growth",
@@ -36,7 +36,7 @@ const pricingData: PricingCardProps[] = [
       "CMS Integration",
     ],
     cta: "Go for Growth",
-    href: "/contact",
+    href: "/checkout?package=growth",
     isPopular: true,
   },
   {
@@ -50,7 +50,7 @@ const pricingData: PricingCardProps[] = [
       "Dedicated Support Team",
     ],
     cta: "Contact Enterprise",
-    href: "/contact",
+    href: "/checkout?package=enterprise",
   },
 ];
 

@@ -125,7 +125,7 @@ function ReviewCard({ review }: { review: GoogleReview }) {
 
       {/* Body */}
       <div className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
-        "{review.text}"
+       {` "${review.text}"`}
       </div>
     </div>
   );

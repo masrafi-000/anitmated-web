@@ -61,8 +61,8 @@ export function HelpPolicy() {
                 </div>
             </AccordionTrigger>
             <AccordionContent className="text-muted-foreground">
-              If you are experiencing a complete service outage or data loss event, please select "Critical" priority in the contact form. 
-              Misuse of the critical priority flag may result in deprioritization of future requests.
+              {`If you are experiencing a complete service outage or data loss event, please select "Critical" priority in the contact form. 
+              Misuse of the critical priority flag may result in deprioritization of future requests.`}
             </AccordionContent>
           </AccordionItem>
           

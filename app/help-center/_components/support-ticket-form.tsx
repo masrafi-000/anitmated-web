@@ -82,7 +82,7 @@ export function SupportTicketForm() {
           </div>
           <h4 className="text-lg font-semibold mb-2">Ticket Submitted!</h4>
           <p className="text-muted-foreground max-w-xs mx-auto">
-            We've received your request and will get back to you shortly via email.
+           {` We've received your request and will get back to you shortly via email.`}
           </p>
           <Button variant="outline" className="mt-6" onClick={() => setIsSuccess(false)}>
             Submit Another Ticket

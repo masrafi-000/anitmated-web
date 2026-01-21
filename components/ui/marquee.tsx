@@ -5,6 +5,7 @@ export function Marquee({
   direction = "left",
   repeat = 4,
   duration = 60,
+  pauseOnHover = false,
   className,
   ...props
 }: {
@@ -12,6 +13,7 @@ export function Marquee({
   direction?: "left" | "right"
   repeat?: number
   duration?: number
+  pauseOnHover?: boolean
   className?: string
 } & React.HTMLAttributes<HTMLDivElement>) {
   return (
@@ -31,7 +33,7 @@ export function Marquee({
             className={cn("flex shrink-0 justify-around [gap:var(--gap)]", {
               "animate-marquee-left": direction === "left",
               "animate-marquee-right": direction === "right",
-              "group-hover:[animation-play-state:paused]": true,
+              "group-hover:[animation-play-state:paused]": pauseOnHover,
             })}
           >
             {children}

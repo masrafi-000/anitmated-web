@@ -3,6 +3,7 @@
 import { Container, Section } from "@/components/ds";
 import ImageGallery from "@/components/image-gallery";
 import PageHeader from "@/components/parts/pageHeader";
+import ProjectTestimonial from "@/components/parts/project-testimonial";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,11 +11,10 @@ import {
   ArrowLeft,
   Calendar,
   CheckCircle2,
-  Quote,
   Tag,
   TrendingUp,
   User,
-  Wrench,
+  Wrench
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -215,27 +215,11 @@ export default function PortfolioWorkPage({ params }: PortfolioWorkPageProps) {
         <Section>
           <Container>
             <div className="max-w-3xl mx-auto">
-              <Card className="border-muted/60 bg-muted/30">
-                <CardContent className="p-8 md:p-12">
-                  <Quote className="h-12 w-12 text-primary/20 mb-6" />
-                  <blockquote className="text-xl md:text-2xl font-medium leading-relaxed mb-6">
-                    &quot;{work.testimonial.quote}&quot;
-                  </blockquote>
-                  <div className="flex items-center gap-4">
-                    <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
-                      <User className="h-6 w-6 text-primary" />
-                    </div>
-                    <div>
-                      <div className="font-semibold">
-                        {work.testimonial.author}
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        {work.testimonial.role}
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <ProjectTestimonial 
+                quote={work.testimonial.quote}
+                author={work.testimonial.author}
+                role={work.testimonial.role}
+              />
             </div>
           </Container>
         </Section>

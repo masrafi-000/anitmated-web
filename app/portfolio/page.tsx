@@ -6,11 +6,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Award, Briefcase, Sparkles, Users } from "lucide-react";
-import NextImage from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { categories, portfolioStats, portfolioWorks } from "./data";
-import Image from "next/image";
 
 export default function PortfolioPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -40,7 +39,9 @@ export default function PortfolioPage() {
                 <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
                   {stat.value}
                 </div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
+                <div className="text-sm text-muted-foreground">
+                  {stat.label}
+                </div>
               </div>
             ))}
           </div>
@@ -59,7 +60,8 @@ export default function PortfolioPage() {
               Our Best Work
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Showcasing our most impactful projects that have transformed businesses and delighted users.
+              Showcasing our most impactful projects that have transformed
+              businesses and delighted users.
             </p>
           </div>
 
@@ -69,7 +71,7 @@ export default function PortfolioPage() {
                 <Card className="group overflow-hidden border-muted/60 transition-all hover:border-primary/50 hover:shadow-xl cursor-pointer h-full">
                   <div className="relative h-72 overflow-hidden">
                     <Image
-                    loading="lazy"
+                      loading="lazy"
                       src={work.thumbnail}
                       alt={work.title}
                       fill
@@ -103,7 +105,8 @@ export default function PortfolioPage() {
               All Projects
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-              Browse through our complete portfolio and filter by category to find exactly what you&apos;re looking for.
+              Browse through our complete portfolio and filter by category to
+              find exactly what you&apos;re looking for.
             </p>
 
             {/* Category Filter */}
@@ -111,7 +114,9 @@ export default function PortfolioPage() {
               {categories.map((category) => (
                 <Button
                   key={category}
-                  variant={selectedCategory === category ? "default" : "outline"}
+                  variant={
+                    selectedCategory === category ? "default" : "outline"
+                  }
                   onClick={() => setSelectedCategory(category)}
                   className="rounded-full"
                   size="sm"
@@ -151,7 +156,11 @@ export default function PortfolioPage() {
                     <div className="flex items-center justify-between">
                       <div className="flex flex-wrap gap-2">
                         {work.tags.slice(0, 2).map((tag) => (
-                          <Badge key={tag} variant="secondary" className="text-xs">
+                          <Badge
+                            key={tag}
+                            variant="secondary"
+                            className="text-xs"
+                          >
                             {tag}
                           </Badge>
                         ))}
@@ -183,7 +192,8 @@ export default function PortfolioPage() {
               Why Choose Ruby Studio
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              We bring expertise, creativity, and dedication to every project we undertake.
+              We bring expertise, creativity, and dedication to every project we
+              undertake.
             </p>
           </div>
 
@@ -239,7 +249,8 @@ export default function PortfolioPage() {
               Ready to Start Your Project?
             </h2>
             <p className="text-muted-foreground mb-8 text-lg">
-              Let&apos;s create something extraordinary together. Get in touch to discuss how we can bring your vision to life.
+              Let&apos;s create something extraordinary together. Get in touch
+              to discuss how we can bring your vision to life.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Link href="/contact">

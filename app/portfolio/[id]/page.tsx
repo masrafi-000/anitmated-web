@@ -7,15 +7,16 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
-    ArrowLeft,
-    Calendar,
-    CheckCircle2,
-    Quote,
-    Tag,
-    TrendingUp,
-    User,
-    Wrench,
+  ArrowLeft,
+  Calendar,
+  CheckCircle2,
+  Quote,
+  Tag,
+  TrendingUp,
+  User,
+  Wrench,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { use } from "react";
@@ -29,7 +30,7 @@ interface PortfolioWorkPageProps {
 
 export default function PortfolioWorkPage({ params }: PortfolioWorkPageProps) {
   const { id } = use(params);
-  
+
   const work = portfolioWorks.find((w) => w.id === id);
 
   if (!work) {
@@ -44,11 +45,7 @@ export default function PortfolioWorkPage({ params }: PortfolioWorkPageProps) {
   return (
     <>
       {/* Section 1: Project Header */}
-      <PageHeader
-        title={work.title}
-        desc={work.description}
-        align="center"
-      />
+      <PageHeader title={work.title} desc={work.description} align="center" />
 
       {/* Section 2: Project Overview & Details */}
       <Section>
@@ -172,9 +169,12 @@ export default function PortfolioWorkPage({ params }: PortfolioWorkPageProps) {
       {/* Section 4: Image Gallery */}
       <Section>
         <Container>
-          <h2 className="text-3xl font-bold text-center mb-4">Project Gallery</h2>
+          <h2 className="text-3xl font-bold text-center mb-4">
+            Project Gallery
+          </h2>
           <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-            Explore the visual journey of this project through our curated gallery of screenshots and designs.
+            Explore the visual journey of this project through our curated
+            gallery of screenshots and designs.
           </p>
           <div className="w-full max-w-7xl mx-auto flex justify-center">
             <ImageGallery images={work.images} />
@@ -226,7 +226,9 @@ export default function PortfolioWorkPage({ params }: PortfolioWorkPageProps) {
                       <User className="h-6 w-6 text-primary" />
                     </div>
                     <div>
-                      <div className="font-semibold">{work.testimonial.author}</div>
+                      <div className="font-semibold">
+                        {work.testimonial.author}
+                      </div>
                       <div className="text-sm text-muted-foreground">
                         {work.testimonial.role}
                       </div>
@@ -254,10 +256,11 @@ export default function PortfolioWorkPage({ params }: PortfolioWorkPageProps) {
                 <Link key={project.id} href={`/portfolio/${project.id}`}>
                   <Card className="group overflow-hidden border-muted/60 transition-all hover:border-primary/50 hover:shadow-lg cursor-pointer h-full">
                     <div className="relative h-48 overflow-hidden">
-                      <img
+                      <Image
+                        fill
                         src={project.thumbnail}
                         alt={project.title}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
                       />
                     </div>
                     <CardContent className="p-6">
@@ -284,7 +287,8 @@ export default function PortfolioWorkPage({ params }: PortfolioWorkPageProps) {
               Interested in Working Together?
             </h2>
             <p className="text-muted-foreground mb-8 text-lg">
-              Let&apos;s create something amazing. Get in touch to discuss your project and see how we can help bring your vision to life.
+              Let&apos;s create something amazing. Get in touch to discuss your
+              project and see how we can help bring your vision to life.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Link href="/contact">

@@ -46,7 +46,7 @@ export default function CareersPage() {
               More Than Just a Job
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              At Ruby Studio, you'll work on cutting-edge projects, collaborate with talented people, and grow your career in a supportive environment.
+             {` At Ruby Studio, you'll work on cutting-edge projects, collaborate with talented people, and grow your career in a supportive environment.`}
             </p>
           </div>
 
@@ -57,7 +57,7 @@ export default function CareersPage() {
               </div>
               <h3 className="text-xl font-semibold mb-3">Impactful Work</h3>
               <p className="text-muted-foreground">
-                Work on projects that matter for clients you'll be proud to showcase
+             {`   Work on projects that matter for clients you'll be proud to showcase`}
               </p>
             </Card>
 
@@ -107,7 +107,7 @@ export default function CareersPage() {
               </div>
               <h3 className="text-xl font-semibold mb-3">Innovation</h3>
               <p className="text-muted-foreground">
-                Work with the latest technologies and push the boundaries of what's possible
+               {` Work with the latest technologies and push the boundaries of what's possible`}
               </p>
             </Card>
           </div>
@@ -234,7 +234,7 @@ export default function CareersPage() {
                 Our Hiring Process
               </h2>
               <p className="text-muted-foreground">
-                We've designed a straightforward, respectful hiring process to find the best fit for both you and our team.
+               {` We've designed a straightforward, respectful hiring process to find the best fit for both you and our team.`}
               </p>
             </div>
 
@@ -286,7 +286,7 @@ export default function CareersPage() {
                 Don&apos;t See the Right Role?
               </h3>
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                We're always interested in hearing from talented people. Send us your resume and let us know how you'd like to contribute to Ruby Studio.
+               {` We're always interested in hearing from talented people. Send us your resume and let us know how you'd like to contribute to Ruby Studio.`}
               </p>
               <Link href="/contact">
                 <Button size="lg" className="rounded-full">

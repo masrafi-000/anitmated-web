@@ -1,10 +1,10 @@
 "use client";
 
-import { getFounders } from "@/app/team/data";
 import { Benefits } from "@/app/contact/_components/benefits";
 import { FAQ } from "@/app/contact/_components/faq";
 import { Socials } from "@/app/contact/_components/socials";
 import { Support } from "@/app/contact/_components/support";
+import { getFounders } from "@/app/team/data";
 import { Container, Section } from "@/components/ds";
 import StepForm from "@/components/multistep-form";
 import PageHeader from "@/components/parts/pageHeader";
@@ -17,8 +17,8 @@ import {
   MarkerTooltip,
 } from "@/components/ui/map";
 import { Mail, MapPin, Phone } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ContactPage() {
   return (
@@ -85,10 +85,7 @@ export default function ContactPage() {
 
             {/* Right Column: Map */}
             <div className="lg:sticky lg:top-24 h-150 w-full rounded-2xl overflow-hidden border shadow-lg relative bg-muted">
-              <Map
-                center={[90.4125, 23.8103]}
-                zoom={12}
-              >
+              <Map center={[90.4125, 23.8103]} zoom={12}>
                 <MapControls position="bottom-right" />
                 <MapMarker longitude={90.4125} latitude={23.8103}>
                   <MarkerContent>
@@ -109,7 +106,7 @@ export default function ContactPage() {
               </Map>
 
               {/* Overlay Card */}
-              <div className="absolute top-6 left-6 z-10 rounded-lg border bg-background/95 p-4 shadow-xl backdrop-blur-sm max-w-[250px]">
+              <div className="absolute top-6 left-6 z-10 rounded-lg border bg-background/95 p-4 shadow-xl backdrop-blur-sm max-w-62.5">
                 <div className="flex items-start gap-3">
                   <MapPin className="mt-1 h-5 w-5 text-primary shrink-0" />
                   <div>
@@ -137,7 +134,8 @@ export default function ContactPage() {
               Meet Our Founders
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              The visionaries behind Ruby Studio, dedicated to creating exceptional digital experiences.
+              The visionaries behind Ruby Studio, dedicated to creating
+              exceptional digital experiences.
             </p>
           </div>
 
@@ -146,7 +144,9 @@ export default function ContactPage() {
               <div key={founder.id} className="text-center">
                 <div className="relative h-48 w-48 mx-auto mb-4 rounded-full overflow-hidden">
                   <Image
-                  loading="lazy"
+                    loading="lazy"
+                    height={192}
+                    width={192}
                     src={founder.image}
                     alt={founder.name}
                     className="h-full w-full object-cover"

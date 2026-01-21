@@ -34,7 +34,7 @@ export const CTASection = () => {
             asChild
             variant="outline"
             size="lg"
-            className="h-12 rounded-full border-neutral-700 bg-transparent px-8 text-base font-semibold text-white hover:bg-neutral-800 hover:text-white"
+            className="h-12 rounded-full border-neutral-700 bg-transparent px-8 text-base font-semibold text-primary-foreground hover:bg-neutral-800 hover:text-white"
           >
             <Link href="/portfolio">View Our Work</Link>
           </Button>

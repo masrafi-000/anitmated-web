@@ -9,11 +9,11 @@ import Balancer from "react-wrap-balancer";
 import * as z from "zod";
 
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Logo from "@/public/logo.png";
@@ -88,6 +88,7 @@ export default function Footer() {
               <Link href="/services" className="hover:text-foreground transition-all duration-300 hover:translate-x-1 w-fit">Services</Link>
               <Link href="/blog" className="hover:text-foreground transition-all duration-300 hover:translate-x-1 w-fit">Blog</Link>
               <Link href="/contact" className="hover:text-foreground transition-all duration-300 hover:translate-x-1 w-fit">Contact</Link>
+              <Link href="/help-center" className="hover:text-foreground transition-all duration-300 hover:translate-x-1 w-fit">Help Center</Link>
             </div>
           </div>
 

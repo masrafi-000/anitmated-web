@@ -1,6 +1,7 @@
 import { Container, Section } from "@/components/ds";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, HelpCircle } from "lucide-react";
+import Link from "next/link";
 
 export function Support() {
   return (
@@ -25,12 +26,16 @@ export function Support() {
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4 shrink-0">
-                <Button size="lg" variant="secondary" className="font-semibold">
-                  Visit Help Center
-                </Button>
-                <Button size="lg" variant="outline" className="bg-transparent text-primary-foreground border-primary-foreground/20 hover:bg-primary-foreground/10 hover:text-primary-foreground">
-                  Open Support Ticket <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+                <Link href="/help-center">
+                  <Button size="lg" variant="secondary" className="font-semibold">
+                    Visit Help Center
+                  </Button>
+                </Link>
+                <Link href="/help-center#ticket-form">
+                  <Button size="lg" variant="outline" className="bg-transparent text-primary-foreground border-primary-foreground/20 hover:bg-primary-foreground/10 hover:text-primary-foreground">
+                    Open Support Ticket <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
               </div>
            </div>
         </div>

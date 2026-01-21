@@ -3,10 +3,10 @@
 
 import { Button } from "@/components/ui/button";
 import {
-  Sheet,
-  SheetContent,
-  SheetTitle,
-  SheetTrigger,
+    Sheet,
+    SheetContent,
+    SheetTitle,
+    SheetTrigger,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import Logo from "@/public/logo.png";
@@ -102,9 +102,11 @@ export default function Navbar() {
           </ul>
           <div className="flex items-center gap-3 border-l pl-6 border-border/60">
             <ThemeToggle />
-            <Button size="sm" className="rounded-full px-5 h-9 font-medium">
-              Let&apos;s Talk
-            </Button>
+            <Link href="/lets-talk">
+              <Button size="sm" className="rounded-full px-5 h-9 font-medium">
+                Let&apos;s Talk
+              </Button>
+            </Link>
           </div>
         </div>
 

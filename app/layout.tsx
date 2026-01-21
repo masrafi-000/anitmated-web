@@ -1,6 +1,7 @@
 import { Nav } from "@/components/ds";
 import Footer from "@/components/parts/footer";
 import Navbar from "@/components/parts/navbar";
+import ScrollToTop from "@/components/parts/scroll-to-top";
 import { ThemeProvider } from "@/providers/theme-provider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -42,6 +43,7 @@ export default function RootLayout({
           </Nav>
           {children}
           <Footer/>
+          <ScrollToTop />
         </ThemeProvider>
       </body>
     </html>

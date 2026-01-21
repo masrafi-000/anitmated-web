@@ -61,13 +61,17 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
-      <nav className="mx-auto flex h-16  items-center justify-between px-6 lg:px-8">
+      <nav className="mx-auto flex h-16  items-center justify-between px-2 lg:px-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group z-50 text-2xl font-medium tracking-wide text-secondary-foreground">
+        <Link
+          href="/"
+          className="flex items-center gap-2 group z-50 text-xl xl:text-2xl font-medium tracking-wide text-secondary-foreground"
+        >
           <Image
             src={Logo}
             alt="Logo"
             width={30}
+            loading="eager"
             height={22}
             className="transition-all hover:opacity-75 dark:invert"
           ></Image>
@@ -76,7 +80,7 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <div className="hidden items-center gap-8 lg:flex">
-          <ul className="flex gap-8">
+          <ul className="flex gap-4 xl:gap-8">
             {navItems.map((item) => (
               <li key={item.name}>
                 <Link
@@ -85,12 +89,12 @@ export default function Navbar() {
                     "text-sm font-medium transition-colors hover:text-foreground relative",
                     pathname === item.href
                       ? "text-foreground font-semibold"
-                      : "text-muted-foreground"
+                      : "text-muted-foreground",
                   )}
                 >
                   {item.name}
                   {pathname === item.href && (
-                    <span className="absolute -bottom-[21px] left-0 h-[2px] w-full bg-primary" />
+                    <span className="absolute -bottom-5.25 left-0 h-0.5 w-full bg-primary" />
                   )}
                 </Link>
               </li>
@@ -119,27 +123,31 @@ export default function Navbar() {
             */}
             <SheetContent
               side="left"
-              className="w-[300px] sm:w-[400px] p-0 border-r-0"
+              className="w-75 sm:w-100 p-0 border-r-0"
             >
               <SheetTitle className="sr-only">Menu</SheetTitle>
 
-              <div className="flex flex-col h-full px-8 py-6">
+              <div className="flex flex-col h-full px-4 xl:px-6 py-6">
                 {/* Mobile Logo Section (Aligned with header) */}
                 <div className="h-16 flex items-center mb-12">
                   <Link
                     href="/"
-                    onClick={() => setIsOpen(false)}
-                    className="flex items-center gap-2"
+                    className="flex items-center gap-2 group z-50 text-xl xl:text-2xl font-medium tracking-wide text-secondary-foreground"
                   >
-                    <div className="size-5 rounded-full bg-foreground" />
-                    <span className="text-xl font-bold tracking-tighter italic">
-                      Ruby Studio
-                    </span>
+                    <Image
+                      src={Logo}
+                      alt="Logo"
+                      width={30}
+                      height={22}
+                      loading="eager"
+                      className="transition-all hover:opacity-75 dark:invert"
+                    ></Image>
+                    Ruby Studio
                   </Link>
                 </div>
 
                 {/* Nav Links */}
-                <div className="flex flex-col space-y-4">
+                <div className="mobile-link flex flex-col space-y-4">
                   {navItems.map((item) => {
                     const isActive = pathname === item.href;
                     return (
@@ -149,7 +157,9 @@ export default function Navbar() {
                         onClick={() => setIsOpen(false)}
                         className={cn(
                           "mobile-link text-4xl font-light tracking-tighter transition-all duration-300 hover:italic hover:translate-x-2",
-                          isActive ? "text-primary font-normal translate-x-2 italic" : "text-foreground/90"
+                          isActive
+                            ? "text-primary font-normal translate-x-2 italic"
+                            : "text-foreground/90",
                         )}
                       >
                         {item.name}

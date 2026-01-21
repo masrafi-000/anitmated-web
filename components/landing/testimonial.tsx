@@ -43,6 +43,7 @@ function TestimonialCard({ item }: { item: (typeof items)[number] }) {
           <Image
             src={item.image}
             alt={item.name}
+            loading="lazy"
             fill
             className="h-full w-full object-cover"
           />

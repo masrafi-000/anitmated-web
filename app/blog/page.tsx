@@ -36,6 +36,7 @@ export default function BlogPage() {
                     <Image
                       height={24}
                       width={24}
+                      loading="lazy"
                       src={post.author.avatar}
                       alt={post.author.name}
                       className=" rounded-full object-cover"

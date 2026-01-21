@@ -137,7 +137,7 @@ export default function PricingQueryForm() {
                   <FormControl>
                     <Textarea 
                       placeholder="Tell us about your project requirements..." 
-                      className="min-h-[120px]"
+                      className="min-h-30"
                       {...field} 
                     />
                   </FormControl>

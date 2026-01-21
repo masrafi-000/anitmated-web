@@ -1,8 +1,8 @@
-"use client"
-import { AboutCTA } from "@/components/about/cta";
-import { Mission } from "@/components/about/mission-vision";
-import { Process } from "@/components/about/process";
-import { Story } from "@/components/about/story";
+"use client";
+import { AboutCTA } from "@/app/about/_components/cta";
+import { Mission } from "@/app/about/_components/mission-vision";
+import { Process } from "@/app/about/_components/process";
+import { Story } from "@/app/about/_components/story";
 import PageHeader from "@/components/parts/pageHeader";
 import { useRouter } from "next/navigation";
 

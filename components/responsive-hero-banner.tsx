@@ -69,7 +69,8 @@ const ResponsiveHeroBanner: React.FC<ResponsiveHeroBannerProps> = ({
         <section className="w-full isolate min-h-screen overflow-hidden relative">
             <Image
                 src={backgroundImageUrl}
-                alt=""
+                loading='lazy'
+                alt="Background-image"
                 className="w-full h-full object-cover absolute top-0 right-0 bottom-0 left-0"
             />
             <div className="pointer-events-none absolute inset-0 ring-1 ring-black/30" />

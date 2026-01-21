@@ -1,21 +1,21 @@
 "use client";
 
+import { PackageComparison } from "@/app/pricing/_components/comparison-table";
+import PricingQueryForm from "@/app/pricing/_components/pricing-query-form";
 import { Container, Section } from "@/components/ds";
 import Pricing from "@/components/landing/pricing";
 import PageHeader from "@/components/parts/pageHeader";
-import { PackageComparison } from "@/components/pricing/comparison-table";
-import PricingQueryForm from "@/components/pricing/pricing-query-form";
 import { Card, CardContent } from "@/components/ui/card";
 import {
-    Award,
-    BarChart3,
-    CheckCircle2,
-    Rocket,
-    Shield,
-    Star,
-    TrendingUp,
-    Users,
-    Zap,
+  Award,
+  BarChart3,
+  CheckCircle2,
+  Rocket,
+  Shield,
+  Star,
+  TrendingUp,
+  Users,
+  Zap,
 } from "lucide-react";
 
 export default function PricingPage() {
@@ -43,7 +43,8 @@ export default function PricingPage() {
               Detailed Package Comparison
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              See exactly what&apos;s included in each package and choose the one that fits your needs.
+              See exactly what&apos;s included in each package and choose the
+              one that fits your needs.
             </p>
           </div>
 
@@ -63,7 +64,8 @@ export default function PricingPage() {
               Why Invest in Our Services
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              We deliver exceptional value through proven expertise, innovative solutions, and unwavering commitment to your success.
+              We deliver exceptional value through proven expertise, innovative
+              solutions, and unwavering commitment to your success.
             </p>
           </div>
 
@@ -75,7 +77,8 @@ export default function PricingPage() {
                 </div>
                 <h3 className="text-xl font-semibold mb-3">Proven Expertise</h3>
                 <p className="text-muted-foreground">
-                  8+ years of experience delivering exceptional digital products for 80+ satisfied clients
+                  8+ years of experience delivering exceptional digital products
+                  for 80+ satisfied clients
                 </p>
               </CardContent>
             </Card>
@@ -85,9 +88,12 @@ export default function PricingPage() {
                 <div className="h-14 w-14 rounded-full bg-green-500/10 flex items-center justify-center mx-auto mb-4">
                   <TrendingUp className="h-7 w-7 text-green-500" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">Measurable Results</h3>
+                <h3 className="text-xl font-semibold mb-3">
+                  Measurable Results
+                </h3>
                 <p className="text-muted-foreground">
-                  Average 45% increase in conversions and 60% improvement in user engagement
+                  Average 45% increase in conversions and 60% improvement in
+                  user engagement
                 </p>
               </CardContent>
             </Card>
@@ -99,7 +105,8 @@ export default function PricingPage() {
                 </div>
                 <h3 className="text-xl font-semibold mb-3">Fast Delivery</h3>
                 <p className="text-muted-foreground">
-                  Efficient processes ensure your project launches on time without compromising quality
+                  Efficient processes ensure your project launches on time
+                  without compromising quality
                 </p>
               </CardContent>
             </Card>
@@ -109,9 +116,12 @@ export default function PricingPage() {
                 <div className="h-14 w-14 rounded-full bg-orange-500/10 flex items-center justify-center mx-auto mb-4">
                   <Shield className="h-7 w-7 text-orange-500" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">Quality Guaranteed</h3>
+                <h3 className="text-xl font-semibold mb-3">
+                  Quality Guaranteed
+                </h3>
                 <p className="text-muted-foreground">
-                  Rigorous testing and quality assurance ensure flawless execution every time
+                  Rigorous testing and quality assurance ensure flawless
+                  execution every time
                 </p>
               </CardContent>
             </Card>
@@ -121,9 +131,12 @@ export default function PricingPage() {
                 <div className="h-14 w-14 rounded-full bg-pink-500/10 flex items-center justify-center mx-auto mb-4">
                   <Users className="h-7 w-7 text-pink-500" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">Dedicated Support</h3>
+                <h3 className="text-xl font-semibold mb-3">
+                  Dedicated Support
+                </h3>
                 <p className="text-muted-foreground">
-                  Your success is our priority with ongoing support and maintenance included
+                  Your success is our priority with ongoing support and
+                  maintenance included
                 </p>
               </CardContent>
             </Card>
@@ -135,7 +148,8 @@ export default function PricingPage() {
                 </div>
                 <h3 className="text-xl font-semibold mb-3">Future-Proof</h3>
                 <p className="text-muted-foreground">
-                  Built with scalability in mind using modern technologies and best practices
+                  Built with scalability in mind using modern technologies and
+                  best practices
                 </p>
               </CardContent>
             </Card>
@@ -151,7 +165,8 @@ export default function PricingPage() {
               Who Trusts Ruby Studio
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              From ambitious startups to established enterprises, we partner with businesses ready to elevate their digital presence.
+              From ambitious startups to established enterprises, we partner
+              with businesses ready to elevate their digital presence.
             </p>
           </div>
 
@@ -172,7 +187,8 @@ export default function PricingPage() {
               </div>
               <h3 className="text-xl font-semibold mb-2">Scale-ups</h3>
               <p className="text-muted-foreground">
-                Growing businesses scaling their operations and digital infrastructure
+                Growing businesses scaling their operations and digital
+                infrastructure
               </p>
             </div>
 
@@ -182,7 +198,8 @@ export default function PricingPage() {
               </div>
               <h3 className="text-xl font-semibold mb-2">Enterprises</h3>
               <p className="text-muted-foreground">
-                Established companies seeking innovation and digital transformation
+                Established companies seeking innovation and digital
+                transformation
               </p>
             </div>
           </div>
@@ -197,7 +214,8 @@ export default function PricingPage() {
               Why Customers Choose Our Packages
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Real results from real businesses that invested in exceptional digital experiences.
+              Real results from real businesses that invested in exceptional
+              digital experiences.
             </p>
           </div>
 
@@ -209,9 +227,13 @@ export default function PricingPage() {
                     <BarChart3 className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg mb-2">ROI-Focused Approach</h3>
+                    <h3 className="font-semibold text-lg mb-2">
+                      ROI-Focused Approach
+                    </h3>
                     <p className="text-muted-foreground text-sm">
-                      Our clients see an average 3x return on investment within the first year through increased conversions and brand value.
+                      Our clients see an average 3x return on investment within
+                      the first year through increased conversions and brand
+                      value.
                     </p>
                   </div>
                 </div>
@@ -225,9 +247,12 @@ export default function PricingPage() {
                     <Users className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg mb-2">User-Centric Design</h3>
+                    <h3 className="font-semibold text-lg mb-2">
+                      User-Centric Design
+                    </h3>
                     <p className="text-muted-foreground text-sm">
-                      75% improvement in user satisfaction scores through research-driven design and intuitive interfaces.
+                      75% improvement in user satisfaction scores through
+                      research-driven design and intuitive interfaces.
                     </p>
                   </div>
                 </div>
@@ -241,9 +266,12 @@ export default function PricingPage() {
                     <Zap className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg mb-2">Performance Optimized</h3>
+                    <h3 className="font-semibold text-lg mb-2">
+                      Performance Optimized
+                    </h3>
                     <p className="text-muted-foreground text-sm">
-                      60% faster load times leading to better SEO rankings and reduced bounce rates for our clients.
+                      60% faster load times leading to better SEO rankings and
+                      reduced bounce rates for our clients.
                     </p>
                   </div>
                 </div>
@@ -257,9 +285,12 @@ export default function PricingPage() {
                     <Shield className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg mb-2">Long-term Partnership</h3>
+                    <h3 className="font-semibold text-lg mb-2">
+                      Long-term Partnership
+                    </h3>
                     <p className="text-muted-foreground text-sm">
-                      85% client retention rate with ongoing support, updates, and continuous improvement.
+                      85% client retention rate with ongoing support, updates,
+                      and continuous improvement.
                     </p>
                   </div>
                 </div>
@@ -277,7 +308,8 @@ export default function PricingPage() {
               What&apos;s Included in Every Package
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              No matter which plan you choose, you get our commitment to excellence and these core benefits.
+              No matter which plan you choose, you get our commitment to
+              excellence and these core benefits.
             </p>
           </div>
 

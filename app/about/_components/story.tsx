@@ -13,7 +13,7 @@ export function Story() {
              {/* Abstract placholder visual */}
             <div className="absolute inset-4 border border-primary/20 rounded-xl" />
             <div className="flex items-center justify-center h-full w-full text-muted-foreground/50 font-medium">
-               <Image src="/images/story.png" alt="Story" fill className="object-cover" />
+               <Image loading="lazy" src="/images/story.png" alt="Story" fill className="object-cover" />
             </div>
           </div>
 

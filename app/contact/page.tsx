@@ -1,10 +1,10 @@
 "use client";
 
 import { getFounders } from "@/app/team/data";
-import { Benefits } from "@/components/contact/benefits";
-import { FAQ } from "@/components/contact/faq";
-import { Socials } from "@/components/contact/socials";
-import { Support } from "@/components/contact/support";
+import { Benefits } from "@/app/contact/_components/benefits";
+import { FAQ } from "@/app/contact/_components/faq";
+import { Socials } from "@/app/contact/_components/socials";
+import { Support } from "@/app/contact/_components/support";
 import { Container, Section } from "@/components/ds";
 import StepForm from "@/components/multistep-form";
 import PageHeader from "@/components/parts/pageHeader";
@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/map";
 import { Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function ContactPage() {
   return (
@@ -83,7 +84,7 @@ export default function ContactPage() {
             </div>
 
             {/* Right Column: Map */}
-            <div className="lg:sticky lg:top-24 h-[600px] w-full rounded-2xl overflow-hidden border shadow-lg relative bg-muted">
+            <div className="lg:sticky lg:top-24 h-150 w-full rounded-2xl overflow-hidden border shadow-lg relative bg-muted">
               <Map
                 center={[90.4125, 23.8103]}
                 zoom={12}
@@ -144,7 +145,8 @@ export default function ContactPage() {
             {getFounders().map((founder) => (
               <div key={founder.id} className="text-center">
                 <div className="relative h-48 w-48 mx-auto mb-4 rounded-full overflow-hidden">
-                  <img
+                  <Image
+                  loading="lazy"
                     src={founder.image}
                     alt={founder.name}
                     className="h-full w-full object-cover"

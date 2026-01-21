@@ -1,6 +1,6 @@
 "use client";
 
-import { AboutCTA } from "@/components/about/cta";
+import { AboutCTA } from "@/app/about/_components/cta";
 import { Container, Section } from "@/components/ds";
 import PageHeader from "@/components/parts/pageHeader";
 import { Badge } from "@/components/ui/badge";
@@ -53,7 +53,7 @@ const coreServices = [
 const creativeTools = [
   { name: "Adobe Photoshop", icon: Brush, desc: "Image Manipulation" },
   { name: "Adobe Illustrator", icon: PenTool, desc: "Vector Graphics" },
-  { name: "Adobe Premiere Pro", icon:  Layers, desc: "Video Editing" },
+  { name: "Adobe Premiere Pro", icon: Layers, desc: "Video Editing" },
   { name: "Figma", icon: LayoutTemplate, desc: "UI Design" },
   { name: "Canva", icon: Palette, desc: "Quick Graphics" },
   { name: "After Effects", icon: Zap, desc: "Motion Graphics" },
@@ -117,12 +117,16 @@ export default function ServicesPage() {
               Core Digital Expertise
             </h2>
             <p className="text-muted-foreground text-lg">
-              We build the foundation of your digital presence with engineering excellence and design precision.
+              We build the foundation of your digital presence with engineering
+              excellence and design precision.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {coreServices.map((service, idx) => (
-              <Card key={idx} className="h-full border-muted/60 transition-all hover:border-primary/50 hover:shadow-md">
+              <Card
+                key={idx}
+                className="h-full border-muted/60 transition-all hover:border-primary/50 hover:shadow-md"
+              >
                 <CardHeader>
                   <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4">
                     <service.icon size={24} />
@@ -135,7 +139,11 @@ export default function ServicesPage() {
                   </CardDescription>
                   <div className="flex flex-wrap gap-2">
                     {service.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="font-normal">
+                      <Badge
+                        key={tag}
+                        variant="secondary"
+                        className="font-normal"
+                      >
                         {tag}
                       </Badge>
                     ))}
@@ -156,7 +164,8 @@ export default function ServicesPage() {
                 Our Creative Suite
               </h2>
               <p className="text-muted-foreground text-lg">
-                We leverage industry-leading tools to create stunning visuals and immersive experiences.
+                We leverage industry-leading tools to create stunning visuals
+                and immersive experiences.
               </p>
             </div>
           </div>
@@ -168,7 +177,9 @@ export default function ServicesPage() {
               >
                 <tool.icon className="h-8 w-8 text-foreground mb-3 opacity-80" />
                 <h4 className="font-medium text-sm">{tool.name}</h4>
-                <span className="text-xs text-muted-foreground mt-1">{tool.desc}</span>
+                <span className="text-xs text-muted-foreground mt-1">
+                  {tool.desc}
+                </span>
               </div>
             ))}
           </div>
@@ -184,7 +195,9 @@ export default function ServicesPage() {
                 Growth & Performance
               </h2>
               <p className="text-lg text-muted-foreground mb-8 text-pretty">
-                Building a great product is just the start. We help you reach your audience through strategic digital marketing, ensuring your brand gets the attention it deserves.
+                Building a great product is just the start. We help you reach
+                your audience through strategic digital marketing, ensuring your
+                brand gets the attention it deserves.
               </p>
               <div className="space-y-6">
                 {marketingServices.map((service, idx) => (
@@ -201,12 +214,14 @@ export default function ServicesPage() {
               </div>
             </div>
             <div className="relative h-100 w-full rounded-2xl bg-linear-to-br from-primary/20 via-primary/5 to-background border flex items-center justify-center overflow-hidden">
-                <Rocket className="h-48 w-48 text-primary/20 absolute -right-10 -bottom-10 rotate-[-15deg]" />
-                <div className="relative z-10 text-center p-8">
-                     <h3 className="text-2xl font-bold mb-2">Ready to Scale?</h3>
-                     <p className="text-muted-foreground mb-6">Let&apos;s build a strategy that works.</p>
-                     <MonitorSmartphone className="h-24 w-24 mx-auto text-primary opacity-80" />
-                </div>
+              <Rocket className="h-48 w-48 text-primary/20 absolute -right-10 -bottom-10 rotate-[-15deg]" />
+              <div className="relative z-10 text-center p-8">
+                <h3 className="text-2xl font-bold mb-2">Ready to Scale?</h3>
+                <p className="text-muted-foreground mb-6">
+                  Let&apos;s build a strategy that works.
+                </p>
+                <MonitorSmartphone className="h-24 w-24 mx-auto text-primary opacity-80" />
+              </div>
             </div>
           </div>
         </Container>
@@ -216,24 +231,40 @@ export default function ServicesPage() {
       <Section className="border-t">
         <Container>
           <div className="flex flex-col md:flex-row gap-8 items-center justify-between p-8 md:p-12 rounded-3xl bg-secondary/50 border border-secondary">
-             <div className="flex-1">
-                 <div className="h-12 w-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground mb-6">
-                    <Settings  size={24}/>
-                 </div>
-                 <h2 className="text-2xl md:text-3xl font-bold mb-4">Maintenance & Support</h2>
-                 <p className="text-muted-foreground text-lg mb-6">
-                    We don&apos;t just launch and leave. Our dedicated support team ensures your digital assets remain secure, up-to-date, and performing at their peak.
-                 </p>
-                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <li className="flex items-center gap-2 text-sm font-medium"><LifeBuoy size={16} className="text-primary"/> 24/7 Monitoring</li>
-                    <li className="flex items-center gap-2 text-sm font-medium"><LifeBuoy size={16} className="text-primary"/> Security Updates</li>
-                    <li className="flex items-center gap-2 text-sm font-medium"><LifeBuoy size={16} className="text-primary"/> Performance Tuning</li>
-                    <li className="flex items-center gap-2 text-sm font-medium"><LifeBuoy size={16} className="text-primary"/> Content Updates</li>
-                 </ul>
-             </div>
-             <div className="flex-1 flex justify-center md:justify-end">
-                <Cpu className="h-40 w-40 text-muted-foreground/20" />
-             </div>
+            <div className="flex-1">
+              <div className="h-12 w-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground mb-6">
+                <Settings size={24} />
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">
+                Maintenance & Support
+              </h2>
+              <p className="text-muted-foreground text-lg mb-6">
+                We don&apos;t just launch and leave. Our dedicated support team
+                ensures your digital assets remain secure, up-to-date, and
+                performing at their peak.
+              </p>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <li className="flex items-center gap-2 text-sm font-medium">
+                  <LifeBuoy size={16} className="text-primary" /> 24/7
+                  Monitoring
+                </li>
+                <li className="flex items-center gap-2 text-sm font-medium">
+                  <LifeBuoy size={16} className="text-primary" /> Security
+                  Updates
+                </li>
+                <li className="flex items-center gap-2 text-sm font-medium">
+                  <LifeBuoy size={16} className="text-primary" /> Performance
+                  Tuning
+                </li>
+                <li className="flex items-center gap-2 text-sm font-medium">
+                  <LifeBuoy size={16} className="text-primary" /> Content
+                  Updates
+                </li>
+              </ul>
+            </div>
+            <div className="flex-1 flex justify-center md:justify-end">
+              <Cpu className="h-40 w-40 text-muted-foreground/20" />
+            </div>
           </div>
         </Container>
       </Section>
@@ -242,22 +273,29 @@ export default function ServicesPage() {
       <Section>
         <Container>
           <div className="text-center mb-16">
-             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">Our Process</h2>
-             <p className="text-muted-foreground">How we bring your vision to reality.</p>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+              Our Process
+            </h2>
+            <p className="text-muted-foreground">
+              How we bring your vision to reality.
+            </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-             {processSteps.map((step, idx) => (
-                 <div key={idx} className="relative flex flex-col items-center text-center group">
-                    <div className="h-14 w-14 rounded-2xl bg-muted border border-border group-hover:border-primary/50 group-hover:bg-primary/5 transition-all flex items-center justify-center text-xl font-bold mb-6 z-10">
-                        {step.id}
-                    </div>
-                    {idx !== processSteps.length - 1 && (
-                        <div className="hidden md:block absolute top-7 left-1/2 w-full h-0.5 bg-border z-0" />
-                    )}
-                    <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                    <p className="text-sm text-muted-foreground">{step.desc}</p>
-                 </div>
-             ))}
+            {processSteps.map((step, idx) => (
+              <div
+                key={idx}
+                className="relative flex flex-col items-center text-center group"
+              >
+                <div className="h-14 w-14 rounded-2xl bg-muted border border-border group-hover:border-primary/50 group-hover:bg-primary/5 transition-all flex items-center justify-center text-xl font-bold mb-6 z-10">
+                  {step.id}
+                </div>
+                {idx !== processSteps.length - 1 && (
+                  <div className="hidden md:block absolute top-7 left-1/2 w-full h-0.5 bg-border z-0" />
+                )}
+                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                <p className="text-sm text-muted-foreground">{step.desc}</p>
+              </div>
+            ))}
           </div>
         </Container>
       </Section>

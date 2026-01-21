@@ -1,16 +1,23 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
- 
+
 import {
-    ColumnDef,
-    flexRender,
-    getCoreRowModel,
-    useReactTable,
+  ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  useReactTable,
 } from "@tanstack/react-table";
 import { Check, X } from "lucide-react";
 import { useMemo } from "react";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../../../components/ui/table";
 
 interface ComparisonFeature {
   feature: string;
@@ -138,7 +145,9 @@ export function PackageComparison() {
           </div>
         ),
         cell: ({ row }) => (
-          <div className="text-center">{renderCell(row.getValue("essential"))}</div>
+          <div className="text-center">
+            {renderCell(row.getValue("essential"))}
+          </div>
         ),
       },
       {
@@ -150,7 +159,9 @@ export function PackageComparison() {
           </div>
         ),
         cell: ({ row }) => (
-          <div className="text-center">{renderCell(row.getValue("growth"))}</div>
+          <div className="text-center">
+            {renderCell(row.getValue("growth"))}
+          </div>
         ),
       },
       {
@@ -164,13 +175,16 @@ export function PackageComparison() {
           </div>
         ),
         cell: ({ row }) => (
-          <div className="text-center">{renderCell(row.getValue("enterprise"))}</div>
+          <div className="text-center">
+            {renderCell(row.getValue("enterprise"))}
+          </div>
         ),
       },
     ],
-    []
+    [],
   );
 
+  /* eslint-disable react-hooks/incompatible-library */
   const table = useReactTable({
     data: comparisonData,
     columns,
@@ -193,7 +207,7 @@ export function PackageComparison() {
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                   </TableHead>
                 ))}
@@ -211,7 +225,7 @@ export function PackageComparison() {
                     <TableCell key={cell.id} className="py-4">
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
                     </TableCell>
                   ))}

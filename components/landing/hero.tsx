@@ -1,4 +1,3 @@
-import { ExpandableCardDemo } from "../card/expandableCard";
 import FAQ from "../parts/faq";
 import PageHeader from "../parts/pageHeader";
 
@@ -19,19 +18,12 @@ const HeroSection = () => {
         secondaryText="Explore Our Work"
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-6 w-full">
-        <ExpandableCardDemo />
-        <ExpandableCardDemo />
-        <ExpandableCardDemo />
-        <ExpandableCardDemo />
-      </div>
-
       <FeatureNine />
 
       <Pricing />
 
       <MarqueeDemo />
-      
+
       <FAQ />
     </>
   );

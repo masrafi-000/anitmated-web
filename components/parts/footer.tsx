@@ -54,6 +54,7 @@ export default function Footer() {
               <Image
                 src={Logo}
                 alt="Logo"
+                loading="lazy"
                 width={30}
                 height={22}
                 className="transition-all hover:opacity-75 dark:invert"

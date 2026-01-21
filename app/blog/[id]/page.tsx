@@ -27,10 +27,11 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <>
-      <div className="relative h-[400px] w-full bg-muted">
+      <div className="relative h-100 w-full bg-muted">
          <Image
             src={post.src}
             alt={post.title}
+            loading="lazy"
             fill
             className="object-cover"
             priority
@@ -71,7 +72,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                     <p className="text-sm font-medium text-muted-foreground mb-1">Written by</p>
                     <div className="flex items-center gap-3">
                         <div className="h-10 w-10 rounded-full overflow-hidden bg-muted relative">
-                            <Image src={post.author.avatar} alt={post.author.name} fill className="object-cover" />
+                            <Image loading="lazy" src={post.author.avatar} alt={post.author.name} fill className="object-cover" />
                         </div>
                         <div>
                             <p className="font-semibold text-sm">{post.author.name}</p>

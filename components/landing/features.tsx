@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import Image from "next/image"
+import Image from "next/image";
 
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card";
 import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from "@/components/ui/carousel"
-import { Container, Section } from "../ds"
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { Container, Section } from "../ds";
 
 const photos = [
   { src: "https://images.unsplash.com/photo-1721137287642-43b251bd6f00" },
@@ -18,7 +18,7 @@ const photos = [
   { src: "https://images.unsplash.com/photo-1721041879224-ff011603ada5" },
   { src: "https://images.unsplash.com/photo-1720983627245-ca4a6913016f" },
   { src: "https://images.unsplash.com/photo-1720887236665-43caad593cdf" },
-]
+];
 
 const FeatureNine = () => {
   return (
@@ -29,7 +29,8 @@ const FeatureNine = () => {
         </h2>
 
         <p className="text-base font-normal text-gray-700 dark:text-gray-400">
-          Explore a curated collection of our most impact-driven projects, where every pixel tells a story of brand evolution and digital mastery.
+          Explore a curated collection of our most impact-driven projects, where
+          every pixel tells a story of brand evolution and digital mastery.
         </p>
 
         <Carousel className="mt-6 w-full">
@@ -42,6 +43,7 @@ const FeatureNine = () => {
                 <Card className="relative overflow-hidden">
                   <CardContent className="not-prose aspect-square p-0">
                     <Image
+                      loading="lazy"
                       src={photo.src}
                       alt="Gallery image"
                       fill
@@ -59,7 +61,7 @@ const FeatureNine = () => {
         </Carousel>
       </Container>
     </Section>
-  )
-}
+  );
+};
 
-export default FeatureNine
+export default FeatureNine;

@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import NextImage from "next/image";
+import Image from "next/image";
 
 interface ImageGalleryProps {
   images: string[];
@@ -11,18 +11,19 @@ export default function ImageGallery({ images, className, itemClassName }: Image
   if (!images || images.length === 0) return null;
 
   return (
-    <div className={cn("flex items-center gap-2 h-[400px] w-full px-4 mb-24", className)}>
+    <div className={cn("flex items-center gap-2 h-100 w-full px-4 mb-24", className)}>
       {images.map((src, idx) => (
         <div
           key={idx}
           className={cn(
-            "relative group flex-grow transition-all w-full md:w-32 rounded-xl overflow-hidden h-full duration-500 hover:w-[400px] hover:grow-[2]",
+            "relative group grow transition-all w-full md:w-32 rounded-xl overflow-hidden h-full duration-500 hover:w-100 hover:grow-2",
             itemClassName
           )}
         >
-          <NextImage
+          <Image
             className="object-cover object-center"
             src={src}
+            loading="lazy"
             alt={`Gallery image ${idx + 1}`}
             fill
           />

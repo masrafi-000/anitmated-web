@@ -10,6 +10,7 @@ import NextImage from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { categories, portfolioStats, portfolioWorks } from "./data";
+import Image from "next/image";
 
 export default function PortfolioPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -67,13 +68,14 @@ export default function PortfolioPage() {
               <Link key={work.id} href={`/portfolio/${work.id}`}>
                 <Card className="group overflow-hidden border-muted/60 transition-all hover:border-primary/50 hover:shadow-xl cursor-pointer h-full">
                   <div className="relative h-72 overflow-hidden">
-                    <NextImage
+                    <Image
+                    loading="lazy"
                       src={work.thumbnail}
                       alt={work.title}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent" />
                     <div className="absolute bottom-6 left-6 right-6">
                       <Badge className="bg-primary/90 text-primary-foreground mb-3">
                         {work.category}
@@ -126,13 +128,13 @@ export default function PortfolioPage() {
               <Link key={work.id} href={`/portfolio/${work.id}`}>
                 <Card className="group overflow-hidden border-muted/60 transition-all hover:border-primary/50 hover:shadow-lg cursor-pointer h-full">
                   <div className="relative h-64 overflow-hidden">
-                    <NextImage
+                    <Image
                       src={work.thumbnail}
                       alt={work.title}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <Badge className="bg-primary/90 text-primary-foreground">
                         {work.category}

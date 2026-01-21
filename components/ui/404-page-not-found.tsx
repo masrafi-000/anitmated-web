@@ -44,7 +44,7 @@ export default function NotFoundPage() {
   };
 
   return (
-    <Section className="min-h-[100dvh] flex items-center justify-center relative overflow-hidden bg-background">
+    <Section className="min-h-dvh flex items-center justify-center relative overflow-hidden bg-background">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] animate-pulse" />
@@ -63,7 +63,7 @@ export default function NotFoundPage() {
             <div className="absolute inset-0 flex items-center justify-center -z-10">
               <Sparkles className="h-32 w-32 text-primary/10 animate-[spin_10s_linear_infinite]" />
             </div>
-            <h1 className="text-[12rem] md:text-[18rem] font-black tracking-tighter leading-none select-none bg-gradient-to-b from-primary via-primary/80 to-background bg-clip-text text-transparent drop-shadow-sm">
+            <h1 className="text-[12rem] md:text-[18rem] font-black tracking-tighter leading-none select-none bg-linear-to-b from-primary via-primary/80 to-background bg-clip-text text-transparent drop-shadow-sm">
               404
             </h1>
           </motion.div>

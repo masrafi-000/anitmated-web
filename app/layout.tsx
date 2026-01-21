@@ -1,4 +1,3 @@
-import { Nav } from "@/components/ds";
 import Footer from "@/components/parts/footer";
 import Navbar from "@/components/parts/navbar";
 import ScrollToTop from "@/components/parts/scroll-to-top";
@@ -38,9 +37,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Nav>
-            <Navbar />
-          </Nav>
+          <Navbar />
           {children}
           <Footer/>
           <ScrollToTop />

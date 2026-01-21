@@ -3,15 +3,15 @@
 
 import { Button } from "@/components/ui/button";
 import {
-    Sheet,
-    SheetContent,
-    SheetTitle,
-    SheetTrigger,
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import Logo from "@/public/logo.png";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+// import { useGSAP } from "@gsap/react";
+// import gsap from "gsap";
 import { Menu } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
@@ -42,26 +42,11 @@ export default function Navbar() {
   const pathname = usePathname();
 
   // GSAP Stagger animation for mobile links
-  useGSAP(() => {
-    if (isOpen) {
-      gsap.fromTo(
-        ".mobile-link",
-        { x: -20, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.5,
-          stagger: 0.08,
-          ease: "power3.out",
-          delay: 0.2,
-        },
-      );
-    }
-  }, [isOpen]);
+
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
-      <nav className="mx-auto flex h-16  items-center justify-between px-2 lg:px-4">
+      <nav className="mx-auto flex h-16  items-center justify-between px-6 md:px-12 lg:px-18">
         {/* Logo */}
         <Link
           href="/"
@@ -81,24 +66,26 @@ export default function Navbar() {
         {/* Desktop Navigation */}
         <div className="hidden items-center gap-8 lg:flex">
           <ul className="flex gap-4 xl:gap-8">
-            {navItems.map((item) => (
+            {navItems.map((item) => {
+              const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
+              return (
               <li key={item.name}>
                 <Link
                   href={item.href}
                   className={cn(
                     "text-sm font-medium transition-colors hover:text-foreground relative",
-                    pathname === item.href
+                    isActive
                       ? "text-foreground font-semibold"
                       : "text-muted-foreground",
                   )}
                 >
                   {item.name}
-                  {pathname === item.href && (
+                  {isActive && (
                     <span className="absolute -bottom-5.25 left-0 h-0.5 w-full bg-primary" />
                   )}
                 </Link>
               </li>
-            ))}
+            );})}
           </ul>
           <div className="flex items-center gap-3 border-l pl-6 border-border/60">
             <ThemeToggle />
@@ -151,7 +138,7 @@ export default function Navbar() {
                 {/* Nav Links */}
                 <div className="mobile-link flex flex-col space-y-4">
                   {navItems.map((item) => {
-                    const isActive = pathname === item.href;
+                    const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
                     return (
                       <Link
                         key={item.name}

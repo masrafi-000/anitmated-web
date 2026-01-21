@@ -1,4 +1,6 @@
 import { IntroSection, MotiveSection, PurposeSection } from "@/components/landing/content-sections";
+import { CTASection } from "@/components/landing/cta-section";
+import { FAQSection } from "@/components/landing/faq-section";
 import { GallerySection } from "@/components/landing/gallery-section";
 import HeroRefactored from "@/components/landing/hero-section";
 import { MarqueeDemo } from "@/components/landing/testimonial";
@@ -9,10 +11,12 @@ export default function Page() {
       <HeroRefactored />
       <IntroSection />
       <MotiveSection />
-      <MarqueeDemo />
       <PurposeSection />
       <GallerySection />
-      {/* Footer handles its own layout usually, but good to include if not in layout.tsx */}
+      <MarqueeDemo />
+      <FAQSection />
+      <CTASection />
+      
     </main>
   );
 }

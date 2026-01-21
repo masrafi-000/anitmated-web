@@ -172,7 +172,7 @@ export default function CareersPage() {
           </div>
 
           {/* Job Listings */}
-          <div className="space-y-4 max-w-4xl mx-auto">
+          <div className=" flex flex-col gap-3 max-w-6xl mx-auto">
             {filteredJobs.map((job) => (
               <Link key={job.id} href={`/careers/${job.id}`}>
                 <Card className="border-muted/60 transition-all hover:border-primary/50 hover:shadow-lg cursor-pointer">

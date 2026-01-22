@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const ZFormSchema = z.object({
+export const ZCContact = z.object({
   name: z.string().min(2, "Name is required"),
   email: z.email("Invalid email address"),
   company: z.string().optional(),
@@ -13,4 +13,4 @@ export const ZFormSchema = z.object({
   description: z.string().min(10, "Please provide some project details"),
 });
 
-export type ZFormType = z.infer<typeof ZFormSchema>;
+export type TCContact = z.infer<typeof ZCContact>;

@@ -12,11 +12,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
-import { api } from "@/lib/axios";
-import { ZFormSchema, ZFormType } from "@/schema/zod/contactFormSchema";
+import { useCreateInquiry } from "@/hooks/use-inquiries";
+import { TCContact, ZCContact } from "@/schema/zod/contactFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
+import { QueryClient } from "@tanstack/react-query";
 import { Check, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -40,8 +39,8 @@ export default function MultiStepForm() {
   const [step, setStep] = useState(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const form = useForm<ZFormType>({
-    resolver: zodResolver(ZFormSchema),
+  const form = useForm<TCContact>({
+    resolver: zodResolver(ZCContact),
     defaultValues: {
       name: "",
       email: "",
@@ -71,26 +70,27 @@ export default function MultiStepForm() {
     setStep((p) => p - 1);
   };
 
-  const mutation = useMutation({
-    mutationFn: async (values: ZFormType) => {
-      const { data } = await api.post("/v0/inquiry", values);
-      return data;
-    },
-    onSuccess: () => {
-      setIsSubmitted(true);
-      toast.success("Request Submitted. We will contact you soon")
-    },
-    onError: (error: AxiosError<{ error: string }>) => {
-      console.error("Submission failed: ", error);
-      const errorMessage =
-        error.response?.data?.error ||
-        "Error sending message. Please try again.";
-      toast.error(errorMessage)
-    },
-  });
+  const queryClient = new QueryClient();
 
-  const onSubmit = (values: ZFormType) => {
-    mutation.mutate(values);
+  const mutation = useCreateInquiry();
+
+  const onSubmit = (body: TCContact) => {
+    mutation.mutate(body, {
+      onSuccess: (res) => {
+        setIsSubmitted(true);
+        queryClient.invalidateQueries({ queryKey: ["inquiries"] });
+        toast.success(
+          res?.message ||
+            "Your request has been submitted successfully. Our team will reach out shortly."
+        );
+      },
+      onError: (error) => {
+        toast.error(
+          error.message ||
+            "We could not submit your request at this time. Please try again later."
+        );
+      },
+    });
   };
 
   if (isSubmitted) {

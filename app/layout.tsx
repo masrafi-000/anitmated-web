@@ -1,12 +1,9 @@
-import Footer from "@/components/parts/footer";
-import Navbar from "@/components/parts/navbar";
-import ScrollToTop from "@/components/parts/scroll-to-top";
+import { Toaster } from "@/components/ui/sonner";
 import QueryProvider from "@/providers/query-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,10 +38,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Navbar />
             {children}
-            <Footer />
-            <ScrollToTop />
             <Toaster />
           </ThemeProvider>
         </QueryProvider>

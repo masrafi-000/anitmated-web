@@ -3,6 +3,14 @@
 import { Badge } from "@/components/ui/badge";
 
 import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
@@ -10,14 +18,6 @@ import {
 } from "@tanstack/react-table";
 import { Check, X } from "lucide-react";
 import { useMemo } from "react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "../../../components/ui/table";
 
 interface ComparisonFeature {
   feature: string;

@@ -1,10 +1,5 @@
 "use client";
 
-import { Benefits } from "@/app/contact/_components/benefits";
-import { FAQ } from "@/app/contact/_components/faq";
-import { Socials } from "@/app/contact/_components/socials";
-import { Support } from "@/app/contact/_components/support";
-import { getFounders } from "@/app/team/data";
 import { Container, Section } from "@/components/ds";
 import StepForm from "@/components/multistep-form";
 import PageHeader from "@/components/parts/pageHeader";
@@ -19,6 +14,11 @@ import {
 import { Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { getFounders } from "../team/data";
+import { Benefits } from "./_components/benefits";
+import { FAQ } from "./_components/faq";
+import { Socials } from "./_components/socials";
+import { Support } from "./_components/support";
 
 export default function ContactPage() {
   return (

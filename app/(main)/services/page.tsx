@@ -1,6 +1,6 @@
 "use client";
 
-import { AboutCTA } from "@/app/about/_components/cta";
+import { AboutCTA } from "../about/_components/cta";
 import { Container, Section } from "@/components/ds";
 import PageHeader from "@/components/parts/pageHeader";
 import { Badge } from "@/components/ui/badge";

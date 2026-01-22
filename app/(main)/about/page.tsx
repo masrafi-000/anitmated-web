@@ -1,10 +1,11 @@
 "use client";
-import { AboutCTA } from "@/app/about/_components/cta";
-import { Mission } from "@/app/about/_components/mission-vision";
-import { Process } from "@/app/about/_components/process";
-import { Story } from "@/app/about/_components/story";
+
 import PageHeader from "@/components/parts/pageHeader";
 import { useRouter } from "next/navigation";
+import { AboutCTA } from "./_components/cta";
+import { Mission } from "./_components/mission-vision";
+import { Process } from "./_components/process";
+import { Story } from "./_components/story";
 
 export default function AboutPage() {
   const router = useRouter();

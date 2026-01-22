@@ -1,7 +1,5 @@
 "use client";
 
-import { PackageComparison } from "@/app/pricing/_components/comparison-table";
-import PricingQueryForm from "@/app/pricing/_components/pricing-query-form";
 import { Container, Section } from "@/components/ds";
 import Pricing from "@/components/landing/pricing";
 import PageHeader from "@/components/parts/pageHeader";
@@ -17,6 +15,8 @@ import {
   Users,
   Zap,
 } from "lucide-react";
+import { PackageComparison } from "./_components/comparison-table";
+import PricingQueryForm from "./_components/pricing-query-form";
 
 export default function PricingPage() {
   return (
@@ -172,7 +172,7 @@ export default function PricingPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <div className="text-center">
-              <div className="h-20 w-20 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mx-auto mb-4 text-white text-2xl font-bold">
+              <div className="h-20 w-20 rounded-full bg-linear-to-br from-blue-500 to-blue-600 flex items-center justify-center mx-auto mb-4 text-white text-2xl font-bold">
                 40%
               </div>
               <h3 className="text-xl font-semibold mb-2">Startups</h3>
@@ -182,7 +182,7 @@ export default function PricingPage() {
             </div>
 
             <div className="text-center">
-              <div className="h-20 w-20 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center mx-auto mb-4 text-white text-2xl font-bold">
+              <div className="h-20 w-20 rounded-full bg-linear-to-br from-green-500 to-green-600 flex items-center justify-center mx-auto mb-4 text-white text-2xl font-bold">
                 35%
               </div>
               <h3 className="text-xl font-semibold mb-2">Scale-ups</h3>

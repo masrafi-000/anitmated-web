@@ -26,7 +26,7 @@ api.interceptors.request.use(
   },
   (error: AxiosError) => {
     return Promise.reject(error);
-  },
+  }
 );
 
 api.interceptors.response.use(
@@ -34,19 +34,17 @@ api.interceptors.response.use(
     console.log(`✅ [Response] ${response.status} ${response.config.url}`);
     return response;
   },
-  (error: AxiosError) => {
+  (error: AxiosError<{ error?: string }>) => {
     // Any status codes outside the range of 2xx trigger this function
 
     const customError = {
-      message:
-        (error.response?.data as any)?.error ||
-        "An unexpected error occurred",
+      message: error.response?.data?.error || "An unexpected error occurred",
       status: error.response?.status,
       data: error.response?.data,
     };
 
     console.error(
-      `❌ [Error Response] ${customError.status}: ${customError.message}`,
+      `❌ [Error Response] ${customError.status}: ${customError.message}`
     );
 
     // Global Error Handling Examples:
@@ -59,5 +57,5 @@ api.interceptors.response.use(
     }
 
     return Promise.reject(customError);
-  },
+  }
 );

@@ -20,6 +20,7 @@ import { AxiosError } from "axios";
 import { Check, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 const services = [
   { id: "branding", label: "Branding", desc: "Logo, Guidelines, Identity" },
@@ -77,13 +78,14 @@ export default function MultiStepForm() {
     },
     onSuccess: () => {
       setIsSubmitted(true);
+      toast.success("Request Submitted. We will contact you soon")
     },
     onError: (error: AxiosError<{ error: string }>) => {
       console.error("Submission failed: ", error);
       const errorMessage =
         error.response?.data?.error ||
         "Error sending message. Please try again.";
-      alert(errorMessage);
+      toast.error(errorMessage)
     },
   });
 

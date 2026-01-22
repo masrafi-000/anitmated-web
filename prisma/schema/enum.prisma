@@ -1,0 +1,6 @@
+enum ServiceType {
+  branding
+  design
+  development
+  marketing
+}

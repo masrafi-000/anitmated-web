@@ -7,29 +7,19 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
+import { api } from "@/lib/axios";
+import { ZFormSchema, ZFormType } from "@/schema/zod/contactFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Check, ChevronLeft, ChevronRight } from "lucide-react";
+import { useMutation } from "@tanstack/react-query";
+import { AxiosError } from "axios";
+import { Check, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
-
-const formSchema = z.object({
-  name: z.string().min(2, "Name is required"),
-  email: z.string().email("Invalid email address"),
-  company: z.string().optional(),
-  service: z.enum(["branding", "design", "development", "marketing"] as const, {
-    message: "Please select a service",
-  }),
-  budget: z.enum(["<5k", "5k-10k", "10k-20k", "20k+"] as const, {
-    message: "Please select a budget range",
-  }),
-  description: z.string().min(10, "Please provide some project details"),
-});
 
 const services = [
   { id: "branding", label: "Branding", desc: "Logo, Guidelines, Identity" },
@@ -49,8 +39,8 @@ export default function MultiStepForm() {
   const [step, setStep] = useState(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<ZFormType>({
+    resolver: zodResolver(ZFormSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -58,6 +48,7 @@ export default function MultiStepForm() {
       description: "",
     },
     mode: "onChange",
+    shouldUnregister: false,
   });
 
   const { trigger, handleSubmit } = form;
@@ -79,14 +70,30 @@ export default function MultiStepForm() {
     setStep((p) => p - 1);
   };
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-    setIsSubmitted(true);
+  const mutation = useMutation({
+    mutationFn: async (values: ZFormType) => {
+      const { data } = await api.post("/v0/inquiry", values);
+      return data;
+    },
+    onSuccess: () => {
+      setIsSubmitted(true);
+    },
+    onError: (error: AxiosError<{ error: string }>) => {
+      console.error("Submission failed: ", error);
+      const errorMessage =
+        error.response?.data?.error ||
+        "Error sending message. Please try again.";
+      alert(errorMessage);
+    },
+  });
+
+  const onSubmit = (values: ZFormType) => {
+    mutation.mutate(values);
   };
 
   if (isSubmitted) {
     return (
-      <div className="flex h-full min-h-[400px] flex-col items-center justify-center text-center space-y-4 animate-in fade-in zoom-in duration-500">
+      <div className="flex h-full min-h-100 flex-col items-center justify-center text-center space-y-4 animate-in fade-in zoom-in duration-500">
         <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
           <Check className="h-10 w-10 text-primary" />
         </div>
@@ -105,27 +112,36 @@ export default function MultiStepForm() {
     <div className="w-full max-w-xl mx-auto py-6">
       <div className="mb-8">
         <div className="flex items-center justify-between mb-2">
-           <span className="text-sm font-medium text-muted-foreground">Step {step} of 3</span>
-           <span className="text-sm font-medium text-primary">{Math.round((step / 3) * 100)}%</span>
+          <span className="text-sm font-medium text-muted-foreground">
+            Step {step} of 3
+          </span>
+          <span className="text-sm font-medium text-primary">
+            {Math.round((step / 3) * 100)}%
+          </span>
         </div>
         <div className="h-2 w-full bg-secondary rounded-full overflow-hidden">
-          <div 
-            className="h-full bg-primary transition-all duration-500 ease-in-out" 
-            style={{ width: `${(step / 3) * 100}%` }} 
+          <div
+            className="h-full bg-primary transition-all duration-500 ease-in-out"
+            style={{ width: `${(step / 3) * 100}%` }}
           />
         </div>
       </div>
 
       <Form {...form}>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 relative min-h-[400px]">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="space-y-8 relative min-h-100"
+        >
           {/* Step 1: Details */}
           {step === 1 && (
             <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-300">
-               <div className="space-y-2">
-                 <h2 className="text-2xl font-semibold tracking-tight">{`Let's start with your details`}</h2>
-                 <p className="text-muted-foreground">So we can get back to you.</p>
-               </div>
-              
+              <div className="space-y-2">
+                <h2 className="text-2xl font-semibold tracking-tight">{`Let's start with your details`}</h2>
+                <p className="text-muted-foreground">
+                  So we can get back to you.
+                </p>
+              </div>
+
               <FormField
                 control={form.control}
                 name="name"
@@ -152,7 +168,7 @@ export default function MultiStepForm() {
                   </FormItem>
                 )}
               />
-               <FormField
+              <FormField
                 control={form.control}
                 name="company"
                 render={({ field }) => (
@@ -171,10 +187,14 @@ export default function MultiStepForm() {
           {/* Step 2: Needs */}
           {step === 2 && (
             <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-300">
-               <div className="space-y-2">
-                 <h2 className="text-2xl font-semibold tracking-tight">What are you looking for?</h2>
-                 <p className="text-muted-foreground">Help us understand your needs.</p>
-               </div>
+              <div className="space-y-2">
+                <h2 className="text-2xl font-semibold tracking-tight">
+                  What are you looking for?
+                </h2>
+                <p className="text-muted-foreground">
+                  Help us understand your needs.
+                </p>
+              </div>
 
               <FormField
                 control={form.control}
@@ -197,8 +217,12 @@ export default function MultiStepForm() {
                               />
                             </FormControl>
                             <FormLabel className="flex flex-col items-start justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5 [&:has([data-state=checked])]:border-primary [&:has([data-state=checked])]:bg-primary/5 cursor-pointer transition-all">
-                              <span className="text-base font-semibold">{service.label}</span>
-                              <span className="text-xs text-muted-foreground mt-1 group-hover:text-accent-foreground">{service.desc}</span>
+                              <span className="text-base font-semibold">
+                                {service.label}
+                              </span>
+                              <span className="text-xs text-muted-foreground mt-1 group-hover:text-accent-foreground">
+                                {service.desc}
+                              </span>
                             </FormLabel>
                           </FormItem>
                         ))}
@@ -215,13 +239,13 @@ export default function MultiStepForm() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Project Budget</FormLabel>
-                     <FormControl>
+                    <FormControl>
                       <RadioGroup
                         onValueChange={field.onChange}
                         defaultValue={field.value}
                         className="grid grid-cols-2 md:grid-cols-4 gap-4"
                       >
-                       {budgets.map((b) => (
+                        {budgets.map((b) => (
                           <FormItem key={b.id}>
                             <FormControl>
                               <RadioGroupItem
@@ -229,11 +253,13 @@ export default function MultiStepForm() {
                                 className="peer sr-only"
                               />
                             </FormControl>
-                             <FormLabel className="flex flex-col items-center justify-center rounded-md border-2 border-muted bg-popover p-2 text-center hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5 [&:has([data-state=checked])]:border-primary [&:has([data-state=checked])]:bg-primary/5 cursor-pointer transition-all">
-                              <span className="text-sm font-medium">{b.label}</span>
+                            <FormLabel className="flex flex-col items-center justify-center rounded-md border-2 border-muted bg-popover p-2 text-center hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5 [&:has([data-state=checked])]:border-primary [&:has([data-state=checked])]:bg-primary/5 cursor-pointer transition-all">
+                              <span className="text-sm font-medium">
+                                {b.label}
+                              </span>
                             </FormLabel>
                           </FormItem>
-                       ))}
+                        ))}
                       </RadioGroup>
                     </FormControl>
                     <FormMessage />
@@ -247,9 +273,13 @@ export default function MultiStepForm() {
           {step === 3 && (
             <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-300">
               <div className="space-y-2">
-                 <h2 className="text-2xl font-semibold tracking-tight">Tell us about your project</h2>
-                 <p className="text-muted-foreground">The more details, the better.</p>
-               </div>
+                <h2 className="text-2xl font-semibold tracking-tight">
+                  Tell us about your project
+                </h2>
+                <p className="text-muted-foreground">
+                  The more details, the better.
+                </p>
+              </div>
               <FormField
                 control={form.control}
                 name="description"
@@ -259,7 +289,7 @@ export default function MultiStepForm() {
                     <FormControl>
                       <Textarea
                         placeholder="Tell us about your goals, timeline, and any specific requirements..."
-                        className="min-h-[150px] resize-none"
+                        className="min-h-37.5 resize-none"
                         {...field}
                       />
                     </FormControl>
@@ -276,7 +306,7 @@ export default function MultiStepForm() {
                 <ChevronLeft className="mr-2 h-4 w-4" /> Back
               </Button>
             ) : (
-                <div /> /* Spacer */
+              <div /> /* Spacer */
             )}
 
             {step < 3 ? (
@@ -284,8 +314,17 @@ export default function MultiStepForm() {
                 Next Step <ChevronRight className="ml-2 h-4 w-4" />
               </Button>
             ) : (
-              <Button type="submit">
-                Submit Request <Check className="ml-2 h-4 w-4" />
+              <Button type="submit" disabled={mutation.isPending}>
+                {mutation.isPending ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Submit Request <Check className="ml-2 h-4 w-4" />
+                  </>
+                )}
               </Button>
             )}
           </div>

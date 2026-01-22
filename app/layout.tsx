@@ -1,6 +1,7 @@
 import Footer from "@/components/parts/footer";
 import Navbar from "@/components/parts/navbar";
 import ScrollToTop from "@/components/parts/scroll-to-top";
+import QueryProvider from "@/providers/query-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -18,7 +19,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Ruby Studio | Digital Agency",
-  description: "We build exceptional digital experiences for ambitious brands. Web design, development, and digital strategy.",
+  description:
+    "We build exceptional digital experiences for ambitious brands. Web design, development, and digital strategy.",
 };
 
 export default function RootLayout({
@@ -31,17 +33,19 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Navbar />
-          {children}
-          <Footer/>
-          <ScrollToTop />
-        </ThemeProvider>
+        <QueryProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Navbar />
+            {children}
+            <Footer />
+            <ScrollToTop />
+          </ThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   );

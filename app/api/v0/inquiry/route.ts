@@ -10,12 +10,26 @@ export async function GET() {
         createdAt: "desc",
       },
     });
-    return NextResponse.json(inquiries);
+    return NextResponse.json(
+      {
+        success: true,
+        message:
+          inquiries.length === 0
+            ? " No Inquiry Data Found"
+            : "All Submitted Inquiries Fetched",
+        data: inquiries,
+        count: inquiries.length,
+      },
+      { status: 200 },
+    );
   } catch (error) {
     console.error("API Error:", error);
     return NextResponse.json(
-      { error: "Failed to fetch inquiries" },
-      { status: 500 }
+      {
+        success: false,
+        error: error instanceof Error ? error.message : "Internal Server Error",
+      },
+      { status: 500 },
     );
   }
 }
@@ -33,7 +47,7 @@ export async function POST(req: Request) {
     return NextResponse.json(
       {
         success: true,
-        message: "Contact form submited succesfully",
+        message: "Contact Form Submitted Successfully",
         data: inquiry,
       },
       { status: 201 }

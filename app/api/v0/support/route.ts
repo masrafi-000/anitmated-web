@@ -3,15 +3,21 @@ import { ZCSupport } from "@/schema/zod/supportFormSchema";
 import { NextResponse } from "next/server";
 import z from "zod";
 
-
 export async function GET() {
   try {
     const support = await prisma.support.findMany();
-    return NextResponse.json({
-      success: true,
-      message: "Support form submited succesfully",
-      data: support,
-    }, { status: 200 });
+    return NextResponse.json(
+      {
+        success: true,
+        message:
+          support.length === 0
+            ? " No Support Data Found"
+            : "All Submitted Support Forms Fetched",
+        data: support,
+        count: support.length
+      },
+      { status: 200 },
+    );
   } catch (error) {
     console.error("API Error:", error);
     return NextResponse.json(
@@ -23,8 +29,6 @@ export async function GET() {
     );
   }
 }
-
-
 
 export async function POST(req: Request) {
   try {
@@ -39,7 +43,7 @@ export async function POST(req: Request) {
     return NextResponse.json(
       {
         success: true,
-        message: "Support form submited succesfully",
+        message: "Support Form Submitted Successfully",
         data: support,
       },
       { status: 201 },

@@ -24,6 +24,7 @@ interface Message {
   content: string;
   hasForm?: boolean;
   isFormSubmitted?: boolean;
+  successMessage?: string;
   timestamp: Date;
 }
 
@@ -40,14 +41,12 @@ export function ChatInterface() {
   ]);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const isMountedRef = useRef(false);
   const isInitialized = useRef(false);
 
   useEffect(() => {
-    if (!isInitialized.current) {
-      isInitialized.current = true;
-      return;
-    }
-  }, [messages, isTyping]);
+    isMountedRef.current = true;
+  }, []);
 
   const handleSendMessage = (e?: React.FormEvent) => {
     e?.preventDefault();
@@ -93,6 +92,31 @@ export function ChatInterface() {
         queryClient.invalidateQueries({
           queryKey: ["support-form"],
         });
+
+        setMessages((prev) =>
+          prev.map((msg) =>
+            msg.id === messageId
+              ? {
+                ...msg,
+                isFormSubmitted: true,
+                successMessage: data.message,
+              }
+              : msg,
+          ),
+        );
+
+        setIsTyping(true);
+        setTimeout(() => {
+          const thanksMsg: Message = {
+            id: Date.now().toString(),
+            sender: "bot",
+            type: "text",
+            content: `Thanks ${body.name}! We have received your details and will contact you soon.`,
+            timestamp: new Date(),
+          };
+          setMessages((prev) => [...prev, thanksMsg]);
+          setIsTyping(false);
+        }, 1000);
       },
       onError: (error) => {
         toast.error(
@@ -100,25 +124,6 @@ export function ChatInterface() {
         );
       },
     });
-
-    setMessages((prev) =>
-      prev.map((msg) =>
-        msg.id === messageId ? { ...msg, isFormSubmitted: true } : msg,
-      ),
-    );
-
-    setIsTyping(true);
-    setTimeout(() => {
-      const thanksMsg: Message = {
-        id: Date.now().toString(),
-        sender: "bot",
-        type: "text",
-        content: `Thanks ${body.name}! We have received your details and will contact you soon.`,
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, thanksMsg]);
-      setIsTyping(false);
-    }, 1000);
   };
 
   return (
@@ -172,7 +177,7 @@ export function ChatInterface() {
                   <div className="mt-4 pt-4 border-t border-border/50">
                     <ChatForm
                       onSubmit={(data) => handleFormSubmit(data, msg.id)}
-                      // disabled={mutation.isPending}
+                      disabled={mutation.isPending}
                     />
                   </div>
                 )}
@@ -181,7 +186,7 @@ export function ChatInterface() {
                 {msg.isFormSubmitted && msg.hasForm && (
                   <div className="mt-2 p-2 bg-green-50 dark:bg-green-900/20 rounded border border-green-200 dark:border-green-800 text-xs text-green-600 dark:text-green-400 flex items-center gap-2">
                     <CheckCheck size={14} />
-                    Form submitted successfully
+                    {msg.successMessage || "Form submitted successfully"}
                   </div>
                 )}
 

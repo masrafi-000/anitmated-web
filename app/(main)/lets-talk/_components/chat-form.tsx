@@ -1,8 +1,8 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -114,9 +114,16 @@ export function ChatForm({ onSubmit, disabled }: ChatFormProps) {
             type="submit"
             size="sm"
             className="w-full cursor-pointer"
-            disabled={disabled}
+            disabled={disabled || !form.formState.isValid}
           >
-            Submit Details
+            {disabled ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Submitting...
+              </>
+            ) : (
+              "Submit Details"
+            )}
           </Button>
         </form>
       </Form>

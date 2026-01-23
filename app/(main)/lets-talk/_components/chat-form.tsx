@@ -6,36 +6,24 @@ import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormMessage
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-
-const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-  phone: z.string().min(10, {
-    message: "Please enter a valid phone number.",
-  }),
-  details: z.string().optional(),
-});
+import { TCSupport, ZCSupport } from "@/schema/zod/supportFormSchema";
 
 interface ChatFormProps {
-  onSubmit: (values: z.infer<typeof formSchema>) => void;
+  onSubmit: (body: TCSupport) => void;
   disabled?: boolean;
 }
 
 export function ChatForm({ onSubmit, disabled }: ChatFormProps) {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<TCSupport>({
+    resolver: zodResolver(ZCSupport),
     defaultValues: {
       name: "",
       email: "",
@@ -60,7 +48,12 @@ export function ChatForm({ onSubmit, disabled }: ChatFormProps) {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="Your Name" {...field} disabled={disabled} className="h-8 text-sm" />
+                  <Input
+                    placeholder="Your Name"
+                    {...field}
+                    disabled={disabled}
+                    className="h-8 text-sm"
+                  />
                 </FormControl>
                 <FormMessage className="text-xs" />
               </FormItem>
@@ -72,7 +65,12 @@ export function ChatForm({ onSubmit, disabled }: ChatFormProps) {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="Email Address" {...field} disabled={disabled} className="h-8 text-sm" />
+                  <Input
+                    placeholder="Email Address"
+                    {...field}
+                    disabled={disabled}
+                    className="h-8 text-sm"
+                  />
                 </FormControl>
                 <FormMessage className="text-xs" />
               </FormItem>
@@ -84,25 +82,40 @@ export function ChatForm({ onSubmit, disabled }: ChatFormProps) {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="Phone Number" {...field} disabled={disabled} className="h-8 text-sm" />
+                  <Input
+                    placeholder="Phone Number"
+                    {...field}
+                    disabled={disabled}
+                    className="h-8 text-sm"
+                  />
                 </FormControl>
                 <FormMessage className="text-xs" />
               </FormItem>
             )}
           />
-           <FormField
+          <FormField
             control={form.control}
             name="details"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Textarea placeholder="Any specific details? (Optional)" {...field} disabled={disabled} className="h-20 text-sm resize-none" />
+                  <Textarea
+                    placeholder="Any specific details? (Optional)"
+                    {...field}
+                    disabled={disabled}
+                    className="h-20 text-sm resize-none"
+                  />
                 </FormControl>
                 <FormMessage className="text-xs" />
               </FormItem>
             )}
           />
-          <Button type="submit" size="sm" className="w-full" disabled={disabled}>
+          <Button
+            type="submit"
+            size="sm"
+            className="w-full cursor-pointer"
+            disabled={disabled}
+          >
             Submit Details
           </Button>
         </form>

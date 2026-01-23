@@ -384,7 +384,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
-  Inquiry: 'Inquiry'
+  Inquiry: 'Inquiry',
+  Support: 'Support'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -400,7 +401,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "inquiry"
+    modelProps: "inquiry" | "support"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -478,6 +479,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Support: {
+      payload: Prisma.$SupportPayload<ExtArgs>
+      fields: Prisma.SupportFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SupportFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SupportPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SupportFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SupportPayload>
+        }
+        findFirst: {
+          args: Prisma.SupportFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SupportPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SupportFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SupportPayload>
+        }
+        findMany: {
+          args: Prisma.SupportFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SupportPayload>[]
+        }
+        create: {
+          args: Prisma.SupportCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SupportPayload>
+        }
+        createMany: {
+          args: Prisma.SupportCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SupportCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SupportPayload>[]
+        }
+        delete: {
+          args: Prisma.SupportDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SupportPayload>
+        }
+        update: {
+          args: Prisma.SupportUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SupportPayload>
+        }
+        deleteMany: {
+          args: Prisma.SupportDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SupportUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SupportUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SupportPayload>[]
+        }
+        upsert: {
+          args: Prisma.SupportUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SupportPayload>
+        }
+        aggregate: {
+          args: Prisma.SupportAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSupport>
+        }
+        groupBy: {
+          args: Prisma.SupportGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SupportGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SupportCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SupportCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -530,6 +605,19 @@ export const InquiryScalarFieldEnum = {
 } as const
 
 export type InquiryScalarFieldEnum = (typeof InquiryScalarFieldEnum)[keyof typeof InquiryScalarFieldEnum]
+
+
+export const SupportScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  details: 'details'
+} as const
+
+export type SupportScalarFieldEnum = (typeof SupportScalarFieldEnum)[keyof typeof SupportScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -713,6 +801,7 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   inquiry?: Prisma.InquiryOmit
+  support?: Prisma.SupportOmit
 }
 
 /* Types for Logging */

@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.3.0",
   "engineVersion": "9d6ad21cbbceab97458517b147a6a09ff43aa735",
   "activeProvider": "postgresql",
-  "inlineSchema": "enum ServiceType {\n  branding\n  design\n  development\n  marketing\n}\n\nmodel Inquiry {\n  id          String      @id @default(cuid())\n  name        String\n  email       String\n  company     String?\n  service     ServiceType\n  budget      String // Stored as string to accommodate \"<5k\", \"20k+\", etc.\n  description String      @db.Text\n  createdAt   DateTime    @default(now())\n  updatedAt   DateTime    @updatedAt\n}\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../../app/generated\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n",
+  "inlineSchema": "enum ServiceType {\n  branding\n  design\n  development\n  marketing\n}\n\nmodel Inquiry {\n  id          String      @id @default(cuid())\n  name        String\n  email       String\n  company     String?\n  service     ServiceType\n  budget      String // Stored as string to accommodate \"<5k\", \"20k+\", etc.\n  description String      @db.Text\n  createdAt   DateTime    @default(now())\n  updatedAt   DateTime    @updatedAt\n}\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../../app/generated\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Support {\n  id String @id @default(cuid())\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  name    String\n  email   String\n  phone   String\n  details String?\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Inquiry\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"company\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"service\",\"kind\":\"enum\",\"type\":\"ServiceType\"},{\"name\":\"budget\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Inquiry\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"company\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"service\",\"kind\":\"enum\",\"type\":\"ServiceType\"},{\"name\":\"budget\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Support\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"details\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -185,6 +185,16 @@ export interface PrismaClient<
     * ```
     */
   get inquiry(): Prisma.InquiryDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.support`: Exposes CRUD operations for the **Support** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Supports
+    * const supports = await prisma.support.findMany()
+    * ```
+    */
+  get support(): Prisma.SupportDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {

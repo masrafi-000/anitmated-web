@@ -9,4 +9,5 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/Inquiry'
+export type * from './models/Support'
 export type * from './commonInputTypes'

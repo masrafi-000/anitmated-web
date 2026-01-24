@@ -42,7 +42,6 @@ export function ChatInterface() {
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const isMountedRef = useRef(false);
-  const isInitialized = useRef(false);
 
   useEffect(() => {
     isMountedRef.current = true;

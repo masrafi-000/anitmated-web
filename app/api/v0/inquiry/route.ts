@@ -74,3 +74,66 @@ export async function POST(req: Request) {
     );
   }
 }
+
+
+export async function DELETE(req: Request) {
+  try {
+    const body = await req.json();
+
+    const inquiry = await prisma.inquiry.delete({
+      where: {
+        id: body.id,
+      },
+    });
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Inquiry Deleted Successfully",
+        data: inquiry,
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("API Error:", error);
+    return NextResponse.json(
+      {
+        success: false,
+        error: error instanceof Error ? error.message : "Internal Server Error",
+      },
+      { status: 500 }
+    );
+  }
+}
+
+
+export async function PATCH(req: Request) {
+  try {
+    const body = await req.json();
+
+    const inquiry = await prisma.inquiry.update({
+      where: {
+        id: body.id,
+      },
+      data: body,
+    });
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Inquiry Updated Successfully",
+        data: inquiry,
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("API Error:", error);
+    return NextResponse.json(
+      {
+        success: false,
+        error: error instanceof Error ? error.message : "Internal Server Error",
+      },
+      { status: 500 }
+    );
+  }
+}

@@ -81,13 +81,13 @@ export default function MultiStepForm() {
         queryClient.invalidateQueries({ queryKey: ["inquiries"] });
         toast.success(
           res?.message ||
-            "Your request has been submitted successfully. Our team will reach out shortly."
+            "Your request has been submitted successfully. Our team will reach out shortly.",
         );
       },
       onError: (error) => {
         toast.error(
           error.message ||
-            "We could not submit your request at this time. Please try again later."
+            "We could not submit your request at this time. Please try again later.",
         );
       },
     });
@@ -177,7 +177,7 @@ export default function MultiStepForm() {
                   <FormItem>
                     <FormLabel>Company (Optional)</FormLabel>
                     <FormControl>
-                      <Input placeholder="Acme Inc." {...field} />
+                      <Input placeholder="Ruby Co." {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

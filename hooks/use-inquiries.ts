@@ -19,7 +19,7 @@ export const useInquiries = () => {
     queryKey: ["inquiries"],
     queryFn: async () => {
       const { data } = await api.get("/v0/inquiry");
-      return data;
+      return data.data;
     },
   });
 };
@@ -28,6 +28,24 @@ export const useCreateInquiry = () => {
   return useMutation({
     mutationFn: async (body: TCContact) => {
       const { data } = await api.post("/v0/inquiry", body);
+      return data;
+    },
+  });
+};
+
+export const useUpdateInquiry = () => {
+  return useMutation({
+    mutationFn: async (body: TCContact) => {
+      const { data } = await api.patch("/v0/inquiry", body);
+      return data;
+    },
+  });
+};
+
+export const useDeleteInquiry = () => {
+  return useMutation({
+    mutationFn: async (body: TCContact) => {
+      const { data } = await api.delete("/v0/inquiry", { data: body });
       return data;
     },
   });

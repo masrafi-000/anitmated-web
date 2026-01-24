@@ -12,6 +12,7 @@ import {
   IconHelp,
   IconInnerShadowTop,
   IconListDetails,
+  IconMist,
   IconReport,
   IconSearch,
   IconSettings,
@@ -50,6 +51,11 @@ const data = {
       title: "Inquiry",
       url: "/dashboard/inquiry",
       icon: IconListDetails,
+    },
+    {
+      title: "Support",
+      url: "/dashboard/support",
+      icon: IconMist,
     },
     {
       title: "Analytics",
@@ -161,9 +167,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               asChild
               className="data-[slot=sidebar-menu-button]:p-1.5!"
             >
-              <Link href="#">
+              <Link href="/dashboard">
                 <IconInnerShadowTop className="size-5!" />
-                <span className="text-base font-semibold">Acme Inc.</span>
+                <span className="text-base font-semibold">Ruby Co.</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

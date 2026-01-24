@@ -253,7 +253,7 @@ function CheckoutContent() {
                           <Input
                             id="company"
                             {...step1Form.register("company")}
-                            placeholder="Acme Inc."
+                            placeholder="Rubu Co."
                           />
                         </div>
 

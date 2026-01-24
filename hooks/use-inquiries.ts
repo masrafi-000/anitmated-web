@@ -1,5 +1,5 @@
 import { api } from "@/lib/axios";
-import { TCContact } from "@/schema/zod/contactFormSchema";
+import { TCContact, TUDContact } from "@/schema/zod/contactFormSchema";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export interface Inquiry {
@@ -35,7 +35,7 @@ export const useCreateInquiry = () => {
 
 export const useUpdateInquiry = () => {
   return useMutation({
-    mutationFn: async (body: TCContact) => {
+    mutationFn: async (body: TUDContact) => {
       const { data } = await api.patch("/v0/inquiry", body);
       return data;
     },
@@ -44,7 +44,7 @@ export const useUpdateInquiry = () => {
 
 export const useDeleteInquiry = () => {
   return useMutation({
-    mutationFn: async (body: TCContact) => {
+    mutationFn: async (body: TUDContact) => {
       const { data } = await api.delete("/v0/inquiry", { data: body });
       return data;
     },

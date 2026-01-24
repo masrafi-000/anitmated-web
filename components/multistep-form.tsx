@@ -13,9 +13,9 @@ import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { useCreateInquiry } from "@/hooks/use-inquiries";
+import { queryClient } from "@/lib/query-client";
 import { TCContact, ZCContact } from "@/schema/zod/contactFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { QueryClient } from "@tanstack/react-query";
 import { Check, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -69,8 +69,6 @@ export default function MultiStepForm() {
   const handleBack = () => {
     setStep((p) => p - 1);
   };
-
-  const queryClient = new QueryClient();
 
   const mutation = useCreateInquiry();
 

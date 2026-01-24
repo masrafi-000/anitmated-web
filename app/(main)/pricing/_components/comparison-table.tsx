@@ -193,7 +193,7 @@ export function PackageComparison() {
 
   return (
     <div className="w-full overflow-x-auto">
-      <div className="rounded-lg border min-w-[800px]">
+      <div className="rounded-lg border min-w-200">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

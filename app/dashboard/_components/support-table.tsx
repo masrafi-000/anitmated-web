@@ -13,7 +13,13 @@ import {
   useReactTable,
   VisibilityState,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, Pencil, Trash2 } from "lucide-react";
+import {
+  ArrowUpDown,
+  ChevronDown,
+  Loader2,
+  Pencil,
+  Trash2,
+} from "lucide-react";
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -34,6 +40,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+import { Support } from "@/app/generated/client";
 import {
   Dialog,
   DialogContent,
@@ -43,13 +50,12 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useSupport } from "@/hooks/use-support";
-import { Support } from "@/app/generated/client";
 
 export default function SupportTable() {
-  const { data : Support = [], isLoading } = useSupport();
+  const { data: Support = [], isLoading } = useSupport();
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
+    [],
   );
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -168,7 +174,7 @@ export default function SupportTable() {
         },
       },
     ],
-    []
+    [],
   );
 
   // eslint-disable-next-line react-hooks/incompatible-library
@@ -252,7 +258,7 @@ export default function SupportTable() {
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext()
+                            header.getContext(),
                           )}
                     </TableHead>
                   );
@@ -261,7 +267,7 @@ export default function SupportTable() {
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
+            {table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
@@ -271,7 +277,7 @@ export default function SupportTable() {
                     <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
                     </TableCell>
                   ))}
@@ -283,17 +289,17 @@ export default function SupportTable() {
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-            {isLoading && (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  Loading...
+                  {isLoading ? (
+                    <span className="inline-flex items-center gap-2">
+                      <Loader2
+                        strokeWidth={2}
+                        className="size-5 animate-spin"
+                      />
+                      Loading...
+                    </span>
+                  ) : (
+                    "No results."
+                  )}
                 </TableCell>
               </TableRow>
             )}

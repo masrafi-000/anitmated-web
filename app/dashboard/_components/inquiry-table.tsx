@@ -13,7 +13,7 @@ import {
   useReactTable,
   VisibilityState,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, Pencil, Trash2 } from "lucide-react";
+import { ArrowUpDown, ChevronDown, Loader2 } from "lucide-react";
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -43,12 +43,14 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Inquiry, useInquiries } from "@/hooks/use-inquiries";
+import { DeleteInquiryDialog } from "./delete-inquiry-dialog";
+import { EditInquiryDialog } from "./edit-inquiry-dialog";
 
 export default function InquiryTable() {
   const { data: inquiries = [], isLoading } = useInquiries();
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
+    [],
   );
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -161,23 +163,17 @@ export default function InquiryTable() {
       {
         id: "actions",
         header: "Actions",
-        cell: () => {
+        cell: ({ row }) => {
           return (
             <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm" className="h-8 w-8 p-0">
-                <Pencil className="h-4 w-4" />
-                <span className="sr-only">Edit</span>
-              </Button>
-              <Button variant="destructive" size="sm" className="h-8 w-8 p-0">
-                <Trash2 className="h-4 w-4" />
-                <span className="sr-only">Delete</span>
-              </Button>
+              <EditInquiryDialog inquiry={row.original} />
+              <DeleteInquiryDialog inquiry={row.original} />
             </div>
           );
         },
       },
     ],
-    []
+    [],
   );
 
   // eslint-disable-next-line react-hooks/incompatible-library
@@ -261,7 +257,7 @@ export default function InquiryTable() {
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext()
+                            header.getContext(),
                           )}
                     </TableHead>
                   );
@@ -270,7 +266,7 @@ export default function InquiryTable() {
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
+            {table.getRowModel().rows.length > 0 ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
@@ -280,7 +276,7 @@ export default function InquiryTable() {
                     <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
                     </TableCell>
                   ))}
@@ -292,17 +288,14 @@ export default function InquiryTable() {
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-            {isLoading && (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  Loading...
+                  {isLoading ? (
+                    <span className="inline-flex items-center gap-2 text-lg font-medium tracking-normal">
+                      <Loader2 strokeWidth={2} className="size-5 animate-spin" />
+                      Loading...
+                    </span>
+                  ) : (
+                    "No results found"
+                  )}
                 </TableCell>
               </TableRow>
             )}

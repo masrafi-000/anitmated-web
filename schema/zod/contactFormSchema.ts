@@ -1,6 +1,7 @@
 import z from "zod";
 
 export const ZCContact = z.object({
+  
   name: z.string().min(2, "Name is required"),
   email: z.email("Invalid email address"),
   company: z.string().optional(),
@@ -14,3 +15,10 @@ export const ZCContact = z.object({
 });
 
 export type TCContact = z.infer<typeof ZCContact>;
+
+
+export const  ZUDContact = ZCContact.extend({
+  id: z.string()
+})
+
+export type TUDContact = z.infer<typeof ZUDContact>

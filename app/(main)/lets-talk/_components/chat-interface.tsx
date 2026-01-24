@@ -96,10 +96,10 @@ export function ChatInterface() {
           prev.map((msg) =>
             msg.id === messageId
               ? {
-                ...msg,
-                isFormSubmitted: true,
-                successMessage: data.message,
-              }
+                  ...msg,
+                  isFormSubmitted: true,
+                  successMessage: data.message,
+                }
               : msg,
           ),
         );

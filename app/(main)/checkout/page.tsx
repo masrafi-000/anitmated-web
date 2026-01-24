@@ -8,11 +8,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,24 +27,39 @@ const packages = {
   essential: {
     title: "Essential",
     price: "$2,999",
-    features: ["Logo & Brand Guidelines", "UI/UX Design for Landing Page", "Next.js Implementation", "SEO Best Practices"],
+    features: [
+      "Logo & Brand Guidelines",
+      "UI/UX Design for Landing Page",
+      "Next.js Implementation",
+      "SEO Best Practices",
+    ],
   },
   growth: {
     title: "Growth",
     price: "$5,999",
-    features: ["Complete Visual Identity", "Multi-Page UI/UX Design", "Advanced Motion (GSAP)", "CMS Integration"],
+    features: [
+      "Complete Visual Identity",
+      "Multi-Page UI/UX Design",
+      "Advanced Motion (GSAP)",
+      "CMS Integration",
+    ],
   },
   enterprise: {
     title: "Enterprise",
     price: "Custom",
-    features: ["Product Strategy & Research", "Design System Documentation", "Scalable Web App Development", "Dedicated Support Team"],
+    features: [
+      "Product Strategy & Research",
+      "Design System Documentation",
+      "Scalable Web App Development",
+      "Dedicated Support Team",
+    ],
   },
 };
 
 // Form validation schemas
 const step1Schema = z.object({
   fullName: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Invalid email address"),
+  email: z.email("Invalid email address"),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
   company: z.string().optional(),
 });
@@ -70,12 +85,14 @@ type Step3Data = z.infer<typeof step3Schema>;
 
 function CheckoutContent() {
   const searchParams = useSearchParams();
-  const router = useRouter();
-  const packageType = (searchParams.get("package") || "essential") as keyof typeof packages;
+  const packageType = (searchParams.get("package") ||
+    "essential") as keyof typeof packages;
   const selectedPackage = packages[packageType];
 
   const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState<Partial<Step1Data & Step2Data & Step3Data>>({});
+  const [formData, setFormData] = useState<
+    Partial<Step1Data & Step2Data & Step3Data>
+  >({});
 
   // Step 1 form
   const step1Form = useForm<Step1Data>({
@@ -110,10 +127,9 @@ function CheckoutContent() {
     console.log("=== CHECKOUT FORM DATA ===");
     console.log(JSON.stringify(finalData, null, 2));
     console.log("=========================");
-    
+
     // Show success message
     alert("Order submitted successfully! Check console for form data.");
-    router.push("/");
   };
 
   return (
@@ -136,9 +152,11 @@ function CheckoutContent() {
                       <Package className="h-5 w-5 text-primary" />
                       <h3 className="font-semibold">Order Summary</h3>
                     </div>
-                    
+
                     <div className="mb-4">
-                      <Badge className="mb-2">{selectedPackage.title} Package</Badge>
+                      <Badge className="mb-2">
+                        {selectedPackage.title} Package
+                      </Badge>
                       <div className="text-3xl font-bold text-primary mb-4">
                         {selectedPackage.price}
                       </div>
@@ -147,9 +165,14 @@ function CheckoutContent() {
                     <div className="space-y-2 mb-6">
                       <p className="text-sm font-medium">Includes:</p>
                       {selectedPackage.features.map((feature, index) => (
-                        <div key={index} className="flex items-start gap-2 text-sm">
+                        <div
+                          key={index}
+                          className="flex items-start gap-2 text-sm"
+                        >
                           <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                          <span className="text-muted-foreground">{feature}</span>
+                          <span className="text-muted-foreground">
+                            {feature}
+                          </span>
                         </div>
                       ))}
                     </div>
@@ -157,11 +180,15 @@ function CheckoutContent() {
                     <div className="border-t pt-4">
                       <div className="flex justify-between text-sm mb-2">
                         <span className="text-muted-foreground">Subtotal</span>
-                        <span className="font-medium">{selectedPackage.price}</span>
+                        <span className="font-medium">
+                          {selectedPackage.price}
+                        </span>
                       </div>
                       <div className="flex justify-between font-semibold">
                         <span>Total</span>
-                        <span className="text-primary">{selectedPackage.price}</span>
+                        <span className="text-primary">
+                          {selectedPackage.price}
+                        </span>
                       </div>
                     </div>
                   </CardContent>
@@ -182,10 +209,18 @@ function CheckoutContent() {
                               : "bg-muted text-muted-foreground"
                           }`}
                         >
-                          {currentStep > step ? <CheckCircle2 className="h-5 w-5" /> : step}
+                          {currentStep > step ? (
+                            <CheckCircle2 className="h-5 w-5" />
+                          ) : (
+                            step
+                          )}
                         </div>
                         <span className="text-xs mt-2 text-muted-foreground">
-                          {step === 1 ? "Personal" : step === 2 ? "Project" : "Billing"}
+                          {step === 1
+                            ? "Personal"
+                            : step === 2
+                              ? "Project"
+                              : "Billing"}
                         </span>
                       </div>
                       {step < 3 && (
@@ -203,8 +238,13 @@ function CheckoutContent() {
                 {currentStep === 1 && (
                   <Card>
                     <CardContent className="p-6">
-                      <h3 className="text-xl font-semibold mb-6">Personal Information</h3>
-                      <form onSubmit={step1Form.handleSubmit(onStep1Submit)} className="space-y-4">
+                      <h3 className="text-xl font-semibold mb-6">
+                        Personal Information
+                      </h3>
+                      <form
+                        onSubmit={step1Form.handleSubmit(onStep1Submit)}
+                        className="space-y-4"
+                      >
                         <div>
                           <Label htmlFor="fullName">Full Name *</Label>
                           <Input
@@ -272,22 +312,35 @@ function CheckoutContent() {
                 {currentStep === 2 && (
                   <Card>
                     <CardContent className="p-6">
-                      <h3 className="text-xl font-semibold mb-6">Project Details</h3>
-                      <form onSubmit={step2Form.handleSubmit(onStep2Submit)} className="space-y-4">
+                      <h3 className="text-xl font-semibold mb-6">
+                        Project Details
+                      </h3>
+                      <form
+                        onSubmit={step2Form.handleSubmit(onStep2Submit)}
+                        className="space-y-4"
+                      >
                         <div>
                           <Label htmlFor="projectType">Project Type *</Label>
                           <Select
-                            onValueChange={(value) => step2Form.setValue("projectType", value)}
+                            onValueChange={(value) =>
+                              step2Form.setValue("projectType", value)
+                            }
                             defaultValue={formData.projectType}
                           >
                             <SelectTrigger>
                               <SelectValue placeholder="Select project type" />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="website">Website Design & Development</SelectItem>
-                              <SelectItem value="webapp">Web Application</SelectItem>
+                              <SelectItem value="website">
+                                Website Design & Development
+                              </SelectItem>
+                              <SelectItem value="webapp">
+                                Web Application
+                              </SelectItem>
                               <SelectItem value="mobile">Mobile App</SelectItem>
-                              <SelectItem value="branding">Branding & Identity</SelectItem>
+                              <SelectItem value="branding">
+                                Branding & Identity
+                              </SelectItem>
                               <SelectItem value="other">Other</SelectItem>
                             </SelectContent>
                           </Select>
@@ -301,16 +354,24 @@ function CheckoutContent() {
                         <div>
                           <Label htmlFor="timeline">Desired Timeline *</Label>
                           <Select
-                            onValueChange={(value) => step2Form.setValue("timeline", value)}
+                            onValueChange={(value) =>
+                              step2Form.setValue("timeline", value)
+                            }
                             defaultValue={formData.timeline}
                           >
                             <SelectTrigger>
                               <SelectValue placeholder="Select timeline" />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="asap">ASAP (1-2 months)</SelectItem>
-                              <SelectItem value="flexible">Flexible (2-4 months)</SelectItem>
-                              <SelectItem value="planned">Planned (4+ months)</SelectItem>
+                              <SelectItem value="asap">
+                                ASAP (1-2 months)
+                              </SelectItem>
+                              <SelectItem value="flexible">
+                                Flexible (2-4 months)
+                              </SelectItem>
+                              <SelectItem value="planned">
+                                Planned (4+ months)
+                              </SelectItem>
                             </SelectContent>
                           </Select>
                           {step2Form.formState.errors.timeline && (
@@ -323,15 +384,21 @@ function CheckoutContent() {
                         <div>
                           <Label htmlFor="budget">Budget Range *</Label>
                           <Select
-                            onValueChange={(value) => step2Form.setValue("budget", value)}
+                            onValueChange={(value) =>
+                              step2Form.setValue("budget", value)
+                            }
                             defaultValue={formData.budget}
                           >
                             <SelectTrigger>
                               <SelectValue placeholder="Select budget range" />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="2-5k">$2,000 - $5,000</SelectItem>
-                              <SelectItem value="5-10k">$5,000 - $10,000</SelectItem>
+                              <SelectItem value="2-5k">
+                                $2,000 - $5,000
+                              </SelectItem>
+                              <SelectItem value="5-10k">
+                                $5,000 - $10,000
+                              </SelectItem>
                               <SelectItem value="10k+">$10,000+</SelectItem>
                             </SelectContent>
                           </Select>
@@ -343,7 +410,9 @@ function CheckoutContent() {
                         </div>
 
                         <div>
-                          <Label htmlFor="description">Project Description *</Label>
+                          <Label htmlFor="description">
+                            Project Description *
+                          </Label>
                           <Textarea
                             id="description"
                             {...step2Form.register("description")}
@@ -381,8 +450,13 @@ function CheckoutContent() {
                 {currentStep === 3 && (
                   <Card>
                     <CardContent className="p-6">
-                      <h3 className="text-xl font-semibold mb-6">Billing Information</h3>
-                      <form onSubmit={step3Form.handleSubmit(onStep3Submit)} className="space-y-4">
+                      <h3 className="text-xl font-semibold mb-6">
+                        Billing Information
+                      </h3>
+                      <form
+                        onSubmit={step3Form.handleSubmit(onStep3Submit)}
+                        className="space-y-4"
+                      >
                         <div>
                           <Label htmlFor="address">Address *</Label>
                           <Input

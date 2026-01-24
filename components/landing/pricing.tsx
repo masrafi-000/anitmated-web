@@ -20,15 +20,22 @@ const pricingData: PricingCardProps[] = [
   {
     title: "Essential",
     price: "$2,999",
-    description: "Perfect for startups needing a solid brand foundation and web presence.",
-    features: ["Logo & Brand Guidelines", "UI/UX Design for Landing Page", "Next.js Implementation", "SEO Best Practices"],
+    description:
+      "Perfect for startups needing a solid brand foundation and web presence.",
+    features: [
+      "Logo & Brand Guidelines",
+      "UI/UX Design for Landing Page",
+      "Next.js Implementation",
+      "SEO Best Practices",
+    ],
     cta: "Start Essential",
     href: "/checkout?package=essential",
   },
   {
     title: "Growth",
     price: "$5,999",
-    description: "Ideal for scaling businesses requiring a comprehensive digital experience.",
+    description:
+      "Ideal for scaling businesses requiring a comprehensive digital experience.",
     features: [
       "Complete Visual Identity",
       "Multi-Page UI/UX Design",
@@ -42,7 +49,8 @@ const pricingData: PricingCardProps[] = [
   {
     title: "Enterprise",
     price: "Custom",
-    description: "For industry leaders needing bespoke products and dedicated partnership.",
+    description:
+      "For industry leaders needing bespoke products and dedicated partnership.",
     features: [
       "Product Strategy & Research",
       "Design System Documentation",
@@ -58,7 +66,9 @@ const Pricing = () => {
   return (
     <Section>
       <Container className="flex flex-col items-center gap-4 text-center">
-        <h2 className="my-0! text-4xl tracking-wide font-semibold">Invest in Excellence</h2>
+        <h2 className="my-0! text-4xl tracking-wide font-semibold">
+          Invest in Excellence
+        </h2>
         <p className="text-lg opacity-70 md:text-2xl">
           <Balancer>{`Flexible engagement models tailored to elevate your brand's digital presence.`}</Balancer>
         </p>
@@ -106,10 +116,10 @@ const PricingCard = ({ plan }: { plan: PricingCardProps }) => {
       </ul>
 
       <div className="mt-auto pt-6">
-        <Link href={plan.href} target="_blank">
+        <Link href={plan.href}>
           <Button
             size={"sm"}
-            className="w-full"
+            className="w-full cursor-pointer"
             variant={plan.isPopular ? "default" : "outline"}
           >
             {plan.cta}

@@ -1,22 +1,28 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -56,10 +62,10 @@ export default function PricingQueryForm() {
   function onSubmit(data: FormValues) {
     // Log the data as requested
     console.log("Pricing Query Submitted:", data);
-    
+
     // Show user feedback
     toast.success("Query submitted successfully!");
-    
+
     // Optional: Reset form
     form.reset();
   }
@@ -67,9 +73,12 @@ export default function PricingQueryForm() {
   return (
     <Card className="w-full max-w-2xl mx-auto border-muted/60 shadow-lg">
       <CardHeader className="text-center">
-        <CardTitle className="text-2xl font-bold">Have questions about our pricing?</CardTitle>
+        <CardTitle className="text-2xl font-bold">
+          Have questions about our pricing?
+        </CardTitle>
         <CardDescription>
-          Fill out the form below and our team will get back to you within 24 hours.
+          Fill out the form below and our team will get back to you within 24
+          hours.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -110,17 +119,28 @@ export default function PricingQueryForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Subject</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Select a plan or inquiry type" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="Essential Plan">Essential Plan ($2,999)</SelectItem>
-                      <SelectItem value="Growth Plan">Growth Plan ($5,999)</SelectItem>
-                      <SelectItem value="Enterprise Plan">Enterprise Plan (Custom)</SelectItem>
-                      <SelectItem value="General Inquiry">General Inquiry</SelectItem>
+                      <SelectItem value="Essential Plan">
+                        Essential Plan ($2,999)
+                      </SelectItem>
+                      <SelectItem value="Growth Plan">
+                        Growth Plan ($5,999)
+                      </SelectItem>
+                      <SelectItem value="Enterprise Plan">
+                        Enterprise Plan (Custom)
+                      </SelectItem>
+                      <SelectItem value="General Inquiry">
+                        General Inquiry
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -135,10 +155,10 @@ export default function PricingQueryForm() {
                 <FormItem>
                   <FormLabel>Message</FormLabel>
                   <FormControl>
-                    <Textarea 
-                      placeholder="Tell us about your project requirements..." 
+                    <Textarea
+                      placeholder="Tell us about your project requirements..."
                       className="min-h-30"
-                      {...field} 
+                      {...field}
                     />
                   </FormControl>
                   <FormMessage />

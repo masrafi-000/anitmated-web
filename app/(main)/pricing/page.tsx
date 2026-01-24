@@ -193,7 +193,7 @@ export default function PricingPage() {
             </div>
 
             <div className="text-center">
-              <div className="h-20 w-20 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center mx-auto mb-4 text-white text-2xl font-bold">
+              <div className="h-20 w-20 rounded-full bg-linear-to-br from-purple-500 to-purple-600 flex items-center justify-center mx-auto mb-4 text-white text-2xl font-bold">
                 25%
               </div>
               <h3 className="text-xl font-semibold mb-2">Enterprises</h3>

@@ -1,0 +1,42 @@
+model Package {
+    id String @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    slug String @unique
+    title String
+    price String
+    isPopular Boolean @default(false)
+    features PackageFeature[]
+    checkouts Checkout[] 
+}
+
+model PackageFeature {
+    id String @id @default(cuid())
+    feature String
+    packageId String
+    package Package @relation(fields: [packageId], references: [id], onDelete: Cascade )
+}
+
+model Checkout {
+    id String @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    fullName String
+    email String
+    phone String
+    company String 
+    projectType String
+    timeline String 
+    budget String
+    description String?
+    address String
+    city String
+    state String
+    zipCode String
+    country String
+    
+    packageId String
+    package Package @relation(fields: [packageId], references: [id])
+}

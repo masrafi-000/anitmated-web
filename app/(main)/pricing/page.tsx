@@ -4,6 +4,7 @@ import { Container, Section } from "@/components/ds";
 import Pricing from "@/components/landing/pricing";
 import PageHeader from "@/components/parts/pageHeader";
 import { Card, CardContent } from "@/components/ui/card";
+import { usePackages } from "@/hooks/use-packages";
 import {
   Award,
   BarChart3,
@@ -19,6 +20,8 @@ import { PackageComparison } from "./_components/comparison-table";
 import PricingQueryForm from "./_components/pricing-query-form";
 
 export default function PricingPage() {
+  const { data: packages = [] } = usePackages();
+
   return (
     <>
       {/* Section 1: Hero/Header */}
@@ -29,7 +32,7 @@ export default function PricingPage() {
       />
 
       {/* Section 2: Pricing Cards */}
-      <Pricing />
+      <Pricing packages={packages} />
 
       {/* Section 3: Package Comparison Table */}
       <Section className="bg-muted/30">

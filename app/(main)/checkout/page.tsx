@@ -17,44 +17,13 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, ArrowRight, CheckCircle2, Package } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-// Package data
-const packages = {
-  essential: {
-    title: "Essential",
-    price: "$2,999",
-    features: [
-      "Logo & Brand Guidelines",
-      "UI/UX Design for Landing Page",
-      "Next.js Implementation",
-      "SEO Best Practices",
-    ],
-  },
-  growth: {
-    title: "Growth",
-    price: "$5,999",
-    features: [
-      "Complete Visual Identity",
-      "Multi-Page UI/UX Design",
-      "Advanced Motion (GSAP)",
-      "CMS Integration",
-    ],
-  },
-  enterprise: {
-    title: "Enterprise",
-    price: "Custom",
-    features: [
-      "Product Strategy & Research",
-      "Design System Documentation",
-      "Scalable Web App Development",
-      "Dedicated Support Team",
-    ],
-  },
-};
+// Package data removed - fetching from API
+import { useCreateCheckout, usePackages } from "@/hooks/use-packages";
 
 // Form validation schemas
 const step1Schema = z.object({
@@ -67,7 +36,7 @@ const step1Schema = z.object({
 const step2Schema = z.object({
   projectType: z.string().min(1, "Please select a project type"),
   timeline: z.string().min(1, "Please select a timeline"),
-  budget: z.string().min(1, "Please select a budget range"),
+  budget: z.string().min(4, "Minimum budget is $1000"),
   description: z.string().min(20, "Please provide at least 20 characters"),
 });
 
@@ -85,9 +54,11 @@ type Step3Data = z.infer<typeof step3Schema>;
 
 function CheckoutContent() {
   const searchParams = useSearchParams();
-  const packageType = (searchParams.get("package") ||
-    "essential") as keyof typeof packages;
-  const selectedPackage = packages[packageType];
+  const packageSlug = searchParams.get("package") || "essential";
+  const { data: packages = [] } = usePackages();
+  const selectedPackage = packages.find(p => p.slug === packageSlug) || packages[0];
+  
+  const createCheckout = useCreateCheckout();
 
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<
@@ -123,14 +94,27 @@ function CheckoutContent() {
   };
 
   const onStep3Submit = (data: Step3Data) => {
-    const finalData = { ...formData, ...data, package: packageType };
-    console.log("=== CHECKOUT FORM DATA ===");
-    console.log(JSON.stringify(finalData, null, 2));
-    console.log("=========================");
-
-    // Show success message
-    alert("Order submitted successfully! Check console for form data.");
+    const finalData = { 
+        ...formData, 
+        ...data, 
+        packageId: selectedPackage?.id 
+    };
+    
+    createCheckout.mutate(finalData, {
+        onSuccess: () => {
+             alert("Order submitted successfully!");
+             // Optional: Redirect or clear form
+        },
+        onError: (error) => {
+            console.error(error);
+            alert("Failed to submit order. Please try again.");
+        }
+    });
   };
+
+  if (!selectedPackage) {
+      return <div>Loading package details...</div>
+  }
 
   return (
     <>
@@ -164,26 +148,20 @@ function CheckoutContent() {
 
                     <div className="space-y-2 mb-6">
                       <p className="text-sm font-medium">Includes:</p>
-                      {selectedPackage.features.map((feature, index) => (
+                      {selectedPackage.features.map((featureObj, index) => (
                         <div
                           key={index}
                           className="flex items-start gap-2 text-sm"
                         >
                           <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
                           <span className="text-muted-foreground">
-                            {feature}
+                            {featureObj.feature}
                           </span>
                         </div>
                       ))}
                     </div>
 
                     <div className="border-t pt-4">
-                      <div className="flex justify-between text-sm mb-2">
-                        <span className="text-muted-foreground">Subtotal</span>
-                        <span className="font-medium">
-                          {selectedPackage.price}
-                        </span>
-                      </div>
                       <div className="flex justify-between font-semibold">
                         <span>Total</span>
                         <span className="text-primary">
@@ -382,26 +360,14 @@ function CheckoutContent() {
                         </div>
 
                         <div>
-                          <Label htmlFor="budget">Budget Range *</Label>
-                          <Select
-                            onValueChange={(value) =>
-                              step2Form.setValue("budget", value)
-                            }
-                            defaultValue={formData.budget}
-                          >
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select budget range" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="2-5k">
-                                $2,000 - $5,000
-                              </SelectItem>
-                              <SelectItem value="5-10k">
-                                $5,000 - $10,000
-                              </SelectItem>
-                              <SelectItem value="10k+">$10,000+</SelectItem>
-                            </SelectContent>
-                          </Select>
+                          <Label htmlFor="budget">Your Budget Range *</Label>
+                          <Input
+                            id="budget"
+                            type="number"
+                            {...step2Form.register("budget")}
+                            placeholder="Give Your Budget Range - ($999) "
+                          />
+
                           {step2Form.formState.errors.budget && (
                             <p className="text-sm text-red-500 mt-1">
                               {step2Form.formState.errors.budget.message}

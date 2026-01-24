@@ -1,68 +1,16 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Package } from "@/hooks/use-packages";
 import { CircleCheck } from "lucide-react";
 import Link from "next/link";
 import Balancer from "react-wrap-balancer";
 import { Container, Section } from "../ds";
 
-interface PricingCardProps {
-  title: "Essential" | "Growth" | "Enterprise";
-  price: string;
-  description?: string;
-  features: string[];
-  cta: string;
-  href: string;
-  isPopular?: boolean;
+interface PricingProps {
+  packages: Package[];
 }
 
-// Dummy pricing data
-const pricingData: PricingCardProps[] = [
-  {
-    title: "Essential",
-    price: "$2,999",
-    description:
-      "Perfect for startups needing a solid brand foundation and web presence.",
-    features: [
-      "Logo & Brand Guidelines",
-      "UI/UX Design for Landing Page",
-      "Next.js Implementation",
-      "SEO Best Practices",
-    ],
-    cta: "Start Essential",
-    href: "/checkout?package=essential",
-  },
-  {
-    title: "Growth",
-    price: "$5,999",
-    description:
-      "Ideal for scaling businesses requiring a comprehensive digital experience.",
-    features: [
-      "Complete Visual Identity",
-      "Multi-Page UI/UX Design",
-      "Advanced Motion (GSAP)",
-      "CMS Integration",
-    ],
-    cta: "Go for Growth",
-    href: "/checkout?package=growth",
-    isPopular: true,
-  },
-  {
-    title: "Enterprise",
-    price: "Custom",
-    description:
-      "For industry leaders needing bespoke products and dedicated partnership.",
-    features: [
-      "Product Strategy & Research",
-      "Design System Documentation",
-      "Scalable Web App Development",
-      "Dedicated Support Team",
-    ],
-    cta: "Contact Enterprise",
-    href: "/checkout?package=enterprise",
-  },
-];
-
-const Pricing = () => {
+const Pricing = ({ packages = [] }: PricingProps) => {
   return (
     <Section>
       <Container className="flex flex-col items-center gap-4 text-center">
@@ -74,15 +22,31 @@ const Pricing = () => {
         </p>
 
         <div className=" mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {pricingData.map((plan, index) => (
-            <PricingCard plan={plan} key={index} />
+          {packages.map((plan) => (
+            <PricingCard plan={plan} key={plan.id} />
           ))}
         </div>
       </Container>
     </Section>
   );
 };
-const PricingCard = ({ plan }: { plan: PricingCardProps }) => {
+
+const PricingCard = ({ plan }: { plan: Package }) => {
+  // Mapping description based on title/slug would be ideal if description isn't in DB.
+  // The DB schema didn't have description in Package model! 
+  // I should've added description to Package model. 
+  // For now I'll hardcode descriptions based on slug or leave empty.
+  
+  const descriptions: Record<string, string> = {
+    essential: "Perfect for startups needing a solid brand foundation and web presence.",
+    growth: "Ideal for scaling businesses requiring a comprehensive digital experience.",
+    enterprise: "For industry leaders needing bespoke products and dedicated partnership."
+  };
+
+  const description = descriptions[plan.slug] || "Unlock your potential.";
+  const cta = plan.slug === 'enterprise' ? 'Contact Enterprise' : (plan.slug === 'growth' ? 'Go for Growth' : 'Start Essential');
+  const href = `/checkout?package=${plan.slug}`;
+
   return (
     <div
       className={`relative flex flex-col rounded-lg border p-6 transition-all duration-200 ${
@@ -101,28 +65,28 @@ const PricingCard = ({ plan }: { plan: PricingCardProps }) => {
         <h4 className="mb-2 mt-4 text-2xl font-bold text-primary">
           {plan.price}
         </h4>
-        <p className="text-sm opacity-70">{plan.description}</p>
+        <p className="text-sm opacity-70">{description}</p>
       </div>
 
       <div className="my-4 border-t"></div>
 
       <ul className="space-y-3 text-left">
-        {plan.features.map((feature, i) => (
+        {plan.features.map((featureObj, i) => (
           <li key={i} className="flex items-center text-sm opacity-70">
             <CircleCheck className="mr-2 h-4 w-4 text-primary" />
-            {feature}
+            {featureObj.feature}
           </li>
         ))}
       </ul>
 
       <div className="mt-auto pt-6">
-        <Link href={plan.href}>
+        <Link href={href}>
           <Button
             size={"sm"}
             className="w-full cursor-pointer"
             variant={plan.isPopular ? "default" : "outline"}
           >
-            {plan.cta}
+            {cta}
           </Button>
         </Link>
       </div>

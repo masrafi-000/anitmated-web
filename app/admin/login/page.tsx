@@ -7,25 +7,28 @@ import * as z from "zod"
 
 import { Button } from "@/components/ui/button"
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card"
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { useAuth } from "@/hooks/use-auth"
+import { useRouter } from "next/navigation"
+import { toast } from "sonner"
 
-const formSchema = z.object({
-  email: z.string().email({
+const ZCLogin = z.object({
+  email: z.email({
     message: "Please enter a valid email address.",
   }),
   password: z.string().min(1, {
@@ -33,17 +36,30 @@ const formSchema = z.object({
   }),
 })
 
+export type ZCLoginType = z.infer<typeof ZCLogin>
+
 export default function AdminLoginPage() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const router = useRouter()
+  const form = useForm<ZCLoginType>({
+    resolver: zodResolver(ZCLogin),
     defaultValues: {
       email: "",
       password: "",
     },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  const mutation = useAuth()
+  function onSubmit(values: ZCLoginType) {
     console.log(values)
+    mutation.mutate(values, {
+      onSuccess: (response) => {
+        router.push("/dashboard")
+        toast.success(response?.message ||"Login successful")
+      },
+      onError: (error) => {
+        toast.error(error?.message || "Something went wrong")
+      }
+    })
   }
 
   return (
@@ -84,8 +100,8 @@ export default function AdminLoginPage() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full">
-                Sign In
+              <Button type="submit" className="w-full" disabled={mutation.isPending}>
+                {mutation.isPending ? "Logging in..." : "Sign In"}
               </Button>
             </form>
           </Form>

@@ -25,33 +25,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { useCreatePricingInquiry } from "@/hooks/use-pricing";
+import { queryClient } from "@/lib/query-client";
+import { TCPricingInquiry, ZCPricingInquiry } from "@/schema/zod/pricingSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Send } from "lucide-react";
+import { Loader2, Send } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import * as z from "zod";
-
-// Form Schema
-const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-  plan: z.string().min(1, {
-    message: "Please select a plan or subject.",
-  }),
-  message: z.string().min(10, {
-    message: "Message must be at least 10 characters.",
-  }),
-});
-
-type FormValues = z.infer<typeof formSchema>;
 
 export default function PricingQueryForm() {
-  const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<TCPricingInquiry>({
+    resolver: zodResolver(ZCPricingInquiry),
     defaultValues: {
       name: "",
       email: "",
@@ -59,15 +43,21 @@ export default function PricingQueryForm() {
     },
   });
 
-  function onSubmit(data: FormValues) {
-    // Log the data as requested
-    console.log("Pricing Query Submitted:", data);
+  const mutation = useCreatePricingInquiry();
 
-    // Show user feedback
-    toast.success("Query submitted successfully!");
-
-    // Optional: Reset form
-    form.reset();
+  function onSubmit(data: TCPricingInquiry) {
+    mutation.mutate(data, {
+      onSuccess: (response) => {
+        queryClient.invalidateQueries({ queryKey: ["pricing-inquiry"] });
+        toast.success(response.message || "Query submitted successfully!");
+        form.reset();
+      },
+      onError: (error) => {
+        toast.error(
+          error.message || "Failed to submit query. Please try again.",
+        );
+      },
+    });
   }
 
   return (
@@ -166,8 +156,23 @@ export default function PricingQueryForm() {
               )}
             />
 
-            <Button type="submit" className="w-full" size="lg">
-              <Send className="mr-2 h-4 w-4" /> Send Inquiry
+            <Button
+              type="submit"
+              className="w-full"
+              size="lg"
+              disabled={mutation.isPending}
+            >
+              {mutation.isPending ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Sending...
+                </>
+              ) : (
+                <>
+                  <Send className="mr-2 h-4 w-4" />
+                  Send Inquiry
+                </>
+              )}
             </Button>
           </form>
         </Form>

@@ -52,6 +52,10 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Inquiry: 'Inquiry',
+  Package: 'Package',
+  Feature: 'Feature',
+  Checkout: 'Checkout',
+  PricingInquiry: 'PricingInquiry',
   Support: 'Support'
 } as const
 
@@ -84,6 +88,58 @@ export const InquiryScalarFieldEnum = {
 } as const
 
 export type InquiryScalarFieldEnum = (typeof InquiryScalarFieldEnum)[keyof typeof InquiryScalarFieldEnum]
+
+
+export const PackageScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  price: 'price',
+  isPopular: 'isPopular'
+} as const
+
+export type PackageScalarFieldEnum = (typeof PackageScalarFieldEnum)[keyof typeof PackageScalarFieldEnum]
+
+
+export const FeatureScalarFieldEnum = {
+  id: 'id',
+  feature: 'feature',
+  packageId: 'packageId'
+} as const
+
+export type FeatureScalarFieldEnum = (typeof FeatureScalarFieldEnum)[keyof typeof FeatureScalarFieldEnum]
+
+
+export const CheckoutScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  company: 'company',
+  projectType: 'projectType',
+  timeline: 'timeline',
+  budget: 'budget',
+  description: 'description',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  packageId: 'packageId'
+} as const
+
+export type CheckoutScalarFieldEnum = (typeof CheckoutScalarFieldEnum)[keyof typeof CheckoutScalarFieldEnum]
+
+
+export const PricingInquiryScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  name: 'name',
+  email: 'email',
+  plan: 'plan',
+  message: 'message'
+} as const
+
+export type PricingInquiryScalarFieldEnum = (typeof PricingInquiryScalarFieldEnum)[keyof typeof PricingInquiryScalarFieldEnum]
 
 
 export const SupportScalarFieldEnum = {

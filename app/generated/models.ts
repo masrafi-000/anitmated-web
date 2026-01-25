@@ -9,5 +9,9 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/Inquiry'
+export type * from './models/Package'
+export type * from './models/Feature'
+export type * from './models/Checkout'
+export type * from './models/PricingInquiry'
 export type * from './models/Support'
 export type * from './commonInputTypes'

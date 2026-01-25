@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.3.0",
   "engineVersion": "9d6ad21cbbceab97458517b147a6a09ff43aa735",
   "activeProvider": "postgresql",
-  "inlineSchema": "enum ServiceType {\n  branding\n  design\n  development\n  marketing\n}\n\nmodel Inquiry {\n  id          String      @id @default(cuid())\n  name        String\n  email       String\n  company     String?\n  service     ServiceType\n  budget      String // Stored as string to accommodate \"<5k\", \"20k+\", etc.\n  description String      @db.Text\n  createdAt   DateTime    @default(now())\n  updatedAt   DateTime    @updatedAt\n}\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../../app/generated\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Support {\n  id String @id @default(cuid())\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  name    String\n  email   String\n  phone   String\n  details String?\n}\n",
+  "inlineSchema": "enum ServiceType {\n  branding\n  design\n  development\n  marketing\n}\n\nmodel Inquiry {\n  id          String      @id @default(cuid())\n  name        String\n  email       String\n  company     String?\n  service     ServiceType\n  budget      String // Stored as string to accommodate \"<5k\", \"20k+\", etc.\n  description String      @db.Text\n  createdAt   DateTime    @default(now())\n  updatedAt   DateTime    @updatedAt\n}\n\nmodel Package {\n  id        String     @id @default(cuid())\n  title     String\n  slug      String     @unique\n  price     String\n  isPopular Boolean    @default(false)\n  features  Feature[]\n  checkout  Checkout[]\n}\n\nmodel Feature {\n  id        String  @id @default(cuid())\n  feature   String\n  package   Package @relation(fields: [packageId], references: [id])\n  packageId String\n}\n\nmodel Checkout {\n  id    String @id @default(cuid())\n  name  String\n  email String\n  phone String\n\n  company     String\n  projectType String\n  timeline    String\n  budget      String\n  description String?\n\n  status    String   @default(\"pending\")\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  packageId String\n  package   Package @relation(fields: [packageId], references: [id])\n}\n\nmodel PricingInquiry {\n  id        String   @id @default(cuid())\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  name    String\n  email   String\n  plan    String\n  message String\n}\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../../app/generated\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Support {\n  id String @id @default(cuid())\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  name    String\n  email   String\n  phone   String\n  details String?\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Inquiry\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"company\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"service\",\"kind\":\"enum\",\"type\":\"ServiceType\"},{\"name\":\"budget\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Support\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"details\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Inquiry\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"company\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"service\",\"kind\":\"enum\",\"type\":\"ServiceType\"},{\"name\":\"budget\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Package\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isPopular\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"features\",\"kind\":\"object\",\"type\":\"Feature\",\"relationName\":\"FeatureToPackage\"},{\"name\":\"checkout\",\"kind\":\"object\",\"type\":\"Checkout\",\"relationName\":\"CheckoutToPackage\"}],\"dbName\":null},\"Feature\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"feature\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"package\",\"kind\":\"object\",\"type\":\"Package\",\"relationName\":\"FeatureToPackage\"},{\"name\":\"packageId\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Checkout\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"company\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"projectType\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"timeline\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"budget\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"packageId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"package\",\"kind\":\"object\",\"type\":\"Package\",\"relationName\":\"CheckoutToPackage\"}],\"dbName\":null},\"PricingInquiry\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"plan\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"message\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Support\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"details\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -185,6 +185,46 @@ export interface PrismaClient<
     * ```
     */
   get inquiry(): Prisma.InquiryDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.package`: Exposes CRUD operations for the **Package** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Packages
+    * const packages = await prisma.package.findMany()
+    * ```
+    */
+  get package(): Prisma.PackageDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.feature`: Exposes CRUD operations for the **Feature** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Features
+    * const features = await prisma.feature.findMany()
+    * ```
+    */
+  get feature(): Prisma.FeatureDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.checkout`: Exposes CRUD operations for the **Checkout** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Checkouts
+    * const checkouts = await prisma.checkout.findMany()
+    * ```
+    */
+  get checkout(): Prisma.CheckoutDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.pricingInquiry`: Exposes CRUD operations for the **PricingInquiry** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PricingInquiries
+    * const pricingInquiries = await prisma.pricingInquiry.findMany()
+    * ```
+    */
+  get pricingInquiry(): Prisma.PricingInquiryDelegate<ExtArgs, { omit: OmitOpts }>;
 
   /**
    * `prisma.support`: Exposes CRUD operations for the **Support** model.

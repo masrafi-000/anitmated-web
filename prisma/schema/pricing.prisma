@@ -1,0 +1,47 @@
+model Package {
+  id        String     @id @default(cuid())
+  title     String
+  slug      String     @unique
+  price     String
+  isPopular Boolean    @default(false)
+  features  Feature[]
+  checkout  Checkout[]
+}
+
+model Feature {
+  id        String  @id @default(cuid())
+  feature   String
+  package   Package @relation(fields: [packageId], references: [id])
+  packageId String
+}
+
+model Checkout {
+  id    String @id @default(cuid())
+  name  String
+  email String
+  phone String
+
+  company     String
+  projectType String
+  timeline    String
+  budget      String
+  description String?
+
+  status    String   @default("pending")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  packageId String
+  package   Package @relation(fields: [packageId], references: [id])
+}
+
+model PricingInquiry {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name    String
+  email   String
+  plan String
+  message String
+}

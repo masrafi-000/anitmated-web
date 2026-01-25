@@ -45,6 +45,26 @@ export { Prisma }
  */
 export type Inquiry = Prisma.InquiryModel
 /**
+ * Model Package
+ * 
+ */
+export type Package = Prisma.PackageModel
+/**
+ * Model Feature
+ * 
+ */
+export type Feature = Prisma.FeatureModel
+/**
+ * Model Checkout
+ * 
+ */
+export type Checkout = Prisma.CheckoutModel
+/**
+ * Model PricingInquiry
+ * 
+ */
+export type PricingInquiry = Prisma.PricingInquiryModel
+/**
  * Model Support
  * 
  */

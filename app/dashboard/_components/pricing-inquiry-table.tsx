@@ -2,57 +2,57 @@
 "use no memo";
 
 import {
-  ColumnDef,
-  ColumnFiltersState,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  SortingState,
-  useReactTable,
-  VisibilityState,
+    ColumnDef,
+    ColumnFiltersState,
+    flexRender,
+    getCoreRowModel,
+    getFilteredRowModel,
+    getPaginationRowModel,
+    getSortedRowModel,
+    SortingState,
+    useReactTable,
+    VisibilityState,
 } from "@tanstack/react-table";
 import {
-  ArrowUpDown,
-  ChevronDown,
-  Loader2,
-  Pencil,
-  Trash2,
+    ArrowUpDown,
+    ChevronDown,
+    Loader2,
+    Pencil,
+    Trash2,
 } from "lucide-react";
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
+    DropdownMenu,
+    DropdownMenuCheckboxItem,
+    DropdownMenuContent,
+    DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
 } from "@/components/ui/table";
 
-import { Support } from "@/app/generated/client";
+import { PricingInquiry } from "@/app/generated/client";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
 } from "@/components/ui/dialog";
-import { useSupport } from "@/hooks/use-support";
+import { usePricingInquiry } from "@/hooks/use-pricing";
 
-export default function SupportTable() {
-  const { data: Support = [], isLoading } = useSupport();
+export default function PricingInquiryTable() {
+  const { data: PricingInquiry = [], isLoading } = usePricingInquiry();
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
@@ -61,7 +61,7 @@ export default function SupportTable() {
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
 
-  const columns: ColumnDef<Support>[] = React.useMemo(
+  const columns: ColumnDef<PricingInquiry>[] = React.useMemo(
     () => [
       {
         id: "select",
@@ -114,33 +114,33 @@ export default function SupportTable() {
         ),
       },
       {
-        accessorKey: "phone",
-        header: "Phone",
+        accessorKey: "plan",
+        header: "Plan",
         cell: ({ row }) => (
-          <div className="capitalize">{row.getValue("phone")}</div>
+          <div className="capitalize">{row.getValue("plan")}</div>
         ),
       },
       {
-        id: "details",
-        header: "Details",
+        id: "message",
+        header: "Message",
         cell: ({ row }) => {
-          const description = row.original.details;
+          const message = row.original.message;
           return (
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant="outline" size="sm">
-                  View Details
+                  View Message
                 </Button>
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
-                  <DialogTitle>Inquiry Details</DialogTitle>
+                  <DialogTitle>Inquiry Message</DialogTitle>
                   <DialogDescription>
-                    Details provided by {row.getValue("name")}
+                    Message provided by {row.getValue("name")}
                   </DialogDescription>
                 </DialogHeader>
                 <div className="mt-4 text-sm text-foreground">
-                  {description || "No description provided."}
+                  {message || "No message provided."}
                 </div>
               </DialogContent>
             </Dialog>
@@ -179,7 +179,7 @@ export default function SupportTable() {
 
   // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
-    data: Support,
+    data: PricingInquiry,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -202,10 +202,10 @@ export default function SupportTable() {
       <div className="flex items-center justify-between">
         <div className="space-y-1">
           <h2 className="text-2xl font-semibold tracking-tight">
-            Recent Support Inquiries
+            Recent Pricing Inquiries
           </h2>
           <p className="text-sm text-muted-foreground">
-            Manage your latest support form submissions.
+            Manage your latest pricing form submissions.
           </p>
         </div>
         <div className="flex items-center gap-2">

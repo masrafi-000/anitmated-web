@@ -5,6 +5,7 @@ import {
   IconChartBar,
   IconDashboard,
   IconDatabase,
+  IconDatabaseDollar,
   IconFileAi,
   IconFileDescription,
   IconFileWord,
@@ -51,6 +52,11 @@ const data = {
       title: "Inquiry",
       url: "/dashboard/inquiry",
       icon: IconListDetails,
+    },
+    {
+      title: "Pricing Inquiry",
+      url: "/dashboard/pricing-inquiry",
+      icon: IconDatabaseDollar,
     },
     {
       title: "Support",

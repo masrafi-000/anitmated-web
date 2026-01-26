@@ -13,8 +13,8 @@ export async function GET() {
           support.length === 0
             ? " No Support Data Found"
             : "All Submitted Support Forms Fetched",
+        count: support.length,
         data: support,
-        count: support.length
       },
       { status: 200 },
     );
@@ -71,7 +71,6 @@ export async function POST(req: Request) {
   }
 }
 
-
 export async function DELETE(req: Request) {
   try {
     const body = await req.json();
@@ -88,7 +87,7 @@ export async function DELETE(req: Request) {
         message: "Support Form Deleted Successfully",
         data: support,
       },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("API Error:", error);
@@ -97,11 +96,10 @@ export async function DELETE(req: Request) {
         success: false,
         error: error instanceof Error ? error.message : "Internal Server Error",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
-
 
 export async function PATCH(req: Request) {
   try {
@@ -120,7 +118,7 @@ export async function PATCH(req: Request) {
         message: "Support Form Updated Successfully",
         data: support,
       },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("API Error:", error);
@@ -129,7 +127,7 @@ export async function PATCH(req: Request) {
         success: false,
         error: error instanceof Error ? error.message : "Internal Server Error",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { CircleCheck } from "lucide-react";
 import Link from "next/link";
 import Balancer from "react-wrap-balancer";
-import { Container, Section } from "../ds";
+import { Container, Section } from "../../../../components/ds";
 
 interface PricingCardProps {
   title: "Essential" | "Growth" | "Enterprise";

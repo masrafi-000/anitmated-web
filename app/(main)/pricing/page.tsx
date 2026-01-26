@@ -1,7 +1,7 @@
 "use client";
 
+import Pricing from "@/app/(main)/pricing/_components/pricing";
 import { Container, Section } from "@/components/ds";
-import Pricing from "@/components/landing/pricing";
 import PageHeader from "@/components/parts/pageHeader";
 import { Card, CardContent } from "@/components/ui/card";
 import {

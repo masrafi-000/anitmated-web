@@ -107,6 +107,8 @@ export const PackageScalarFieldEnum = {
   title: 'title',
   slug: 'slug',
   price: 'price',
+  description: 'description',
+  cta: 'cta',
   isPopular: 'isPopular'
 } as const
 

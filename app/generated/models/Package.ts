@@ -29,6 +29,8 @@ export type PackageMinAggregateOutputType = {
   title: string | null
   slug: string | null
   price: string | null
+  description: string | null
+  cta: string | null
   isPopular: boolean | null
 }
 
@@ -37,6 +39,8 @@ export type PackageMaxAggregateOutputType = {
   title: string | null
   slug: string | null
   price: string | null
+  description: string | null
+  cta: string | null
   isPopular: boolean | null
 }
 
@@ -45,6 +49,8 @@ export type PackageCountAggregateOutputType = {
   title: number
   slug: number
   price: number
+  description: number
+  cta: number
   isPopular: number
   _all: number
 }
@@ -55,6 +61,8 @@ export type PackageMinAggregateInputType = {
   title?: true
   slug?: true
   price?: true
+  description?: true
+  cta?: true
   isPopular?: true
 }
 
@@ -63,6 +71,8 @@ export type PackageMaxAggregateInputType = {
   title?: true
   slug?: true
   price?: true
+  description?: true
+  cta?: true
   isPopular?: true
 }
 
@@ -71,6 +81,8 @@ export type PackageCountAggregateInputType = {
   title?: true
   slug?: true
   price?: true
+  description?: true
+  cta?: true
   isPopular?: true
   _all?: true
 }
@@ -152,6 +164,8 @@ export type PackageGroupByOutputType = {
   title: string
   slug: string
   price: string
+  description: string | null
+  cta: string | null
   isPopular: boolean
   _count: PackageCountAggregateOutputType | null
   _min: PackageMinAggregateOutputType | null
@@ -181,6 +195,8 @@ export type PackageWhereInput = {
   title?: Prisma.StringFilter<"Package"> | string
   slug?: Prisma.StringFilter<"Package"> | string
   price?: Prisma.StringFilter<"Package"> | string
+  description?: Prisma.StringNullableFilter<"Package"> | string | null
+  cta?: Prisma.StringNullableFilter<"Package"> | string | null
   isPopular?: Prisma.BoolFilter<"Package"> | boolean
   features?: Prisma.FeatureListRelationFilter
   checkout?: Prisma.CheckoutListRelationFilter
@@ -191,6 +207,8 @@ export type PackageOrderByWithRelationInput = {
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
+  cta?: Prisma.SortOrderInput | Prisma.SortOrder
   isPopular?: Prisma.SortOrder
   features?: Prisma.FeatureOrderByRelationAggregateInput
   checkout?: Prisma.CheckoutOrderByRelationAggregateInput
@@ -204,6 +222,8 @@ export type PackageWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.PackageWhereInput | Prisma.PackageWhereInput[]
   title?: Prisma.StringFilter<"Package"> | string
   price?: Prisma.StringFilter<"Package"> | string
+  description?: Prisma.StringNullableFilter<"Package"> | string | null
+  cta?: Prisma.StringNullableFilter<"Package"> | string | null
   isPopular?: Prisma.BoolFilter<"Package"> | boolean
   features?: Prisma.FeatureListRelationFilter
   checkout?: Prisma.CheckoutListRelationFilter
@@ -214,6 +234,8 @@ export type PackageOrderByWithAggregationInput = {
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
+  cta?: Prisma.SortOrderInput | Prisma.SortOrder
   isPopular?: Prisma.SortOrder
   _count?: Prisma.PackageCountOrderByAggregateInput
   _max?: Prisma.PackageMaxOrderByAggregateInput
@@ -228,6 +250,8 @@ export type PackageScalarWhereWithAggregatesInput = {
   title?: Prisma.StringWithAggregatesFilter<"Package"> | string
   slug?: Prisma.StringWithAggregatesFilter<"Package"> | string
   price?: Prisma.StringWithAggregatesFilter<"Package"> | string
+  description?: Prisma.StringNullableWithAggregatesFilter<"Package"> | string | null
+  cta?: Prisma.StringNullableWithAggregatesFilter<"Package"> | string | null
   isPopular?: Prisma.BoolWithAggregatesFilter<"Package"> | boolean
 }
 
@@ -236,6 +260,8 @@ export type PackageCreateInput = {
   title: string
   slug: string
   price: string
+  description?: string | null
+  cta?: string | null
   isPopular?: boolean
   features?: Prisma.FeatureCreateNestedManyWithoutPackageInput
   checkout?: Prisma.CheckoutCreateNestedManyWithoutPackageInput
@@ -246,6 +272,8 @@ export type PackageUncheckedCreateInput = {
   title: string
   slug: string
   price: string
+  description?: string | null
+  cta?: string | null
   isPopular?: boolean
   features?: Prisma.FeatureUncheckedCreateNestedManyWithoutPackageInput
   checkout?: Prisma.CheckoutUncheckedCreateNestedManyWithoutPackageInput
@@ -256,6 +284,8 @@ export type PackageUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPopular?: Prisma.BoolFieldUpdateOperationsInput | boolean
   features?: Prisma.FeatureUpdateManyWithoutPackageNestedInput
   checkout?: Prisma.CheckoutUpdateManyWithoutPackageNestedInput
@@ -266,6 +296,8 @@ export type PackageUncheckedUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPopular?: Prisma.BoolFieldUpdateOperationsInput | boolean
   features?: Prisma.FeatureUncheckedUpdateManyWithoutPackageNestedInput
   checkout?: Prisma.CheckoutUncheckedUpdateManyWithoutPackageNestedInput
@@ -276,6 +308,8 @@ export type PackageCreateManyInput = {
   title: string
   slug: string
   price: string
+  description?: string | null
+  cta?: string | null
   isPopular?: boolean
 }
 
@@ -284,6 +318,8 @@ export type PackageUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPopular?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -292,6 +328,8 @@ export type PackageUncheckedUpdateManyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPopular?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -300,6 +338,8 @@ export type PackageCountOrderByAggregateInput = {
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  cta?: Prisma.SortOrder
   isPopular?: Prisma.SortOrder
 }
 
@@ -308,6 +348,8 @@ export type PackageMaxOrderByAggregateInput = {
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  cta?: Prisma.SortOrder
   isPopular?: Prisma.SortOrder
 }
 
@@ -316,6 +358,8 @@ export type PackageMinOrderByAggregateInput = {
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  cta?: Prisma.SortOrder
   isPopular?: Prisma.SortOrder
 }
 
@@ -361,6 +405,8 @@ export type PackageCreateWithoutFeaturesInput = {
   title: string
   slug: string
   price: string
+  description?: string | null
+  cta?: string | null
   isPopular?: boolean
   checkout?: Prisma.CheckoutCreateNestedManyWithoutPackageInput
 }
@@ -370,6 +416,8 @@ export type PackageUncheckedCreateWithoutFeaturesInput = {
   title: string
   slug: string
   price: string
+  description?: string | null
+  cta?: string | null
   isPopular?: boolean
   checkout?: Prisma.CheckoutUncheckedCreateNestedManyWithoutPackageInput
 }
@@ -395,6 +443,8 @@ export type PackageUpdateWithoutFeaturesInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPopular?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checkout?: Prisma.CheckoutUpdateManyWithoutPackageNestedInput
 }
@@ -404,6 +454,8 @@ export type PackageUncheckedUpdateWithoutFeaturesInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPopular?: Prisma.BoolFieldUpdateOperationsInput | boolean
   checkout?: Prisma.CheckoutUncheckedUpdateManyWithoutPackageNestedInput
 }
@@ -413,6 +465,8 @@ export type PackageCreateWithoutCheckoutInput = {
   title: string
   slug: string
   price: string
+  description?: string | null
+  cta?: string | null
   isPopular?: boolean
   features?: Prisma.FeatureCreateNestedManyWithoutPackageInput
 }
@@ -422,6 +476,8 @@ export type PackageUncheckedCreateWithoutCheckoutInput = {
   title: string
   slug: string
   price: string
+  description?: string | null
+  cta?: string | null
   isPopular?: boolean
   features?: Prisma.FeatureUncheckedCreateNestedManyWithoutPackageInput
 }
@@ -447,6 +503,8 @@ export type PackageUpdateWithoutCheckoutInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPopular?: Prisma.BoolFieldUpdateOperationsInput | boolean
   features?: Prisma.FeatureUpdateManyWithoutPackageNestedInput
 }
@@ -456,6 +514,8 @@ export type PackageUncheckedUpdateWithoutCheckoutInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cta?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isPopular?: Prisma.BoolFieldUpdateOperationsInput | boolean
   features?: Prisma.FeatureUncheckedUpdateManyWithoutPackageNestedInput
 }
@@ -505,6 +565,8 @@ export type PackageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   title?: boolean
   slug?: boolean
   price?: boolean
+  description?: boolean
+  cta?: boolean
   isPopular?: boolean
   features?: boolean | Prisma.Package$featuresArgs<ExtArgs>
   checkout?: boolean | Prisma.Package$checkoutArgs<ExtArgs>
@@ -516,6 +578,8 @@ export type PackageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   title?: boolean
   slug?: boolean
   price?: boolean
+  description?: boolean
+  cta?: boolean
   isPopular?: boolean
 }, ExtArgs["result"]["package"]>
 
@@ -524,6 +588,8 @@ export type PackageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   title?: boolean
   slug?: boolean
   price?: boolean
+  description?: boolean
+  cta?: boolean
   isPopular?: boolean
 }, ExtArgs["result"]["package"]>
 
@@ -532,10 +598,12 @@ export type PackageSelectScalar = {
   title?: boolean
   slug?: boolean
   price?: boolean
+  description?: boolean
+  cta?: boolean
   isPopular?: boolean
 }
 
-export type PackageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "price" | "isPopular", ExtArgs["result"]["package"]>
+export type PackageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "price" | "description" | "cta" | "isPopular", ExtArgs["result"]["package"]>
 export type PackageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   features?: boolean | Prisma.Package$featuresArgs<ExtArgs>
   checkout?: boolean | Prisma.Package$checkoutArgs<ExtArgs>
@@ -555,6 +623,8 @@ export type $PackagePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     title: string
     slug: string
     price: string
+    description: string | null
+    cta: string | null
     isPopular: boolean
   }, ExtArgs["result"]["package"]>
   composites: {}
@@ -985,6 +1055,8 @@ export interface PackageFieldRefs {
   readonly title: Prisma.FieldRef<"Package", 'String'>
   readonly slug: Prisma.FieldRef<"Package", 'String'>
   readonly price: Prisma.FieldRef<"Package", 'String'>
+  readonly description: Prisma.FieldRef<"Package", 'String'>
+  readonly cta: Prisma.FieldRef<"Package", 'String'>
   readonly isPopular: Prisma.FieldRef<"Package", 'Boolean'>
 }
     

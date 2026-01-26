@@ -1,34 +1,35 @@
 "use client";
 
 import {
-  IconCamera,
-  IconChartBar,
-  IconDashboard,
-  IconDatabase,
-  IconDatabaseDollar,
-  IconFileAi,
-  IconFileDescription,
-  IconFileWord,
-  IconFolder,
-  IconHelp,
-  IconInnerShadowTop,
-  IconListDetails,
-  IconMist,
-  IconReport,
-  IconSearch,
-  IconSettings,
-  IconUsers,
+    IconCamera,
+    IconChartBar,
+    IconDashboard,
+    IconDatabase,
+    IconDatabaseDollar,
+    IconFileAi,
+    IconFileDescription,
+    IconFileWord,
+    IconFolder,
+    IconHelp,
+    IconInnerShadowTop,
+    IconListDetails,
+    IconMist,
+    IconPackage,
+    IconReport,
+    IconSearch,
+    IconSettings,
+    IconUsers,
 } from "@tabler/icons-react";
 import * as React from "react";
 
 import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
+    Sidebar,
+    SidebarContent,
+    SidebarFooter,
+    SidebarHeader,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { NavDocuments } from "./nav-document";
@@ -57,6 +58,11 @@ const data = {
       title: "Pricing Inquiry",
       url: "/dashboard/pricing-inquiry",
       icon: IconDatabaseDollar,
+    },
+    {
+      title: "Packages",
+      url: "/dashboard/packages",
+      icon: IconPackage,
     },
     {
       title: "Support",

@@ -3,6 +3,8 @@ model Package {
   title     String
   slug      String     @unique
   price     String
+  description String?
+  cta       String?
   isPopular Boolean    @default(false)
   features  Feature[]
   checkout  Checkout[]

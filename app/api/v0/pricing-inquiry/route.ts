@@ -1,6 +1,3 @@
-
-
-
 import prisma from "@/lib/prisma";
 import { ZCPricingInquiry } from "@/schema/zod/pricingSchema";
 import { NextResponse } from "next/server";
@@ -20,8 +17,8 @@ export async function GET() {
           pricingInquiries.length === 0
             ? " No Pricing Inquiry Data Found"
             : "All Submitted Pricing Inquiries Fetched",
-        data: pricingInquiries,
         count: pricingInquiries.length,
+        data: pricingInquiries,
       },
       { status: 200 },
     );
@@ -43,17 +40,17 @@ export async function POST(req: Request) {
 
     const validatedData = ZCPricingInquiry.parse(body);
 
-    const inquiry = await prisma.pricingInquiry.create({
-       data: validatedData,
+    const pricinginquiry = await prisma.pricingInquiry.create({
+      data: validatedData,
     });
 
     return NextResponse.json(
       {
         success: true,
         message: "Pricing Inquiry Form Submitted Successfully",
-        data: inquiry,
+        data: pricinginquiry,
       },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     console.error("API Error:", error);
@@ -64,7 +61,7 @@ export async function POST(req: Request) {
           success: false,
           error: "Validation Error",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -73,11 +70,10 @@ export async function POST(req: Request) {
         success: false,
         error: error instanceof Error ? error.message : "Internal Server Error",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
-
 
 export async function DELETE(req: Request) {
   try {
@@ -95,7 +91,7 @@ export async function DELETE(req: Request) {
         message: "Pricing Inquiry Deleted Successfully",
         data: inquiry,
       },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("API Error:", error);
@@ -104,11 +100,10 @@ export async function DELETE(req: Request) {
         success: false,
         error: error instanceof Error ? error.message : "Internal Server Error",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
-
 
 export async function PATCH(req: Request) {
   try {
@@ -125,9 +120,10 @@ export async function PATCH(req: Request) {
       {
         success: true,
         message: "Pricing Inquiry Updated Successfully",
+
         data: inquiry,
       },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("API Error:", error);
@@ -136,7 +132,7 @@ export async function PATCH(req: Request) {
         success: false,
         error: error instanceof Error ? error.message : "Internal Server Error",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -17,8 +17,8 @@ export async function GET() {
           inquiries.length === 0
             ? " No Inquiry Data Found"
             : "All Submitted Inquiries Fetched",
-        data: inquiries,
         count: inquiries.length,
+        data: inquiries,
       },
       { status: 200 },
     );
@@ -50,7 +50,7 @@ export async function POST(req: Request) {
         message: "Contact Form Submitted Successfully",
         data: inquiry,
       },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     console.error("API Error:", error);
@@ -61,7 +61,7 @@ export async function POST(req: Request) {
           success: false,
           error: "Validation Error",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -70,11 +70,10 @@ export async function POST(req: Request) {
         success: false,
         error: error instanceof Error ? error.message : "Internal Server Error",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
-
 
 export async function DELETE(req: Request) {
   try {
@@ -92,7 +91,7 @@ export async function DELETE(req: Request) {
         message: "Inquiry Deleted Successfully",
         data: inquiry,
       },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("API Error:", error);
@@ -101,11 +100,10 @@ export async function DELETE(req: Request) {
         success: false,
         error: error instanceof Error ? error.message : "Internal Server Error",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
-
 
 export async function PATCH(req: Request) {
   try {
@@ -124,7 +122,7 @@ export async function PATCH(req: Request) {
         message: "Inquiry Updated Successfully",
         data: inquiry,
       },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("API Error:", error);
@@ -133,7 +131,7 @@ export async function PATCH(req: Request) {
         success: false,
         error: error instanceof Error ? error.message : "Internal Server Error",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

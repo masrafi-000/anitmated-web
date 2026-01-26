@@ -28,12 +28,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { useCreatePricingInquiry } from "@/hooks/use-pricing";
 import { TCPricingInquiry, ZCPricingInquiry } from "@/schema/zod/pricingSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { queryClient } from "@/lib/query-client";
+import { useQueryClient } from "@tanstack/react-query";
 import { Loader2, Send } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 export default function PricingQueryForm() {
+  const queryClient = useQueryClient();
   const form = useForm<TCPricingInquiry>({
     resolver: zodResolver(ZCPricingInquiry),
     defaultValues: {

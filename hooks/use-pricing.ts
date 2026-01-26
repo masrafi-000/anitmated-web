@@ -1,19 +1,19 @@
 import { api } from "@/lib/axios";
-import { queryClient } from "@/lib/query-client";
 import { TCPricingInquiry } from "@/schema/zod/pricingSchema";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const usePricingInquiry = () => {
-return useQuery({
-  queryKey: ["pricing-inquiry"],
-  queryFn: async () => {
-    const { data } = await api.get("/v0/pricing-inquiry");
-    return data.data;
-  },
-})
-}
+  return useQuery({
+    queryKey: ["pricing-inquiry"],
+    queryFn: async () => {
+      const { data } = await api.get("/v0/pricing-inquiry");
+      return data.data;
+    },
+  });
+};
 
-export const useCreatePricingInquiry =  () => {  
+export const useCreatePricingInquiry = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (body: TCPricingInquiry) => {
       const { data } = await api.post("/v0/pricing-inquiry", body);
@@ -23,4 +23,4 @@ export const useCreatePricingInquiry =  () => {
       queryClient.invalidateQueries({ queryKey: ["pricing-inquiry"] });
     },
   });
-}; 
+};

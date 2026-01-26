@@ -1,7 +1,6 @@
 import { api } from "@/lib/axios";
-import { queryClient } from "@/lib/query-client";
 import { TCContact, TUDContact } from "@/schema/zod/contactFormSchema";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export interface Inquiry {
   id: string;
@@ -26,6 +25,7 @@ export const useInquiries = () => {
 };
 
 export const useCreateInquiry = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (body: TCContact) => {
       const { data } = await api.post("/v0/inquiry", body);
@@ -38,6 +38,7 @@ export const useCreateInquiry = () => {
 };
 
 export const useUpdateInquiry = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (body: TUDContact) => {
       const { data } = await api.patch("/v0/inquiry", body);
@@ -50,6 +51,7 @@ export const useUpdateInquiry = () => {
 };
 
 export const useDeleteInquiry = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (body: TUDContact) => {
       const { data } = await api.delete("/v0/inquiry", { data: body });

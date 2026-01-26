@@ -1,7 +1,6 @@
 import { api } from "@/lib/axios";
-import { queryClient } from "@/lib/query-client";
 import { TCSupport } from "@/schema/zod/supportFormSchema";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export interface Support {
   id: string;
@@ -14,16 +13,17 @@ export interface Support {
 }
 
 export const useSupport = () => {
-return useQuery({
-  queryKey: ["support-form"],
-  queryFn: async () => {
-    const { data } = await api.get("/v0/support");
-    return data.data;
-  },
-})
-}
+  return useQuery({
+    queryKey: ["support-form"],
+    queryFn: async () => {
+      const { data } = await api.get("/v0/support");
+      return data.data;
+    },
+  });
+};
 
 export const useCreateSupport = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (body: TCSupport) => {
       const { data } = await api.post("/v0/support", body);

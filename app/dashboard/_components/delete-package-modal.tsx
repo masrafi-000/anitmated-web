@@ -2,12 +2,12 @@
 
 import { Button } from "@/components/ui/button";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
 } from "@/components/ui/dialog";
 import { AlertTriangle } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -75,7 +75,8 @@ export const DeletePackageModal = ({
               "Deleting..."
             ) : (
               <>
-                Delete Package <strong className={``}>{countdown}</strong>
+                Delete Package
+                {countdown > 0 && <strong className="ml-1">{countdown}</strong>}
               </>
             )}
           </Button>

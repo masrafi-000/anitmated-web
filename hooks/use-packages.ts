@@ -1,8 +1,7 @@
 import { api } from "@/lib/axios";
-import { queryClient } from "@/lib/query-client";
 import { Package } from "@/schema/ts/pricing";
 import { TCPackages } from "@/schema/zod/pricing";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 
 
@@ -18,6 +17,7 @@ export const usePackages = () => {
 
 
 export const useCreatePackage = () => {
+    const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async (body: TCPackages) => {
             const { data } = await api.post("/v0/packages", body);
@@ -31,6 +31,7 @@ export const useCreatePackage = () => {
 
 
 export const useUpdatePackage = () => {
+    const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async ({ id, ...body }: TCPackages & { id: string }) => {
             const { data } = await api.patch("/v0/packages", { id, ...body });
@@ -44,6 +45,7 @@ export const useUpdatePackage = () => {
 
 
 export const useDeletePackage = () => {
+    const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async (id: string) => {
             const { data } = await api.delete("/v0/packages", { data: { id } });

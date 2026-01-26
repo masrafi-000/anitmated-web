@@ -9,11 +9,9 @@ import { Input } from "@/components/ui/input";
 import { useCreateSupport } from "@/hooks/use-support";
 import { cn } from "@/lib/utils";
 import { TCSupport } from "@/schema/zod/supportFormSchema";
+import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { ChatForm } from "./chat-form";
-import { queryClient } from "@/lib/query-client";
-
-
 // Types
 type MessageType = "text" | "form";
 type Sender = "user" | "bot";
@@ -30,6 +28,7 @@ interface Message {
 }
 
 export function ChatInterface() {
+  const queryClient = useQueryClient();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "init-1",

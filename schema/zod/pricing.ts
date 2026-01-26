@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const ZCPackages = z.object({
-  title: z.enum(["Essential", "Growth", "Enterprise"]),
+  title: z.string().min(1, "Title is required"),
 
   price: z.string().min(1, "Price is required"),
 

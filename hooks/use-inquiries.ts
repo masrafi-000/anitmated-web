@@ -1,4 +1,5 @@
 import { api } from "@/lib/axios";
+import { queryClient } from "@/lib/query-client";
 import { TCContact, TUDContact } from "@/schema/zod/contactFormSchema";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -30,6 +31,9 @@ export const useCreateInquiry = () => {
       const { data } = await api.post("/v0/inquiry", body);
       return data;
     },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["inquiries"] });
+    },
   });
 };
 
@@ -39,6 +43,9 @@ export const useUpdateInquiry = () => {
       const { data } = await api.patch("/v0/inquiry", body);
       return data;
     },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["inquiries"] });
+    },
   });
 };
 
@@ -47,6 +54,9 @@ export const useDeleteInquiry = () => {
     mutationFn: async (body: TUDContact) => {
       const { data } = await api.delete("/v0/inquiry", { data: body });
       return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["inquiries"] });
     },
   });
 };

@@ -26,9 +26,9 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useCreatePricingInquiry } from "@/hooks/use-pricing";
-import { queryClient } from "@/lib/query-client";
 import { TCPricingInquiry, ZCPricingInquiry } from "@/schema/zod/pricingSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { queryClient } from "@/lib/query-client";
 import { Loader2, Send } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";

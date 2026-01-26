@@ -7,11 +7,12 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useCreateSupport } from "@/hooks/use-support";
-import { queryClient } from "@/lib/query-client";
 import { cn } from "@/lib/utils";
 import { TCSupport } from "@/schema/zod/supportFormSchema";
 import { toast } from "sonner";
 import { ChatForm } from "./chat-form";
+import { queryClient } from "@/lib/query-client";
+
 
 // Types
 type MessageType = "text" | "form";

@@ -1,4 +1,5 @@
 import { api } from "@/lib/axios";
+import { queryClient } from "@/lib/query-client";
 import { TCSupport } from "@/schema/zod/supportFormSchema";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -27,6 +28,9 @@ export const useCreateSupport = () => {
     mutationFn: async (body: TCSupport) => {
       const { data } = await api.post("/v0/support", body);
       return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["support-form"] });
     },
   });
 };

@@ -1,82 +1,47 @@
 import prisma from "@/lib/prisma";
 
+
+
 async function main() {
-  // reset (safe for dev)
-  await prisma.feature.deleteMany();
-  await prisma.package.deleteMany();
+  console.log("Seeding careers...");
+  
+  try {
+    const existing = await prisma.jobOpportunity.findUnique({
+        where: { slug: "senior-frontend-developer" }
+    });
 
-  const packages = [
-    {
-      title: "Essential",
-      slug: "essential",
-      price: "$2,999",
-      description:
-        "Perfect for startups needing a solid brand foundation and web presence.",
-      cta: "Start Essential",
-      features: [
-        "Logo & Brand Guidelines",
-        "UI/UX Design for Landing Page",
-        "Next.js Implementation",
-        "SEO Best Practices",
-      ],
-    },
-    {
-      title: "Growth",
-      slug: "growth",
-      price: "$5,999",
-      description:
-        "Ideal for scaling businesses requiring a comprehensive digital experience.",
-      cta: "Go for Growth",
-      isPopular: true,
-      features: [
-        "Complete Visual Identity",
-        "Multi-Page UI/UX Design",
-        "Advanced Motion (GSAP)",
-        "CMS Integration",
-      ],
-    },
-    {
-      title: "Enterprise",
-      slug: "enterprise",
-      price: "Custom",
-      description:
-        "For industry leaders needing bespoke products and dedicated partnership.",
-      cta: "Contact Enterprise",
-      features: [
-        "Product Strategy & Research",
-        "Design System Documentation",
-        "Scalable Web App Development",
-        "Dedicated Support Team",
-      ],
-    },
-  ];
+    if (existing) {
+        console.log("Career already exists, skipping creation.");
+        return;
+    }
 
-  for (const pkg of packages) {
-    await prisma.package.create({
+    await prisma.jobOpportunity.create({
       data: {
-        title: pkg.title,
-        slug: pkg.slug,
-        price: pkg.price,
-        description: pkg.description,
-        cta: pkg.cta,
-        isPopular: pkg.isPopular ?? false,
-        features: {
-          create: pkg.features.map((feature) => ({
-            feature,
-          })),
-        },
+        title: "Senior Frontend Developer",
+        slug: "senior-frontend-developer",
+        department: "Engineering",
+        location: "Remote",
+        workMode: "REMOTE",
+        type: "FULL_TIME",
+        experienceLevel: "Senior",
+        description: "We are looking for a Senior Frontend Developer to join our team. You will be responsible for building high-quality user interfaces.",
+        responsibilities: ["Develop user-facing features", "Build reusable code and libraries for future use", "Ensure the technical feasibility of UI/UX designs"],
+        requirements: ["Proficient understanding of web markup, including HTML5, CSS3", "Basic understanding of server-side CSS pre-processing platforms, such as LESS and SASS", "Proficient understanding of client-side scripting and JavaScript frameworks, including jQuery"],
+        benefits: ["Competitive salary", "Remote work options", "Health insurance"],
+        salaryMin: 50000,
+        salaryMax: 80000,
+        salaryCurrency: "USD",
+        isActive: true,
       },
     });
-  }
 
-  console.log("Packages seeded successfully");
+    console.log("Seeded 1 career.");
+  } catch(e) {
+    console.error(e);
+  }
 }
 
 main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
   .finally(async () => {
     await prisma.$disconnect();
   });

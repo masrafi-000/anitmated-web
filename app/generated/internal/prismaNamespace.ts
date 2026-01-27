@@ -1224,7 +1224,8 @@ export const JobOpportunityScalarFieldEnum = {
   requirements: 'requirements',
   benefits: 'benefits',
   isActive: 'isActive',
-  deletedAt: 'deletedAt'
+  deletedAt: 'deletedAt',
+  applicationDeadline: 'applicationDeadline'
 } as const
 
 export type JobOpportunityScalarFieldEnum = (typeof JobOpportunityScalarFieldEnum)[keyof typeof JobOpportunityScalarFieldEnum]

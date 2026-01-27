@@ -55,6 +55,7 @@ export type JobOpportunityMinAggregateOutputType = {
   description: string | null
   isActive: boolean | null
   deletedAt: Date | null
+  applicationDeadline: Date | null
 }
 
 export type JobOpportunityMaxAggregateOutputType = {
@@ -76,6 +77,7 @@ export type JobOpportunityMaxAggregateOutputType = {
   description: string | null
   isActive: boolean | null
   deletedAt: Date | null
+  applicationDeadline: Date | null
 }
 
 export type JobOpportunityCountAggregateOutputType = {
@@ -100,6 +102,7 @@ export type JobOpportunityCountAggregateOutputType = {
   benefits: number
   isActive: number
   deletedAt: number
+  applicationDeadline: number
   _all: number
 }
 
@@ -133,6 +136,7 @@ export type JobOpportunityMinAggregateInputType = {
   description?: true
   isActive?: true
   deletedAt?: true
+  applicationDeadline?: true
 }
 
 export type JobOpportunityMaxAggregateInputType = {
@@ -154,6 +158,7 @@ export type JobOpportunityMaxAggregateInputType = {
   description?: true
   isActive?: true
   deletedAt?: true
+  applicationDeadline?: true
 }
 
 export type JobOpportunityCountAggregateInputType = {
@@ -178,6 +183,7 @@ export type JobOpportunityCountAggregateInputType = {
   benefits?: true
   isActive?: true
   deletedAt?: true
+  applicationDeadline?: true
   _all?: true
 }
 
@@ -289,6 +295,7 @@ export type JobOpportunityGroupByOutputType = {
   benefits: string[]
   isActive: boolean
   deletedAt: Date | null
+  applicationDeadline: Date | null
   _count: JobOpportunityCountAggregateOutputType | null
   _avg: JobOpportunityAvgAggregateOutputType | null
   _sum: JobOpportunitySumAggregateOutputType | null
@@ -336,6 +343,7 @@ export type JobOpportunityWhereInput = {
   benefits?: Prisma.StringNullableListFilter<"JobOpportunity">
   isActive?: Prisma.BoolFilter<"JobOpportunity"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"JobOpportunity"> | Date | string | null
+  applicationDeadline?: Prisma.DateTimeNullableFilter<"JobOpportunity"> | Date | string | null
   applications?: Prisma.ApplicationListRelationFilter
 }
 
@@ -361,6 +369,7 @@ export type JobOpportunityOrderByWithRelationInput = {
   benefits?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  applicationDeadline?: Prisma.SortOrderInput | Prisma.SortOrder
   applications?: Prisma.ApplicationOrderByRelationAggregateInput
 }
 
@@ -389,6 +398,7 @@ export type JobOpportunityWhereUniqueInput = Prisma.AtLeast<{
   benefits?: Prisma.StringNullableListFilter<"JobOpportunity">
   isActive?: Prisma.BoolFilter<"JobOpportunity"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"JobOpportunity"> | Date | string | null
+  applicationDeadline?: Prisma.DateTimeNullableFilter<"JobOpportunity"> | Date | string | null
   applications?: Prisma.ApplicationListRelationFilter
 }, "id" | "slug">
 
@@ -414,6 +424,7 @@ export type JobOpportunityOrderByWithAggregationInput = {
   benefits?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  applicationDeadline?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.JobOpportunityCountOrderByAggregateInput
   _avg?: Prisma.JobOpportunityAvgOrderByAggregateInput
   _max?: Prisma.JobOpportunityMaxOrderByAggregateInput
@@ -446,6 +457,7 @@ export type JobOpportunityScalarWhereWithAggregatesInput = {
   benefits?: Prisma.StringNullableListFilter<"JobOpportunity">
   isActive?: Prisma.BoolWithAggregatesFilter<"JobOpportunity"> | boolean
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"JobOpportunity"> | Date | string | null
+  applicationDeadline?: Prisma.DateTimeNullableWithAggregatesFilter<"JobOpportunity"> | Date | string | null
 }
 
 export type JobOpportunityCreateInput = {
@@ -470,6 +482,7 @@ export type JobOpportunityCreateInput = {
   benefits?: Prisma.JobOpportunityCreatebenefitsInput | string[]
   isActive?: boolean
   deletedAt?: Date | string | null
+  applicationDeadline?: Date | string | null
   applications?: Prisma.ApplicationCreateNestedManyWithoutJobInput
 }
 
@@ -495,6 +508,7 @@ export type JobOpportunityUncheckedCreateInput = {
   benefits?: Prisma.JobOpportunityCreatebenefitsInput | string[]
   isActive?: boolean
   deletedAt?: Date | string | null
+  applicationDeadline?: Date | string | null
   applications?: Prisma.ApplicationUncheckedCreateNestedManyWithoutJobInput
 }
 
@@ -520,6 +534,7 @@ export type JobOpportunityUpdateInput = {
   benefits?: Prisma.JobOpportunityUpdatebenefitsInput | string[]
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  applicationDeadline?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   applications?: Prisma.ApplicationUpdateManyWithoutJobNestedInput
 }
 
@@ -545,6 +560,7 @@ export type JobOpportunityUncheckedUpdateInput = {
   benefits?: Prisma.JobOpportunityUpdatebenefitsInput | string[]
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  applicationDeadline?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   applications?: Prisma.ApplicationUncheckedUpdateManyWithoutJobNestedInput
 }
 
@@ -570,6 +586,7 @@ export type JobOpportunityCreateManyInput = {
   benefits?: Prisma.JobOpportunityCreatebenefitsInput | string[]
   isActive?: boolean
   deletedAt?: Date | string | null
+  applicationDeadline?: Date | string | null
 }
 
 export type JobOpportunityUpdateManyMutationInput = {
@@ -594,6 +611,7 @@ export type JobOpportunityUpdateManyMutationInput = {
   benefits?: Prisma.JobOpportunityUpdatebenefitsInput | string[]
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  applicationDeadline?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type JobOpportunityUncheckedUpdateManyInput = {
@@ -618,6 +636,7 @@ export type JobOpportunityUncheckedUpdateManyInput = {
   benefits?: Prisma.JobOpportunityUpdatebenefitsInput | string[]
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  applicationDeadline?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type StringNullableListFilter<$PrismaModel = never> = {
@@ -650,6 +669,7 @@ export type JobOpportunityCountOrderByAggregateInput = {
   benefits?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  applicationDeadline?: Prisma.SortOrder
 }
 
 export type JobOpportunityAvgOrderByAggregateInput = {
@@ -676,6 +696,7 @@ export type JobOpportunityMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  applicationDeadline?: Prisma.SortOrder
 }
 
 export type JobOpportunityMinOrderByAggregateInput = {
@@ -697,6 +718,7 @@ export type JobOpportunityMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  applicationDeadline?: Prisma.SortOrder
 }
 
 export type JobOpportunitySumOrderByAggregateInput = {
@@ -796,6 +818,7 @@ export type JobOpportunityCreateWithoutApplicationsInput = {
   benefits?: Prisma.JobOpportunityCreatebenefitsInput | string[]
   isActive?: boolean
   deletedAt?: Date | string | null
+  applicationDeadline?: Date | string | null
 }
 
 export type JobOpportunityUncheckedCreateWithoutApplicationsInput = {
@@ -820,6 +843,7 @@ export type JobOpportunityUncheckedCreateWithoutApplicationsInput = {
   benefits?: Prisma.JobOpportunityCreatebenefitsInput | string[]
   isActive?: boolean
   deletedAt?: Date | string | null
+  applicationDeadline?: Date | string | null
 }
 
 export type JobOpportunityCreateOrConnectWithoutApplicationsInput = {
@@ -860,6 +884,7 @@ export type JobOpportunityUpdateWithoutApplicationsInput = {
   benefits?: Prisma.JobOpportunityUpdatebenefitsInput | string[]
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  applicationDeadline?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type JobOpportunityUncheckedUpdateWithoutApplicationsInput = {
@@ -884,6 +909,7 @@ export type JobOpportunityUncheckedUpdateWithoutApplicationsInput = {
   benefits?: Prisma.JobOpportunityUpdatebenefitsInput | string[]
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  applicationDeadline?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -939,6 +965,7 @@ export type JobOpportunitySelect<ExtArgs extends runtime.Types.Extensions.Intern
   benefits?: boolean
   isActive?: boolean
   deletedAt?: boolean
+  applicationDeadline?: boolean
   applications?: boolean | Prisma.JobOpportunity$applicationsArgs<ExtArgs>
   _count?: boolean | Prisma.JobOpportunityCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["jobOpportunity"]>
@@ -965,6 +992,7 @@ export type JobOpportunitySelectCreateManyAndReturn<ExtArgs extends runtime.Type
   benefits?: boolean
   isActive?: boolean
   deletedAt?: boolean
+  applicationDeadline?: boolean
 }, ExtArgs["result"]["jobOpportunity"]>
 
 export type JobOpportunitySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -989,6 +1017,7 @@ export type JobOpportunitySelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   benefits?: boolean
   isActive?: boolean
   deletedAt?: boolean
+  applicationDeadline?: boolean
 }, ExtArgs["result"]["jobOpportunity"]>
 
 export type JobOpportunitySelectScalar = {
@@ -1013,9 +1042,10 @@ export type JobOpportunitySelectScalar = {
   benefits?: boolean
   isActive?: boolean
   deletedAt?: boolean
+  applicationDeadline?: boolean
 }
 
-export type JobOpportunityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "title" | "createdAt" | "updatedAt" | "expiresAt" | "salaryMin" | "salaryMax" | "salaryCurrency" | "department" | "location" | "workMode" | "type" | "experienceLevel" | "experienceRequired" | "description" | "responsibilities" | "requirements" | "benefits" | "isActive" | "deletedAt", ExtArgs["result"]["jobOpportunity"]>
+export type JobOpportunityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "title" | "createdAt" | "updatedAt" | "expiresAt" | "salaryMin" | "salaryMax" | "salaryCurrency" | "department" | "location" | "workMode" | "type" | "experienceLevel" | "experienceRequired" | "description" | "responsibilities" | "requirements" | "benefits" | "isActive" | "deletedAt" | "applicationDeadline", ExtArgs["result"]["jobOpportunity"]>
 export type JobOpportunityInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   applications?: boolean | Prisma.JobOpportunity$applicationsArgs<ExtArgs>
   _count?: boolean | Prisma.JobOpportunityCountOutputTypeDefaultArgs<ExtArgs>
@@ -1050,6 +1080,7 @@ export type $JobOpportunityPayload<ExtArgs extends runtime.Types.Extensions.Inte
     benefits: string[]
     isActive: boolean
     deletedAt: Date | null
+    applicationDeadline: Date | null
   }, ExtArgs["result"]["jobOpportunity"]>
   composites: {}
 }
@@ -1495,6 +1526,7 @@ export interface JobOpportunityFieldRefs {
   readonly benefits: Prisma.FieldRef<"JobOpportunity", 'String[]'>
   readonly isActive: Prisma.FieldRef<"JobOpportunity", 'Boolean'>
   readonly deletedAt: Prisma.FieldRef<"JobOpportunity", 'DateTime'>
+  readonly applicationDeadline: Prisma.FieldRef<"JobOpportunity", 'DateTime'>
 }
     
 

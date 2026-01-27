@@ -28,6 +28,7 @@ model JobOpportunity {
   isActive     Boolean       @default(true)
   deletedAt    DateTime? // For Soft Deletes
   applications Application[]
+  applicationDeadline DateTime?
 
   // Performance Indexes
   @@index([isActive, createdAt])

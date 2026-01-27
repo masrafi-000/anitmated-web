@@ -17,3 +17,35 @@ export const ServiceType = {
 } as const
 
 export type ServiceType = (typeof ServiceType)[keyof typeof ServiceType]
+
+
+export const JobType = {
+  FULL_TIME: 'FULL_TIME',
+  PART_TIME: 'PART_TIME',
+  CONTRACT: 'CONTRACT',
+  INTERNSHIP: 'INTERNSHIP',
+  FREELANCE: 'FREELANCE'
+} as const
+
+export type JobType = (typeof JobType)[keyof typeof JobType]
+
+
+export const WorkMode = {
+  REMOTE: 'REMOTE',
+  HYBRID: 'HYBRID',
+  ONSITE: 'ONSITE'
+} as const
+
+export type WorkMode = (typeof WorkMode)[keyof typeof WorkMode]
+
+
+export const ApplicationStatus = {
+  PENDING: 'PENDING',
+  REVIEWING: 'REVIEWING',
+  INTERVIEWING: 'INTERVIEWING',
+  OFFERED: 'OFFERED',
+  REJECTED: 'REJECTED',
+  WITHDRAWN: 'WITHDRAWN'
+} as const
+
+export type ApplicationStatus = (typeof ApplicationStatus)[keyof typeof ApplicationStatus]

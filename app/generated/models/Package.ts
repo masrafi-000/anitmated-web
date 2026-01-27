@@ -368,10 +368,6 @@ export type PackageScalarRelationFilter = {
   isNot?: Prisma.PackageWhereInput
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type PackageCreateNestedOneWithoutFeaturesInput = {
   create?: Prisma.XOR<Prisma.PackageCreateWithoutFeaturesInput, Prisma.PackageUncheckedCreateWithoutFeaturesInput>
   connectOrCreate?: Prisma.PackageCreateOrConnectWithoutFeaturesInput

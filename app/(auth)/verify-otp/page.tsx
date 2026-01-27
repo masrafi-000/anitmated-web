@@ -44,11 +44,11 @@ export default function VerifyOtpPage() {
     console.log(values)
     // Verify OTP logic here
     // On success:
-    router.push("/admin/reset-password")
+    router.push("/reset-password")
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50/50 px-4 py-12 sm:px-6 lg:px-8">
+    <div className="flex min-h-screen items-start justify-center px-4 py-12 sm:px-6 lg:px-8">
       <Card className="w-full max-w-sm">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center">Verify OTP</CardTitle>
@@ -90,7 +90,7 @@ export default function VerifyOtpPage() {
                     Resend
                 </button>
             </div>
-            <Link href="/admin/login" className="text-sm text-center text-muted-foreground hover:text-primary underline underline-offset-4">
+            <Link href="/login" className="text-sm text-center text-muted-foreground hover:text-primary underline underline-offset-4">
                 Back to Login
             </Link>
         </CardFooter>

@@ -51,11 +51,11 @@ export default function ResetPasswordPage() {
     console.log(values)
     // API call to reset password
     // On success:
-    router.push("/admin/login")
+    router.push("/login")
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50/50 px-4 py-12 sm:px-6 lg:px-8">
+    <div className="flex min-h-screen items-start justify-center px-4 py-12 sm:px-6 lg:px-8">
       <Card className="w-full max-w-sm">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center">Reset Password</CardTitle>
@@ -99,7 +99,7 @@ export default function ResetPasswordPage() {
           </Form>
         </CardContent>
         <CardFooter className="flex justify-center">
-            <Link href="/admin/login" className="text-sm text-muted-foreground hover:text-primary underline underline-offset-4">
+            <Link href="/login" className="text-sm text-muted-foreground hover:text-primary underline underline-offset-4">
                 Back to Login
             </Link>
         </CardFooter>

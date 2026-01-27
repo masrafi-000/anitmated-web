@@ -1,0 +1,74 @@
+model JobOpportunity {
+  id        String    @id @default(cuid())
+  slug      String    @unique // Essential for SEO
+  title     String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  expiresAt DateTime? // Auto-close listings
+
+  // Salary - Use Decimal or BigInt (cents) for precision
+  salaryMin      Decimal? @db.Decimal(12, 2)
+  salaryMax      Decimal? @db.Decimal(12, 2)
+  salaryCurrency String   @default("BDT") // ISO Currency Code
+
+  // Relations & Metadata
+  department         String
+  location           String
+  workMode           WorkMode @default(ONSITE)
+  type               JobType
+  experienceLevel    String // e.g., "Senior", "3-5 years"
+  experienceRequired Boolean  @default(true)
+
+  // Rich Content
+  description      String   @db.Text // Use @db.Text for long content
+  responsibilities String[]
+  requirements     String[]
+  benefits         String[]
+
+  isActive     Boolean       @default(true)
+  deletedAt    DateTime? // For Soft Deletes
+  applications Application[]
+
+  // Performance Indexes
+  @@index([isActive, createdAt])
+  @@index([location])
+}
+
+model Application {
+  id        String         @id @default(cuid())
+  createdAt DateTime       @default(now())
+  jobId     String
+  job       JobOpportunity @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  // Candidate Info
+  fullName           String
+  email              String
+  phone              String?
+  educationLevel     String?
+  yearsOfExperience  Int?
+  currentDesignation String?
+  currentCompany     String?
+  currentSalary      Decimal? @db.Decimal(12, 2)
+  expectedSalary     Decimal? @db.Decimal(12, 2)
+  resumeUrl          String
+  coverLetter        String?  @db.Text
+
+  // Skills - JSONB is often better for complex filtering
+  techSkills String[]
+  softSkills String[]
+
+  status ApplicationStatus @default(PENDING)
+  notes  InternalNote[] // Added for recruiters
+
+  @@index([jobId])
+  @@index([email])
+}
+
+model InternalNote {
+  id            String      @id @default(cuid())
+  applicationId String
+  application   Application @relation(fields: [applicationId], references: [id])
+  authorName    String
+  content       String      @db.Text
+  createdAt     DateTime    @default(now())
+}

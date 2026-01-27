@@ -4,3 +4,26 @@ enum ServiceType {
   development
   marketing
 }
+
+enum JobType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+  INTERNSHIP
+  FREELANCE
+}
+
+enum WorkMode {
+  REMOTE
+  HYBRID
+  ONSITE
+}
+
+enum ApplicationStatus {
+  PENDING
+  REVIEWING
+  INTERVIEWING
+  OFFERED
+  REJECTED
+  WITHDRAWN
+}

@@ -1,13 +1,13 @@
 model Package {
-  id        String     @id @default(cuid())
-  title     String
-  slug      String     @unique
-  price     String
+  id          String     @id @default(cuid())
+  title       String
+  slug        String     @unique
+  price       String
   description String?
-  cta       String?
-  isPopular Boolean    @default(false)
-  features  Feature[]
-  checkout  Checkout[]
+  cta         String?
+  isPopular   Boolean    @default(false)
+  features    Feature[]
+  checkout    Checkout[]
 }
 
 model Feature {

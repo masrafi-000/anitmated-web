@@ -52,6 +52,9 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
+  JobOpportunity: 'JobOpportunity',
+  Application: 'Application',
+  InternalNote: 'InternalNote',
   Inquiry: 'Inquiry',
   Package: 'Package',
   Feature: 'Feature',
@@ -85,6 +88,67 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const JobOpportunityScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  title: 'title',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  expiresAt: 'expiresAt',
+  salaryMin: 'salaryMin',
+  salaryMax: 'salaryMax',
+  salaryCurrency: 'salaryCurrency',
+  department: 'department',
+  location: 'location',
+  workMode: 'workMode',
+  type: 'type',
+  experienceLevel: 'experienceLevel',
+  experienceRequired: 'experienceRequired',
+  description: 'description',
+  responsibilities: 'responsibilities',
+  requirements: 'requirements',
+  benefits: 'benefits',
+  isActive: 'isActive',
+  deletedAt: 'deletedAt'
+} as const
+
+export type JobOpportunityScalarFieldEnum = (typeof JobOpportunityScalarFieldEnum)[keyof typeof JobOpportunityScalarFieldEnum]
+
+
+export const ApplicationScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  jobId: 'jobId',
+  fullName: 'fullName',
+  email: 'email',
+  phone: 'phone',
+  educationLevel: 'educationLevel',
+  yearsOfExperience: 'yearsOfExperience',
+  currentDesignation: 'currentDesignation',
+  currentCompany: 'currentCompany',
+  currentSalary: 'currentSalary',
+  expectedSalary: 'expectedSalary',
+  resumeUrl: 'resumeUrl',
+  coverLetter: 'coverLetter',
+  techSkills: 'techSkills',
+  softSkills: 'softSkills',
+  status: 'status'
+} as const
+
+export type ApplicationScalarFieldEnum = (typeof ApplicationScalarFieldEnum)[keyof typeof ApplicationScalarFieldEnum]
+
+
+export const InternalNoteScalarFieldEnum = {
+  id: 'id',
+  applicationId: 'applicationId',
+  authorName: 'authorName',
+  content: 'content',
+  createdAt: 'createdAt'
+} as const
+
+export type InternalNoteScalarFieldEnum = (typeof InternalNoteScalarFieldEnum)[keyof typeof InternalNoteScalarFieldEnum]
 
 
 export const InquiryScalarFieldEnum = {

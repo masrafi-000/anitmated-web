@@ -67,7 +67,7 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-start justify-center bg-gray-50/50 px-4 py-12 sm:px-6 lg:px-8">
+    <div className="flex min-h-screen items-start justify-center px-4 py-12 sm:px-6 lg:px-8">
       <Card className="w-full max-w-sm">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center">
@@ -139,7 +139,7 @@ export default function AdminLoginPage() {
         <CardFooter className="flex flex-col gap-2">
           <div className="text-sm text-center text-muted-foreground">
             <Link
-              href="/admin/forgot-password"
+              href="/forgot-password"
               className="hover:text-primary underline underline-offset-4"
             >
               Forgot your password?

@@ -9,6 +9,8 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/User'
+export type * from './models/Blog'
+export type * from './models/Author'
 export type * from './models/JobOpportunity'
 export type * from './models/Application'
 export type * from './models/InternalNote'

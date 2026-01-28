@@ -52,6 +52,8 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
+  Blog: 'Blog',
+  Author: 'Author',
   JobOpportunity: 'JobOpportunity',
   Application: 'Application',
   InternalNote: 'InternalNote',
@@ -88,6 +90,33 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const BlogScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  title: 'title',
+  slug: 'slug',
+  content: 'content',
+  published: 'published',
+  description: 'description',
+  imageUrl: 'imageUrl',
+  Links: 'Links',
+  authoId: 'authoId'
+} as const
+
+export type BlogScalarFieldEnum = (typeof BlogScalarFieldEnum)[keyof typeof BlogScalarFieldEnum]
+
+
+export const AuthorScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  designation: 'designation'
+} as const
+
+export type AuthorScalarFieldEnum = (typeof AuthorScalarFieldEnum)[keyof typeof AuthorScalarFieldEnum]
 
 
 export const JobOpportunityScalarFieldEnum = {

@@ -25,9 +25,9 @@ model JobOpportunity {
   requirements     String[]
   benefits         String[]
 
-  isActive     Boolean       @default(true)
-  deletedAt    DateTime? // For Soft Deletes
-  applications Application[]
+  isActive            Boolean       @default(true)
+  deletedAt           DateTime? // For Soft Deletes
+  applications        Application[]
   applicationDeadline DateTime?
 
   // Performance Indexes

@@ -1,0 +1,26 @@
+model Blog {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title       String
+  slug        String   @unique
+  content     String
+  published   Boolean  @default(false)
+  description String?
+  imageUrl    String?
+  Links       String[]
+
+  authoId String
+  author  Author @relation(fields: [authoId], references: [id], onDelete: Cascade)
+}
+
+model Author {
+  id String @id @default(cuid())
+
+  name        String
+  email       String  @unique
+  designation String?
+
+  bologs Blog[]
+}

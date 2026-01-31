@@ -53,6 +53,14 @@ export type ApplicationMinAggregateOutputType = {
   expectedSalary: runtime.Decimal | null
   resumeUrl: string | null
   coverLetter: string | null
+  linkedInProfile: string | null
+  portfolioUrl: string | null
+  githubProfile: string | null
+  stackOverflow: string | null
+  codeForces: string | null
+  codeChef: string | null
+  hackerrank: string | null
+  leetCode: string | null
   status: $Enums.ApplicationStatus | null
 }
 
@@ -71,6 +79,14 @@ export type ApplicationMaxAggregateOutputType = {
   expectedSalary: runtime.Decimal | null
   resumeUrl: string | null
   coverLetter: string | null
+  linkedInProfile: string | null
+  portfolioUrl: string | null
+  githubProfile: string | null
+  stackOverflow: string | null
+  codeForces: string | null
+  codeChef: string | null
+  hackerrank: string | null
+  leetCode: string | null
   status: $Enums.ApplicationStatus | null
 }
 
@@ -91,6 +107,14 @@ export type ApplicationCountAggregateOutputType = {
   coverLetter: number
   techSkills: number
   softSkills: number
+  linkedInProfile: number
+  portfolioUrl: number
+  githubProfile: number
+  stackOverflow: number
+  codeForces: number
+  codeChef: number
+  hackerrank: number
+  leetCode: number
   status: number
   _all: number
 }
@@ -123,6 +147,14 @@ export type ApplicationMinAggregateInputType = {
   expectedSalary?: true
   resumeUrl?: true
   coverLetter?: true
+  linkedInProfile?: true
+  portfolioUrl?: true
+  githubProfile?: true
+  stackOverflow?: true
+  codeForces?: true
+  codeChef?: true
+  hackerrank?: true
+  leetCode?: true
   status?: true
 }
 
@@ -141,6 +173,14 @@ export type ApplicationMaxAggregateInputType = {
   expectedSalary?: true
   resumeUrl?: true
   coverLetter?: true
+  linkedInProfile?: true
+  portfolioUrl?: true
+  githubProfile?: true
+  stackOverflow?: true
+  codeForces?: true
+  codeChef?: true
+  hackerrank?: true
+  leetCode?: true
   status?: true
 }
 
@@ -161,6 +201,14 @@ export type ApplicationCountAggregateInputType = {
   coverLetter?: true
   techSkills?: true
   softSkills?: true
+  linkedInProfile?: true
+  portfolioUrl?: true
+  githubProfile?: true
+  stackOverflow?: true
+  codeForces?: true
+  codeChef?: true
+  hackerrank?: true
+  leetCode?: true
   status?: true
   _all?: true
 }
@@ -268,6 +316,14 @@ export type ApplicationGroupByOutputType = {
   coverLetter: string | null
   techSkills: string[]
   softSkills: string[]
+  linkedInProfile: string | null
+  portfolioUrl: string | null
+  githubProfile: string | null
+  stackOverflow: string | null
+  codeForces: string | null
+  codeChef: string | null
+  hackerrank: string | null
+  leetCode: string | null
   status: $Enums.ApplicationStatus
   _count: ApplicationCountAggregateOutputType | null
   _avg: ApplicationAvgAggregateOutputType | null
@@ -311,6 +367,14 @@ export type ApplicationWhereInput = {
   coverLetter?: Prisma.StringNullableFilter<"Application"> | string | null
   techSkills?: Prisma.StringNullableListFilter<"Application">
   softSkills?: Prisma.StringNullableListFilter<"Application">
+  linkedInProfile?: Prisma.StringNullableFilter<"Application"> | string | null
+  portfolioUrl?: Prisma.StringNullableFilter<"Application"> | string | null
+  githubProfile?: Prisma.StringNullableFilter<"Application"> | string | null
+  stackOverflow?: Prisma.StringNullableFilter<"Application"> | string | null
+  codeForces?: Prisma.StringNullableFilter<"Application"> | string | null
+  codeChef?: Prisma.StringNullableFilter<"Application"> | string | null
+  hackerrank?: Prisma.StringNullableFilter<"Application"> | string | null
+  leetCode?: Prisma.StringNullableFilter<"Application"> | string | null
   status?: Prisma.EnumApplicationStatusFilter<"Application"> | $Enums.ApplicationStatus
   job?: Prisma.XOR<Prisma.JobOpportunityScalarRelationFilter, Prisma.JobOpportunityWhereInput>
   notes?: Prisma.InternalNoteListRelationFilter
@@ -333,6 +397,14 @@ export type ApplicationOrderByWithRelationInput = {
   coverLetter?: Prisma.SortOrderInput | Prisma.SortOrder
   techSkills?: Prisma.SortOrder
   softSkills?: Prisma.SortOrder
+  linkedInProfile?: Prisma.SortOrderInput | Prisma.SortOrder
+  portfolioUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  githubProfile?: Prisma.SortOrderInput | Prisma.SortOrder
+  stackOverflow?: Prisma.SortOrderInput | Prisma.SortOrder
+  codeForces?: Prisma.SortOrderInput | Prisma.SortOrder
+  codeChef?: Prisma.SortOrderInput | Prisma.SortOrder
+  hackerrank?: Prisma.SortOrderInput | Prisma.SortOrder
+  leetCode?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   job?: Prisma.JobOpportunityOrderByWithRelationInput
   notes?: Prisma.InternalNoteOrderByRelationAggregateInput
@@ -358,6 +430,14 @@ export type ApplicationWhereUniqueInput = Prisma.AtLeast<{
   coverLetter?: Prisma.StringNullableFilter<"Application"> | string | null
   techSkills?: Prisma.StringNullableListFilter<"Application">
   softSkills?: Prisma.StringNullableListFilter<"Application">
+  linkedInProfile?: Prisma.StringNullableFilter<"Application"> | string | null
+  portfolioUrl?: Prisma.StringNullableFilter<"Application"> | string | null
+  githubProfile?: Prisma.StringNullableFilter<"Application"> | string | null
+  stackOverflow?: Prisma.StringNullableFilter<"Application"> | string | null
+  codeForces?: Prisma.StringNullableFilter<"Application"> | string | null
+  codeChef?: Prisma.StringNullableFilter<"Application"> | string | null
+  hackerrank?: Prisma.StringNullableFilter<"Application"> | string | null
+  leetCode?: Prisma.StringNullableFilter<"Application"> | string | null
   status?: Prisma.EnumApplicationStatusFilter<"Application"> | $Enums.ApplicationStatus
   job?: Prisma.XOR<Prisma.JobOpportunityScalarRelationFilter, Prisma.JobOpportunityWhereInput>
   notes?: Prisma.InternalNoteListRelationFilter
@@ -380,6 +460,14 @@ export type ApplicationOrderByWithAggregationInput = {
   coverLetter?: Prisma.SortOrderInput | Prisma.SortOrder
   techSkills?: Prisma.SortOrder
   softSkills?: Prisma.SortOrder
+  linkedInProfile?: Prisma.SortOrderInput | Prisma.SortOrder
+  portfolioUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  githubProfile?: Prisma.SortOrderInput | Prisma.SortOrder
+  stackOverflow?: Prisma.SortOrderInput | Prisma.SortOrder
+  codeForces?: Prisma.SortOrderInput | Prisma.SortOrder
+  codeChef?: Prisma.SortOrderInput | Prisma.SortOrder
+  hackerrank?: Prisma.SortOrderInput | Prisma.SortOrder
+  leetCode?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   _count?: Prisma.ApplicationCountOrderByAggregateInput
   _avg?: Prisma.ApplicationAvgOrderByAggregateInput
@@ -408,6 +496,14 @@ export type ApplicationScalarWhereWithAggregatesInput = {
   coverLetter?: Prisma.StringNullableWithAggregatesFilter<"Application"> | string | null
   techSkills?: Prisma.StringNullableListFilter<"Application">
   softSkills?: Prisma.StringNullableListFilter<"Application">
+  linkedInProfile?: Prisma.StringNullableWithAggregatesFilter<"Application"> | string | null
+  portfolioUrl?: Prisma.StringNullableWithAggregatesFilter<"Application"> | string | null
+  githubProfile?: Prisma.StringNullableWithAggregatesFilter<"Application"> | string | null
+  stackOverflow?: Prisma.StringNullableWithAggregatesFilter<"Application"> | string | null
+  codeForces?: Prisma.StringNullableWithAggregatesFilter<"Application"> | string | null
+  codeChef?: Prisma.StringNullableWithAggregatesFilter<"Application"> | string | null
+  hackerrank?: Prisma.StringNullableWithAggregatesFilter<"Application"> | string | null
+  leetCode?: Prisma.StringNullableWithAggregatesFilter<"Application"> | string | null
   status?: Prisma.EnumApplicationStatusWithAggregatesFilter<"Application"> | $Enums.ApplicationStatus
 }
 
@@ -427,6 +523,14 @@ export type ApplicationCreateInput = {
   coverLetter?: string | null
   techSkills?: Prisma.ApplicationCreatetechSkillsInput | string[]
   softSkills?: Prisma.ApplicationCreatesoftSkillsInput | string[]
+  linkedInProfile?: string | null
+  portfolioUrl?: string | null
+  githubProfile?: string | null
+  stackOverflow?: string | null
+  codeForces?: string | null
+  codeChef?: string | null
+  hackerrank?: string | null
+  leetCode?: string | null
   status?: $Enums.ApplicationStatus
   job: Prisma.JobOpportunityCreateNestedOneWithoutApplicationsInput
   notes?: Prisma.InternalNoteCreateNestedManyWithoutApplicationInput
@@ -449,6 +553,14 @@ export type ApplicationUncheckedCreateInput = {
   coverLetter?: string | null
   techSkills?: Prisma.ApplicationCreatetechSkillsInput | string[]
   softSkills?: Prisma.ApplicationCreatesoftSkillsInput | string[]
+  linkedInProfile?: string | null
+  portfolioUrl?: string | null
+  githubProfile?: string | null
+  stackOverflow?: string | null
+  codeForces?: string | null
+  codeChef?: string | null
+  hackerrank?: string | null
+  leetCode?: string | null
   status?: $Enums.ApplicationStatus
   notes?: Prisma.InternalNoteUncheckedCreateNestedManyWithoutApplicationInput
 }
@@ -469,6 +581,14 @@ export type ApplicationUpdateInput = {
   coverLetter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   techSkills?: Prisma.ApplicationUpdatetechSkillsInput | string[]
   softSkills?: Prisma.ApplicationUpdatesoftSkillsInput | string[]
+  linkedInProfile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubProfile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stackOverflow?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codeForces?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codeChef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hackerrank?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leetCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
   job?: Prisma.JobOpportunityUpdateOneRequiredWithoutApplicationsNestedInput
   notes?: Prisma.InternalNoteUpdateManyWithoutApplicationNestedInput
@@ -491,6 +611,14 @@ export type ApplicationUncheckedUpdateInput = {
   coverLetter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   techSkills?: Prisma.ApplicationUpdatetechSkillsInput | string[]
   softSkills?: Prisma.ApplicationUpdatesoftSkillsInput | string[]
+  linkedInProfile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubProfile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stackOverflow?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codeForces?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codeChef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hackerrank?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leetCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
   notes?: Prisma.InternalNoteUncheckedUpdateManyWithoutApplicationNestedInput
 }
@@ -512,6 +640,14 @@ export type ApplicationCreateManyInput = {
   coverLetter?: string | null
   techSkills?: Prisma.ApplicationCreatetechSkillsInput | string[]
   softSkills?: Prisma.ApplicationCreatesoftSkillsInput | string[]
+  linkedInProfile?: string | null
+  portfolioUrl?: string | null
+  githubProfile?: string | null
+  stackOverflow?: string | null
+  codeForces?: string | null
+  codeChef?: string | null
+  hackerrank?: string | null
+  leetCode?: string | null
   status?: $Enums.ApplicationStatus
 }
 
@@ -531,6 +667,14 @@ export type ApplicationUpdateManyMutationInput = {
   coverLetter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   techSkills?: Prisma.ApplicationUpdatetechSkillsInput | string[]
   softSkills?: Prisma.ApplicationUpdatesoftSkillsInput | string[]
+  linkedInProfile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubProfile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stackOverflow?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codeForces?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codeChef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hackerrank?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leetCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
 }
 
@@ -551,6 +695,14 @@ export type ApplicationUncheckedUpdateManyInput = {
   coverLetter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   techSkills?: Prisma.ApplicationUpdatetechSkillsInput | string[]
   softSkills?: Prisma.ApplicationUpdatesoftSkillsInput | string[]
+  linkedInProfile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubProfile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stackOverflow?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codeForces?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codeChef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hackerrank?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leetCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
 }
 
@@ -581,6 +733,14 @@ export type ApplicationCountOrderByAggregateInput = {
   coverLetter?: Prisma.SortOrder
   techSkills?: Prisma.SortOrder
   softSkills?: Prisma.SortOrder
+  linkedInProfile?: Prisma.SortOrder
+  portfolioUrl?: Prisma.SortOrder
+  githubProfile?: Prisma.SortOrder
+  stackOverflow?: Prisma.SortOrder
+  codeForces?: Prisma.SortOrder
+  codeChef?: Prisma.SortOrder
+  hackerrank?: Prisma.SortOrder
+  leetCode?: Prisma.SortOrder
   status?: Prisma.SortOrder
 }
 
@@ -605,6 +765,14 @@ export type ApplicationMaxOrderByAggregateInput = {
   expectedSalary?: Prisma.SortOrder
   resumeUrl?: Prisma.SortOrder
   coverLetter?: Prisma.SortOrder
+  linkedInProfile?: Prisma.SortOrder
+  portfolioUrl?: Prisma.SortOrder
+  githubProfile?: Prisma.SortOrder
+  stackOverflow?: Prisma.SortOrder
+  codeForces?: Prisma.SortOrder
+  codeChef?: Prisma.SortOrder
+  hackerrank?: Prisma.SortOrder
+  leetCode?: Prisma.SortOrder
   status?: Prisma.SortOrder
 }
 
@@ -623,6 +791,14 @@ export type ApplicationMinOrderByAggregateInput = {
   expectedSalary?: Prisma.SortOrder
   resumeUrl?: Prisma.SortOrder
   coverLetter?: Prisma.SortOrder
+  linkedInProfile?: Prisma.SortOrder
+  portfolioUrl?: Prisma.SortOrder
+  githubProfile?: Prisma.SortOrder
+  stackOverflow?: Prisma.SortOrder
+  codeForces?: Prisma.SortOrder
+  codeChef?: Prisma.SortOrder
+  hackerrank?: Prisma.SortOrder
+  leetCode?: Prisma.SortOrder
   status?: Prisma.SortOrder
 }
 
@@ -739,6 +915,14 @@ export type ApplicationCreateWithoutJobInput = {
   coverLetter?: string | null
   techSkills?: Prisma.ApplicationCreatetechSkillsInput | string[]
   softSkills?: Prisma.ApplicationCreatesoftSkillsInput | string[]
+  linkedInProfile?: string | null
+  portfolioUrl?: string | null
+  githubProfile?: string | null
+  stackOverflow?: string | null
+  codeForces?: string | null
+  codeChef?: string | null
+  hackerrank?: string | null
+  leetCode?: string | null
   status?: $Enums.ApplicationStatus
   notes?: Prisma.InternalNoteCreateNestedManyWithoutApplicationInput
 }
@@ -759,6 +943,14 @@ export type ApplicationUncheckedCreateWithoutJobInput = {
   coverLetter?: string | null
   techSkills?: Prisma.ApplicationCreatetechSkillsInput | string[]
   softSkills?: Prisma.ApplicationCreatesoftSkillsInput | string[]
+  linkedInProfile?: string | null
+  portfolioUrl?: string | null
+  githubProfile?: string | null
+  stackOverflow?: string | null
+  codeForces?: string | null
+  codeChef?: string | null
+  hackerrank?: string | null
+  leetCode?: string | null
   status?: $Enums.ApplicationStatus
   notes?: Prisma.InternalNoteUncheckedCreateNestedManyWithoutApplicationInput
 }
@@ -809,6 +1001,14 @@ export type ApplicationScalarWhereInput = {
   coverLetter?: Prisma.StringNullableFilter<"Application"> | string | null
   techSkills?: Prisma.StringNullableListFilter<"Application">
   softSkills?: Prisma.StringNullableListFilter<"Application">
+  linkedInProfile?: Prisma.StringNullableFilter<"Application"> | string | null
+  portfolioUrl?: Prisma.StringNullableFilter<"Application"> | string | null
+  githubProfile?: Prisma.StringNullableFilter<"Application"> | string | null
+  stackOverflow?: Prisma.StringNullableFilter<"Application"> | string | null
+  codeForces?: Prisma.StringNullableFilter<"Application"> | string | null
+  codeChef?: Prisma.StringNullableFilter<"Application"> | string | null
+  hackerrank?: Prisma.StringNullableFilter<"Application"> | string | null
+  leetCode?: Prisma.StringNullableFilter<"Application"> | string | null
   status?: Prisma.EnumApplicationStatusFilter<"Application"> | $Enums.ApplicationStatus
 }
 
@@ -828,6 +1028,14 @@ export type ApplicationCreateWithoutNotesInput = {
   coverLetter?: string | null
   techSkills?: Prisma.ApplicationCreatetechSkillsInput | string[]
   softSkills?: Prisma.ApplicationCreatesoftSkillsInput | string[]
+  linkedInProfile?: string | null
+  portfolioUrl?: string | null
+  githubProfile?: string | null
+  stackOverflow?: string | null
+  codeForces?: string | null
+  codeChef?: string | null
+  hackerrank?: string | null
+  leetCode?: string | null
   status?: $Enums.ApplicationStatus
   job: Prisma.JobOpportunityCreateNestedOneWithoutApplicationsInput
 }
@@ -849,6 +1057,14 @@ export type ApplicationUncheckedCreateWithoutNotesInput = {
   coverLetter?: string | null
   techSkills?: Prisma.ApplicationCreatetechSkillsInput | string[]
   softSkills?: Prisma.ApplicationCreatesoftSkillsInput | string[]
+  linkedInProfile?: string | null
+  portfolioUrl?: string | null
+  githubProfile?: string | null
+  stackOverflow?: string | null
+  codeForces?: string | null
+  codeChef?: string | null
+  hackerrank?: string | null
+  leetCode?: string | null
   status?: $Enums.ApplicationStatus
 }
 
@@ -884,6 +1100,14 @@ export type ApplicationUpdateWithoutNotesInput = {
   coverLetter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   techSkills?: Prisma.ApplicationUpdatetechSkillsInput | string[]
   softSkills?: Prisma.ApplicationUpdatesoftSkillsInput | string[]
+  linkedInProfile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubProfile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stackOverflow?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codeForces?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codeChef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hackerrank?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leetCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
   job?: Prisma.JobOpportunityUpdateOneRequiredWithoutApplicationsNestedInput
 }
@@ -905,6 +1129,14 @@ export type ApplicationUncheckedUpdateWithoutNotesInput = {
   coverLetter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   techSkills?: Prisma.ApplicationUpdatetechSkillsInput | string[]
   softSkills?: Prisma.ApplicationUpdatesoftSkillsInput | string[]
+  linkedInProfile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubProfile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stackOverflow?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codeForces?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codeChef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hackerrank?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leetCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
 }
 
@@ -924,6 +1156,14 @@ export type ApplicationCreateManyJobInput = {
   coverLetter?: string | null
   techSkills?: Prisma.ApplicationCreatetechSkillsInput | string[]
   softSkills?: Prisma.ApplicationCreatesoftSkillsInput | string[]
+  linkedInProfile?: string | null
+  portfolioUrl?: string | null
+  githubProfile?: string | null
+  stackOverflow?: string | null
+  codeForces?: string | null
+  codeChef?: string | null
+  hackerrank?: string | null
+  leetCode?: string | null
   status?: $Enums.ApplicationStatus
 }
 
@@ -943,6 +1183,14 @@ export type ApplicationUpdateWithoutJobInput = {
   coverLetter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   techSkills?: Prisma.ApplicationUpdatetechSkillsInput | string[]
   softSkills?: Prisma.ApplicationUpdatesoftSkillsInput | string[]
+  linkedInProfile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubProfile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stackOverflow?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codeForces?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codeChef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hackerrank?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leetCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
   notes?: Prisma.InternalNoteUpdateManyWithoutApplicationNestedInput
 }
@@ -963,6 +1211,14 @@ export type ApplicationUncheckedUpdateWithoutJobInput = {
   coverLetter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   techSkills?: Prisma.ApplicationUpdatetechSkillsInput | string[]
   softSkills?: Prisma.ApplicationUpdatesoftSkillsInput | string[]
+  linkedInProfile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubProfile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stackOverflow?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codeForces?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codeChef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hackerrank?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leetCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
   notes?: Prisma.InternalNoteUncheckedUpdateManyWithoutApplicationNestedInput
 }
@@ -983,6 +1239,14 @@ export type ApplicationUncheckedUpdateManyWithoutJobInput = {
   coverLetter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   techSkills?: Prisma.ApplicationUpdatetechSkillsInput | string[]
   softSkills?: Prisma.ApplicationUpdatesoftSkillsInput | string[]
+  linkedInProfile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portfolioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  githubProfile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stackOverflow?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codeForces?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  codeChef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hackerrank?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leetCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
 }
 
@@ -1034,6 +1298,14 @@ export type ApplicationSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   coverLetter?: boolean
   techSkills?: boolean
   softSkills?: boolean
+  linkedInProfile?: boolean
+  portfolioUrl?: boolean
+  githubProfile?: boolean
+  stackOverflow?: boolean
+  codeForces?: boolean
+  codeChef?: boolean
+  hackerrank?: boolean
+  leetCode?: boolean
   status?: boolean
   job?: boolean | Prisma.JobOpportunityDefaultArgs<ExtArgs>
   notes?: boolean | Prisma.Application$notesArgs<ExtArgs>
@@ -1057,6 +1329,14 @@ export type ApplicationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   coverLetter?: boolean
   techSkills?: boolean
   softSkills?: boolean
+  linkedInProfile?: boolean
+  portfolioUrl?: boolean
+  githubProfile?: boolean
+  stackOverflow?: boolean
+  codeForces?: boolean
+  codeChef?: boolean
+  hackerrank?: boolean
+  leetCode?: boolean
   status?: boolean
   job?: boolean | Prisma.JobOpportunityDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["application"]>
@@ -1078,6 +1358,14 @@ export type ApplicationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   coverLetter?: boolean
   techSkills?: boolean
   softSkills?: boolean
+  linkedInProfile?: boolean
+  portfolioUrl?: boolean
+  githubProfile?: boolean
+  stackOverflow?: boolean
+  codeForces?: boolean
+  codeChef?: boolean
+  hackerrank?: boolean
+  leetCode?: boolean
   status?: boolean
   job?: boolean | Prisma.JobOpportunityDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["application"]>
@@ -1099,10 +1387,18 @@ export type ApplicationSelectScalar = {
   coverLetter?: boolean
   techSkills?: boolean
   softSkills?: boolean
+  linkedInProfile?: boolean
+  portfolioUrl?: boolean
+  githubProfile?: boolean
+  stackOverflow?: boolean
+  codeForces?: boolean
+  codeChef?: boolean
+  hackerrank?: boolean
+  leetCode?: boolean
   status?: boolean
 }
 
-export type ApplicationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "jobId" | "fullName" | "email" | "phone" | "educationLevel" | "yearsOfExperience" | "currentDesignation" | "currentCompany" | "currentSalary" | "expectedSalary" | "resumeUrl" | "coverLetter" | "techSkills" | "softSkills" | "status", ExtArgs["result"]["application"]>
+export type ApplicationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "jobId" | "fullName" | "email" | "phone" | "educationLevel" | "yearsOfExperience" | "currentDesignation" | "currentCompany" | "currentSalary" | "expectedSalary" | "resumeUrl" | "coverLetter" | "techSkills" | "softSkills" | "linkedInProfile" | "portfolioUrl" | "githubProfile" | "stackOverflow" | "codeForces" | "codeChef" | "hackerrank" | "leetCode" | "status", ExtArgs["result"]["application"]>
 export type ApplicationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   job?: boolean | Prisma.JobOpportunityDefaultArgs<ExtArgs>
   notes?: boolean | Prisma.Application$notesArgs<ExtArgs>
@@ -1138,6 +1434,14 @@ export type $ApplicationPayload<ExtArgs extends runtime.Types.Extensions.Interna
     coverLetter: string | null
     techSkills: string[]
     softSkills: string[]
+    linkedInProfile: string | null
+    portfolioUrl: string | null
+    githubProfile: string | null
+    stackOverflow: string | null
+    codeForces: string | null
+    codeChef: string | null
+    hackerrank: string | null
+    leetCode: string | null
     status: $Enums.ApplicationStatus
   }, ExtArgs["result"]["application"]>
   composites: {}
@@ -1580,6 +1884,14 @@ export interface ApplicationFieldRefs {
   readonly coverLetter: Prisma.FieldRef<"Application", 'String'>
   readonly techSkills: Prisma.FieldRef<"Application", 'String[]'>
   readonly softSkills: Prisma.FieldRef<"Application", 'String[]'>
+  readonly linkedInProfile: Prisma.FieldRef<"Application", 'String'>
+  readonly portfolioUrl: Prisma.FieldRef<"Application", 'String'>
+  readonly githubProfile: Prisma.FieldRef<"Application", 'String'>
+  readonly stackOverflow: Prisma.FieldRef<"Application", 'String'>
+  readonly codeForces: Prisma.FieldRef<"Application", 'String'>
+  readonly codeChef: Prisma.FieldRef<"Application", 'String'>
+  readonly hackerrank: Prisma.FieldRef<"Application", 'String'>
+  readonly leetCode: Prisma.FieldRef<"Application", 'String'>
   readonly status: Prisma.FieldRef<"Application", 'ApplicationStatus'>
 }
     

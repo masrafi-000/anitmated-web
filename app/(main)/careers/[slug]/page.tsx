@@ -13,8 +13,6 @@ interface JobDetailPageProps {
 
 export default function JobDetailPage({ params }: JobDetailPageProps) {
   const { slug } = use(params);
-  
-  
 
   if (!slug) {
     notFound();

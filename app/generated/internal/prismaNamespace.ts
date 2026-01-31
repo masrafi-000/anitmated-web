@@ -1425,6 +1425,14 @@ export const ApplicationScalarFieldEnum = {
   coverLetter: 'coverLetter',
   techSkills: 'techSkills',
   softSkills: 'softSkills',
+  linkedInProfile: 'linkedInProfile',
+  portfolioUrl: 'portfolioUrl',
+  githubProfile: 'githubProfile',
+  stackOverflow: 'stackOverflow',
+  codeForces: 'codeForces',
+  codeChef: 'codeChef',
+  hackerrank: 'hackerrank',
+  leetCode: 'leetCode',
   status: 'status'
 } as const
 

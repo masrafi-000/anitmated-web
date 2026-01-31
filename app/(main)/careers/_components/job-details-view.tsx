@@ -7,11 +7,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useJob } from "@/hooks/use-careers";
 import {
-    ArrowLeft,
-    Briefcase,
-    CheckCircle2,
-    Clock,
-    MapPin,
+  ArrowLeft,
+  Briefcase,
+  CheckCircle2,
+  Clock,
+  MapPin,
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -150,8 +150,7 @@ export default function JobDetailsView({ slug }: JobDetailsViewProps) {
                   portfolio, and tell us why you&apos;re excited about this role.
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-4">
-                  <Link href={`/careers/apply?jobId=${job.id}`}>
-                     {/* Or just /contact as in original? Original was /contact. I'll stick to /contact for now or check if there is an apply page. Original had /contact */}
+                  <Link href={`/careers/apply?slug=${job.slug}`}>
                     <Button size="lg" className="rounded-full">
                       Apply Now
                     </Button>

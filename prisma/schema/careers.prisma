@@ -58,6 +58,16 @@ model Application {
   techSkills String[]
   softSkills String[]
 
+  // Social Links
+  linkedInProfile String?
+  portfolioUrl    String?
+  githubProfile   String?
+  stackOverflow   String?
+  codeForces     String?
+  codeChef       String?
+  hackerrank     String?
+  leetCode       String?
+
   status ApplicationStatus @default(PENDING)
   notes  InternalNote[] // Added for recruiters
 

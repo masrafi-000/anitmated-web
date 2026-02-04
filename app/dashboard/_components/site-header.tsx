@@ -1,10 +1,8 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import dynamic from "next/dynamic"
-import Link from "next/link"
 
 const ThemeToggle = dynamic(() => import("@/components/parts/themeToggle"), {
   ssr: false,

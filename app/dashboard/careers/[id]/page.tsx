@@ -7,15 +7,15 @@ import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useApplication } from "@/hooks/use-applications";
 import {
-    ArrowLeft,
-    Briefcase,
-    Calendar,
-    Download,
-    ExternalLink,
-    Mail,
-    MapPin,
-    Phone,
-    User,
+  ArrowLeft,
+  Briefcase,
+  Calendar,
+  Download,
+  ExternalLink,
+  Mail,
+  MapPin,
+  Phone,
+  User,
 } from "lucide-react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
@@ -259,11 +259,13 @@ export default function ApplicationDetailsPage() {
                     Technical Skills
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {application.techSkills.map((skill: string, index: number) => (
-                      <Badge key={index} variant="secondary">
-                        {skill}
-                      </Badge>
-                    ))}
+                    {application.techSkills.map(
+                      (skill: string, index: number) => (
+                        <Badge key={index} variant="secondary">
+                          {skill}
+                        </Badge>
+                      ),
+                    )}
                   </div>
                 </div>
               )}
@@ -273,11 +275,13 @@ export default function ApplicationDetailsPage() {
                     Soft Skills
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {application.softSkills.map((skill: string, index: number) => (
-                      <Badge key={index} variant="outline">
-                        {skill}
-                      </Badge>
-                    ))}
+                    {application.softSkills.map(
+                      (skill: string, index: number) => (
+                        <Badge key={index} variant="outline">
+                          {skill}
+                        </Badge>
+                      ),
+                    )}
                   </div>
                 </div>
               )}
@@ -338,16 +342,18 @@ export default function ApplicationDetailsPage() {
               ]
                 .filter((profile) => profile.value)
                 .map((profile) => (
-                  <a
+                  <Link
                     key={profile.label}
                     href={profile.value!}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-between p-2 rounded-md hover:bg-accent transition-colors"
                   >
-                    <span className="text-sm font-medium">{profile.label}</span>
+                    <span className="text-sm font-medium">
+                      {profile.label}: {profile.value}
+                    </span>
                     <ExternalLink className="h-4 w-4 text-muted-foreground" />
-                  </a>
+                  </Link>
                 ))}
               {![
                 application.linkedInProfile,

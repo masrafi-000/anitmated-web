@@ -47,19 +47,19 @@
   --animate-marquee-left: marquee-left var(--duration, 30s) linear infinite;
   --animate-marquee-right: marquee-right var(--duration, 30s) linear infinite;
   @keyframes marquee-left {
-  from {
-    transform: translateX(0);
+    from {
+      transform: translateX(0);
     }
-  to {
-    transform: translateX(calc(-100% - var(--gap)));
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
     }
   }
   @keyframes marquee-right {
-  from {
-    transform: translateX(calc(-100% - var(--gap)));
+    from {
+      transform: translateX(calc(-100% - var(--gap)));
     }
-  to {
-    transform: translateX(0);
+    to {
+      transform: translateX(0);
     }
   }
 }
@@ -146,4 +146,10 @@
   .maplibregl-popup-tip {
     @apply hidden!;
   }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }

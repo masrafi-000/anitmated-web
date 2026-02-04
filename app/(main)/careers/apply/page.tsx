@@ -3,12 +3,12 @@
 import { Container } from "@/components/ds";
 import { Button } from "@/components/ui/button";
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -17,7 +17,7 @@ import { api } from "@/lib/axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useForm, type Resolver } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -26,21 +26,21 @@ const applicationSchema = z.object({
   fullName: z.string().min(1, "Full name is required"),
   email: z.string().email("Invalid email address"),
   phone: z.string().optional(),
-  
+
   // Professional Info
   educationLevel: z.string().optional(),
   yearsOfExperience: z.coerce.number().min(0, "Must be positive").optional(),
   currentDesignation: z.string().optional(),
   currentCompany: z.string().optional(),
-  
+
   // Salary
   currentSalary: z.coerce.number().optional(),
   expectedSalary: z.coerce.number().optional(),
-  
+
   // Documents
   resumeUrl: z.string().url("Please provide a valid URL for your resume (e.g., Google Drive, LinkedIn)"),
   coverLetter: z.string().optional(),
-  
+
   // Skills (Comma separated strings for input, array for output)
   techSkills: z.string().optional(),
   softSkills: z.string().optional(),
@@ -65,33 +65,33 @@ type Step = {
 };
 
 const steps: Step[] = [
-  { 
-    id: "personal", 
-    title: "Personal Information", 
-    fields: ["fullName", "email", "phone"] 
+  {
+    id: "personal",
+    title: "Personal Information",
+    fields: ["fullName", "email", "phone"]
   },
-  { 
-    id: "professional", 
-    title: "Professional Details", 
-    fields: ["currentDesignation", "currentCompany", "yearsOfExperience", "educationLevel"] 
+  {
+    id: "professional",
+    title: "Professional Details",
+    fields: ["currentDesignation", "currentCompany", "yearsOfExperience", "educationLevel"]
   },
-  { 
-    id: "social", 
-    title: "Social Profiles", 
-    fields: ["linkedInProfile", "portfolioUrl", "githubProfile", "stackOverflow", "leetCode", "hackerrank", "codeForces", "codeChef"] 
+  {
+    id: "social",
+    title: "Social Profiles",
+    fields: ["linkedInProfile", "portfolioUrl", "githubProfile", "stackOverflow", "leetCode", "hackerrank", "codeForces", "codeChef"]
   },
-  { 
-    id: "final", 
-    title: "Resume & Expectations", 
-    fields: ["currentSalary", "expectedSalary", "resumeUrl", "techSkills", "coverLetter"] 
+  {
+    id: "final",
+    title: "Resume & Expectations",
+    fields: ["currentSalary", "expectedSalary", "resumeUrl", "techSkills", "coverLetter"]
   }
 ];
 
-export default function ApplyPage() {
+function ApplyContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const slug = searchParams.get("slug");
-  
+
   const { data: job, isLoading: isJobLoading, isError } = useJob(slug);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
@@ -130,7 +130,7 @@ export default function ApplyPage() {
   const handleNext = async () => {
     const fields = steps[currentStep].fields;
     const isValid = await form.trigger(fields);
-    
+
     if (isValid) {
       setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -148,11 +148,11 @@ export default function ApplyPage() {
     setIsSubmitting(true);
     try {
       // Transform comma separated skills to arrays
-      const techSkills = data.techSkills 
-        ? data.techSkills.split(",").map(s => s.trim()).filter(Boolean) 
+      const techSkills = data.techSkills
+        ? data.techSkills.split(",").map(s => s.trim()).filter(Boolean)
         : [];
-      const softSkills = data.softSkills 
-        ? data.softSkills.split(",").map(s => s.trim()).filter(Boolean) 
+      const softSkills = data.softSkills
+        ? data.softSkills.split(",").map(s => s.trim()).filter(Boolean)
         : [];
 
       await api.post("/v0/careers/apply", {
@@ -202,12 +202,12 @@ export default function ApplyPage() {
       {/* Steps Indicator */}
       <div className="mb-8">
         <div className="flex justify-between text-sm font-medium text-muted-foreground mb-2">
-           <span>Step {currentStep + 1} of {steps.length}</span>
-           <span>{steps[currentStep].title}</span>
+          <span>Step {currentStep + 1} of {steps.length}</span>
+          <span>{steps[currentStep].title}</span>
         </div>
         <div className="h-2 w-full bg-secondary rounded-full overflow-hidden">
-          <div 
-            className="h-full bg-primary transition-all duration-300 ease-in-out" 
+          <div
+            className="h-full bg-primary transition-all duration-300 ease-in-out"
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -215,7 +215,7 @@ export default function ApplyPage() {
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          
+
           {/* Step 1: Personal Information */}
           {currentStep === 0 && (
             <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
@@ -298,41 +298,41 @@ export default function ApplyPage() {
                 />
               </div>
 
-               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <FormField
-                      control={form.control}
-                      name="yearsOfExperience"
-                      render={({ field }) => (
-                      <FormItem>
-                          <FormLabel>Years of Experience</FormLabel>
-                          <FormControl>
-                          <Input type="number" placeholder="5" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                      </FormItem>
-                      )}
-                  />
-                   <FormField
-                      control={form.control}
-                      name="educationLevel"
-                      render={({ field }) => (
-                      <FormItem>
-                          <FormLabel>Highest Education</FormLabel>
-                          <FormControl>
-                          <Input placeholder="e.g. Bachelors in CS" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                      </FormItem>
-                      )}
-                  />
-               </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="yearsOfExperience"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Years of Experience</FormLabel>
+                      <FormControl>
+                        <Input type="number" placeholder="5" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="educationLevel"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Highest Education</FormLabel>
+                      <FormControl>
+                        <Input placeholder="e.g. Bachelors in CS" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
             </div>
           )}
 
           {/* Step 3: Social Profiles */}
           {currentStep === 2 && (
             <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
-               <h3 className="text-lg font-semibold border-b pb-2">Social Profiles & Coding Handles</h3>
+              <h3 className="text-lg font-semibold border-b pb-2">Social Profiles & Coding Handles</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
@@ -386,7 +386,7 @@ export default function ApplyPage() {
                     </FormItem>
                   )}
                 />
-                 <FormField
+                <FormField
                   control={form.control}
                   name="leetCode"
                   render={({ field }) => (
@@ -399,7 +399,7 @@ export default function ApplyPage() {
                     </FormItem>
                   )}
                 />
-                 <FormField
+                <FormField
                   control={form.control}
                   name="hackerrank"
                   render={({ field }) => (
@@ -412,7 +412,7 @@ export default function ApplyPage() {
                     </FormItem>
                   )}
                 />
-                 <FormField
+                <FormField
                   control={form.control}
                   name="codeForces"
                   render={({ field }) => (
@@ -425,7 +425,7 @@ export default function ApplyPage() {
                     </FormItem>
                   )}
                 />
-                 <FormField
+                <FormField
                   control={form.control}
                   name="codeChef"
                   render={({ field }) => (
@@ -445,35 +445,35 @@ export default function ApplyPage() {
           {/* Step 4: Resume & Expectations */}
           {currentStep === 3 && (
             <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
-               <h3 className="text-lg font-semibold border-b pb-2">Resume & Expectations</h3>
+              <h3 className="text-lg font-semibold border-b pb-2">Resume & Expectations</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                 <FormField
-                      control={form.control}
-                      name="currentSalary"
-                      render={({ field }) => (
-                      <FormItem>
-                          <FormLabel>Current Salary</FormLabel>
-                          <FormControl>
-                          <Input type="number" placeholder="0" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                      </FormItem>
-                      )}
-                  />
-                  <FormField
-                      control={form.control}
-                      name="expectedSalary"
-                      render={({ field }) => (
-                      <FormItem>
-                          <FormLabel>Expected Salary</FormLabel>
-                          <FormControl>
-                          <Input type="number" placeholder="0" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                      </FormItem>
-                      )}
-                  />
-               </div>
+                <FormField
+                  control={form.control}
+                  name="currentSalary"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Current Salary</FormLabel>
+                      <FormControl>
+                        <Input type="number" placeholder="0" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="expectedSalary"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Expected Salary</FormLabel>
+                      <FormControl>
+                        <Input type="number" placeholder="0" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
               <FormField
                 control={form.control}
@@ -484,7 +484,7 @@ export default function ApplyPage() {
                     <FormControl>
                       <Input placeholder="Google Drive / Dropbox / LinkedIn Link" {...field} />
                     </FormControl>
-                     <p className="text-xs text-muted-foreground">Please make sure the link is accessible.</p>
+                    <p className="text-xs text-muted-foreground">Please make sure the link is accessible.</p>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -511,10 +511,10 @@ export default function ApplyPage() {
                   <FormItem>
                     <FormLabel>Cover Letter</FormLabel>
                     <FormControl>
-                      <Textarea 
-                          placeholder="Tell us why you are a great fit..." 
-                          className="min-h-[150px]"
-                          {...field} 
+                      <Textarea
+                        placeholder="Tell us why you are a great fit..."
+                        className="min-h-[150px]"
+                        {...field}
                       />
                     </FormControl>
                     <FormMessage />
@@ -526,29 +526,41 @@ export default function ApplyPage() {
 
           {/* Navigation Buttons */}
           <div className="pt-6 flex justify-between gap-4 border-t mt-8">
-             {currentStep > 0 ? (
-               <Button type="button" variant="outline" onClick={handleBack}>
-                 Back
-               </Button>
-             ) : (
-               <Button type="button" variant="ghost" onClick={() => router.back()}>
-                 Cancel
-               </Button>
-             )}
-             
-             {currentStep < steps.length - 1 ? (
-                <Button type="button" onClick={handleNext}>
-                  Next
-                </Button>
-             ) : (
-                <Button type="submit" disabled={isSubmitting}>
-                  {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                  Submit Application
-                </Button>
-             )}
+            {currentStep > 0 ? (
+              <Button type="button" variant="outline" onClick={handleBack}>
+                Back
+              </Button>
+            ) : (
+              <Button type="button" variant="ghost" onClick={() => router.back()}>
+                Cancel
+              </Button>
+            )}
+
+            {currentStep < steps.length - 1 ? (
+              <Button type="button" onClick={handleNext}>
+                Next
+              </Button>
+            ) : (
+              <Button type="submit" disabled={isSubmitting}>
+                {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                Submit Application
+              </Button>
+            )}
           </div>
         </form>
       </Form>
     </Container>
+  );
+}
+
+export default function ApplyPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    }>
+      <ApplyContent />
+    </Suspense>
   );
 }

@@ -2,6 +2,40 @@ import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
+export async function GET() {
+  try {
+    const applications = await prisma.application.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      include: {
+        job: {
+          select: {
+            title: true,
+            department: true,
+          },
+        },
+      },
+    });
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Applications fetched successfully",
+        count: applications.length,
+        data: applications,
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error fetching applications:", error);
+    return NextResponse.json(
+      { success: false, message: "Failed to fetch applications" },
+      { status: 500 }
+    );
+  }
+}
+
 const applicationSchema = z.object({
   jobId: z.string().min(1, "Job ID is required"),
   fullName: z.string().min(1, "Full name is required"),

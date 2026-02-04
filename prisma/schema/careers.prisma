@@ -69,10 +69,21 @@ model Application {
   leetCode       String?
 
   status ApplicationStatus @default(PENDING)
-  notes  InternalNote[] // Added for recruiters
+  
+  // Rejection tracking
+  rejectedAt      DateTime?
+  rejectedBy      String? // Admin who rejected
+  rejectionReason String?  @db.Text
+  
+  // URL-friendly identifier (optional for backward compatibility)
+  slug String? @unique
+  
+  notes InternalNote[] // Added for recruiters
 
   @@index([jobId])
   @@index([email])
+  @@index([status])
+  @@index([slug])
 }
 
 model InternalNote {

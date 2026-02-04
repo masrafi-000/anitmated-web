@@ -62,6 +62,10 @@ export type ApplicationMinAggregateOutputType = {
   hackerrank: string | null
   leetCode: string | null
   status: $Enums.ApplicationStatus | null
+  rejectedAt: Date | null
+  rejectedBy: string | null
+  rejectionReason: string | null
+  slug: string | null
 }
 
 export type ApplicationMaxAggregateOutputType = {
@@ -88,6 +92,10 @@ export type ApplicationMaxAggregateOutputType = {
   hackerrank: string | null
   leetCode: string | null
   status: $Enums.ApplicationStatus | null
+  rejectedAt: Date | null
+  rejectedBy: string | null
+  rejectionReason: string | null
+  slug: string | null
 }
 
 export type ApplicationCountAggregateOutputType = {
@@ -116,6 +124,10 @@ export type ApplicationCountAggregateOutputType = {
   hackerrank: number
   leetCode: number
   status: number
+  rejectedAt: number
+  rejectedBy: number
+  rejectionReason: number
+  slug: number
   _all: number
 }
 
@@ -156,6 +168,10 @@ export type ApplicationMinAggregateInputType = {
   hackerrank?: true
   leetCode?: true
   status?: true
+  rejectedAt?: true
+  rejectedBy?: true
+  rejectionReason?: true
+  slug?: true
 }
 
 export type ApplicationMaxAggregateInputType = {
@@ -182,6 +198,10 @@ export type ApplicationMaxAggregateInputType = {
   hackerrank?: true
   leetCode?: true
   status?: true
+  rejectedAt?: true
+  rejectedBy?: true
+  rejectionReason?: true
+  slug?: true
 }
 
 export type ApplicationCountAggregateInputType = {
@@ -210,6 +230,10 @@ export type ApplicationCountAggregateInputType = {
   hackerrank?: true
   leetCode?: true
   status?: true
+  rejectedAt?: true
+  rejectedBy?: true
+  rejectionReason?: true
+  slug?: true
   _all?: true
 }
 
@@ -325,6 +349,10 @@ export type ApplicationGroupByOutputType = {
   hackerrank: string | null
   leetCode: string | null
   status: $Enums.ApplicationStatus
+  rejectedAt: Date | null
+  rejectedBy: string | null
+  rejectionReason: string | null
+  slug: string | null
   _count: ApplicationCountAggregateOutputType | null
   _avg: ApplicationAvgAggregateOutputType | null
   _sum: ApplicationSumAggregateOutputType | null
@@ -376,6 +404,10 @@ export type ApplicationWhereInput = {
   hackerrank?: Prisma.StringNullableFilter<"Application"> | string | null
   leetCode?: Prisma.StringNullableFilter<"Application"> | string | null
   status?: Prisma.EnumApplicationStatusFilter<"Application"> | $Enums.ApplicationStatus
+  rejectedAt?: Prisma.DateTimeNullableFilter<"Application"> | Date | string | null
+  rejectedBy?: Prisma.StringNullableFilter<"Application"> | string | null
+  rejectionReason?: Prisma.StringNullableFilter<"Application"> | string | null
+  slug?: Prisma.StringNullableFilter<"Application"> | string | null
   job?: Prisma.XOR<Prisma.JobOpportunityScalarRelationFilter, Prisma.JobOpportunityWhereInput>
   notes?: Prisma.InternalNoteListRelationFilter
 }
@@ -406,12 +438,17 @@ export type ApplicationOrderByWithRelationInput = {
   hackerrank?: Prisma.SortOrderInput | Prisma.SortOrder
   leetCode?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  rejectedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  rejectedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  slug?: Prisma.SortOrderInput | Prisma.SortOrder
   job?: Prisma.JobOpportunityOrderByWithRelationInput
   notes?: Prisma.InternalNoteOrderByRelationAggregateInput
 }
 
 export type ApplicationWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  slug?: string
   AND?: Prisma.ApplicationWhereInput | Prisma.ApplicationWhereInput[]
   OR?: Prisma.ApplicationWhereInput[]
   NOT?: Prisma.ApplicationWhereInput | Prisma.ApplicationWhereInput[]
@@ -439,9 +476,12 @@ export type ApplicationWhereUniqueInput = Prisma.AtLeast<{
   hackerrank?: Prisma.StringNullableFilter<"Application"> | string | null
   leetCode?: Prisma.StringNullableFilter<"Application"> | string | null
   status?: Prisma.EnumApplicationStatusFilter<"Application"> | $Enums.ApplicationStatus
+  rejectedAt?: Prisma.DateTimeNullableFilter<"Application"> | Date | string | null
+  rejectedBy?: Prisma.StringNullableFilter<"Application"> | string | null
+  rejectionReason?: Prisma.StringNullableFilter<"Application"> | string | null
   job?: Prisma.XOR<Prisma.JobOpportunityScalarRelationFilter, Prisma.JobOpportunityWhereInput>
   notes?: Prisma.InternalNoteListRelationFilter
-}, "id">
+}, "id" | "slug">
 
 export type ApplicationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -469,6 +509,10 @@ export type ApplicationOrderByWithAggregationInput = {
   hackerrank?: Prisma.SortOrderInput | Prisma.SortOrder
   leetCode?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  rejectedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  rejectedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  slug?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ApplicationCountOrderByAggregateInput
   _avg?: Prisma.ApplicationAvgOrderByAggregateInput
   _max?: Prisma.ApplicationMaxOrderByAggregateInput
@@ -505,6 +549,10 @@ export type ApplicationScalarWhereWithAggregatesInput = {
   hackerrank?: Prisma.StringNullableWithAggregatesFilter<"Application"> | string | null
   leetCode?: Prisma.StringNullableWithAggregatesFilter<"Application"> | string | null
   status?: Prisma.EnumApplicationStatusWithAggregatesFilter<"Application"> | $Enums.ApplicationStatus
+  rejectedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Application"> | Date | string | null
+  rejectedBy?: Prisma.StringNullableWithAggregatesFilter<"Application"> | string | null
+  rejectionReason?: Prisma.StringNullableWithAggregatesFilter<"Application"> | string | null
+  slug?: Prisma.StringNullableWithAggregatesFilter<"Application"> | string | null
 }
 
 export type ApplicationCreateInput = {
@@ -532,6 +580,10 @@ export type ApplicationCreateInput = {
   hackerrank?: string | null
   leetCode?: string | null
   status?: $Enums.ApplicationStatus
+  rejectedAt?: Date | string | null
+  rejectedBy?: string | null
+  rejectionReason?: string | null
+  slug?: string | null
   job: Prisma.JobOpportunityCreateNestedOneWithoutApplicationsInput
   notes?: Prisma.InternalNoteCreateNestedManyWithoutApplicationInput
 }
@@ -562,6 +614,10 @@ export type ApplicationUncheckedCreateInput = {
   hackerrank?: string | null
   leetCode?: string | null
   status?: $Enums.ApplicationStatus
+  rejectedAt?: Date | string | null
+  rejectedBy?: string | null
+  rejectionReason?: string | null
+  slug?: string | null
   notes?: Prisma.InternalNoteUncheckedCreateNestedManyWithoutApplicationInput
 }
 
@@ -590,6 +646,10 @@ export type ApplicationUpdateInput = {
   hackerrank?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leetCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   job?: Prisma.JobOpportunityUpdateOneRequiredWithoutApplicationsNestedInput
   notes?: Prisma.InternalNoteUpdateManyWithoutApplicationNestedInput
 }
@@ -620,6 +680,10 @@ export type ApplicationUncheckedUpdateInput = {
   hackerrank?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leetCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.InternalNoteUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
@@ -649,6 +713,10 @@ export type ApplicationCreateManyInput = {
   hackerrank?: string | null
   leetCode?: string | null
   status?: $Enums.ApplicationStatus
+  rejectedAt?: Date | string | null
+  rejectedBy?: string | null
+  rejectionReason?: string | null
+  slug?: string | null
 }
 
 export type ApplicationUpdateManyMutationInput = {
@@ -676,6 +744,10 @@ export type ApplicationUpdateManyMutationInput = {
   hackerrank?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leetCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ApplicationUncheckedUpdateManyInput = {
@@ -704,6 +776,10 @@ export type ApplicationUncheckedUpdateManyInput = {
   hackerrank?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leetCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ApplicationListRelationFilter = {
@@ -742,6 +818,10 @@ export type ApplicationCountOrderByAggregateInput = {
   hackerrank?: Prisma.SortOrder
   leetCode?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  rejectedAt?: Prisma.SortOrder
+  rejectedBy?: Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
 }
 
 export type ApplicationAvgOrderByAggregateInput = {
@@ -774,6 +854,10 @@ export type ApplicationMaxOrderByAggregateInput = {
   hackerrank?: Prisma.SortOrder
   leetCode?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  rejectedAt?: Prisma.SortOrder
+  rejectedBy?: Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
 }
 
 export type ApplicationMinOrderByAggregateInput = {
@@ -800,6 +884,10 @@ export type ApplicationMinOrderByAggregateInput = {
   hackerrank?: Prisma.SortOrder
   leetCode?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  rejectedAt?: Prisma.SortOrder
+  rejectedBy?: Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
 }
 
 export type ApplicationSumOrderByAggregateInput = {
@@ -924,6 +1012,10 @@ export type ApplicationCreateWithoutJobInput = {
   hackerrank?: string | null
   leetCode?: string | null
   status?: $Enums.ApplicationStatus
+  rejectedAt?: Date | string | null
+  rejectedBy?: string | null
+  rejectionReason?: string | null
+  slug?: string | null
   notes?: Prisma.InternalNoteCreateNestedManyWithoutApplicationInput
 }
 
@@ -952,6 +1044,10 @@ export type ApplicationUncheckedCreateWithoutJobInput = {
   hackerrank?: string | null
   leetCode?: string | null
   status?: $Enums.ApplicationStatus
+  rejectedAt?: Date | string | null
+  rejectedBy?: string | null
+  rejectionReason?: string | null
+  slug?: string | null
   notes?: Prisma.InternalNoteUncheckedCreateNestedManyWithoutApplicationInput
 }
 
@@ -1010,6 +1106,10 @@ export type ApplicationScalarWhereInput = {
   hackerrank?: Prisma.StringNullableFilter<"Application"> | string | null
   leetCode?: Prisma.StringNullableFilter<"Application"> | string | null
   status?: Prisma.EnumApplicationStatusFilter<"Application"> | $Enums.ApplicationStatus
+  rejectedAt?: Prisma.DateTimeNullableFilter<"Application"> | Date | string | null
+  rejectedBy?: Prisma.StringNullableFilter<"Application"> | string | null
+  rejectionReason?: Prisma.StringNullableFilter<"Application"> | string | null
+  slug?: Prisma.StringNullableFilter<"Application"> | string | null
 }
 
 export type ApplicationCreateWithoutNotesInput = {
@@ -1037,6 +1137,10 @@ export type ApplicationCreateWithoutNotesInput = {
   hackerrank?: string | null
   leetCode?: string | null
   status?: $Enums.ApplicationStatus
+  rejectedAt?: Date | string | null
+  rejectedBy?: string | null
+  rejectionReason?: string | null
+  slug?: string | null
   job: Prisma.JobOpportunityCreateNestedOneWithoutApplicationsInput
 }
 
@@ -1066,6 +1170,10 @@ export type ApplicationUncheckedCreateWithoutNotesInput = {
   hackerrank?: string | null
   leetCode?: string | null
   status?: $Enums.ApplicationStatus
+  rejectedAt?: Date | string | null
+  rejectedBy?: string | null
+  rejectionReason?: string | null
+  slug?: string | null
 }
 
 export type ApplicationCreateOrConnectWithoutNotesInput = {
@@ -1109,6 +1217,10 @@ export type ApplicationUpdateWithoutNotesInput = {
   hackerrank?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leetCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   job?: Prisma.JobOpportunityUpdateOneRequiredWithoutApplicationsNestedInput
 }
 
@@ -1138,6 +1250,10 @@ export type ApplicationUncheckedUpdateWithoutNotesInput = {
   hackerrank?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leetCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ApplicationCreateManyJobInput = {
@@ -1165,6 +1281,10 @@ export type ApplicationCreateManyJobInput = {
   hackerrank?: string | null
   leetCode?: string | null
   status?: $Enums.ApplicationStatus
+  rejectedAt?: Date | string | null
+  rejectedBy?: string | null
+  rejectionReason?: string | null
+  slug?: string | null
 }
 
 export type ApplicationUpdateWithoutJobInput = {
@@ -1192,6 +1312,10 @@ export type ApplicationUpdateWithoutJobInput = {
   hackerrank?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leetCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.InternalNoteUpdateManyWithoutApplicationNestedInput
 }
 
@@ -1220,6 +1344,10 @@ export type ApplicationUncheckedUpdateWithoutJobInput = {
   hackerrank?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leetCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.InternalNoteUncheckedUpdateManyWithoutApplicationNestedInput
 }
 
@@ -1248,6 +1376,10 @@ export type ApplicationUncheckedUpdateManyWithoutJobInput = {
   hackerrank?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leetCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -1307,6 +1439,10 @@ export type ApplicationSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   hackerrank?: boolean
   leetCode?: boolean
   status?: boolean
+  rejectedAt?: boolean
+  rejectedBy?: boolean
+  rejectionReason?: boolean
+  slug?: boolean
   job?: boolean | Prisma.JobOpportunityDefaultArgs<ExtArgs>
   notes?: boolean | Prisma.Application$notesArgs<ExtArgs>
   _count?: boolean | Prisma.ApplicationCountOutputTypeDefaultArgs<ExtArgs>
@@ -1338,6 +1474,10 @@ export type ApplicationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   hackerrank?: boolean
   leetCode?: boolean
   status?: boolean
+  rejectedAt?: boolean
+  rejectedBy?: boolean
+  rejectionReason?: boolean
+  slug?: boolean
   job?: boolean | Prisma.JobOpportunityDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["application"]>
 
@@ -1367,6 +1507,10 @@ export type ApplicationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   hackerrank?: boolean
   leetCode?: boolean
   status?: boolean
+  rejectedAt?: boolean
+  rejectedBy?: boolean
+  rejectionReason?: boolean
+  slug?: boolean
   job?: boolean | Prisma.JobOpportunityDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["application"]>
 
@@ -1396,9 +1540,13 @@ export type ApplicationSelectScalar = {
   hackerrank?: boolean
   leetCode?: boolean
   status?: boolean
+  rejectedAt?: boolean
+  rejectedBy?: boolean
+  rejectionReason?: boolean
+  slug?: boolean
 }
 
-export type ApplicationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "jobId" | "fullName" | "email" | "phone" | "educationLevel" | "yearsOfExperience" | "currentDesignation" | "currentCompany" | "currentSalary" | "expectedSalary" | "resumeUrl" | "coverLetter" | "techSkills" | "softSkills" | "linkedInProfile" | "portfolioUrl" | "githubProfile" | "stackOverflow" | "codeForces" | "codeChef" | "hackerrank" | "leetCode" | "status", ExtArgs["result"]["application"]>
+export type ApplicationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "jobId" | "fullName" | "email" | "phone" | "educationLevel" | "yearsOfExperience" | "currentDesignation" | "currentCompany" | "currentSalary" | "expectedSalary" | "resumeUrl" | "coverLetter" | "techSkills" | "softSkills" | "linkedInProfile" | "portfolioUrl" | "githubProfile" | "stackOverflow" | "codeForces" | "codeChef" | "hackerrank" | "leetCode" | "status" | "rejectedAt" | "rejectedBy" | "rejectionReason" | "slug", ExtArgs["result"]["application"]>
 export type ApplicationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   job?: boolean | Prisma.JobOpportunityDefaultArgs<ExtArgs>
   notes?: boolean | Prisma.Application$notesArgs<ExtArgs>
@@ -1443,6 +1591,10 @@ export type $ApplicationPayload<ExtArgs extends runtime.Types.Extensions.Interna
     hackerrank: string | null
     leetCode: string | null
     status: $Enums.ApplicationStatus
+    rejectedAt: Date | null
+    rejectedBy: string | null
+    rejectionReason: string | null
+    slug: string | null
   }, ExtArgs["result"]["application"]>
   composites: {}
 }
@@ -1893,6 +2045,10 @@ export interface ApplicationFieldRefs {
   readonly hackerrank: Prisma.FieldRef<"Application", 'String'>
   readonly leetCode: Prisma.FieldRef<"Application", 'String'>
   readonly status: Prisma.FieldRef<"Application", 'ApplicationStatus'>
+  readonly rejectedAt: Prisma.FieldRef<"Application", 'DateTime'>
+  readonly rejectedBy: Prisma.FieldRef<"Application", 'String'>
+  readonly rejectionReason: Prisma.FieldRef<"Application", 'String'>
+  readonly slug: Prisma.FieldRef<"Application", 'String'>
 }
     
 

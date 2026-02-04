@@ -1,35 +1,36 @@
 "use client";
 
 import {
-    IconCamera,
-    IconChartBar,
-    IconDashboard,
-    IconDatabase,
-    IconDatabaseDollar,
-    IconFileAi,
-    IconFileDescription,
-    IconFileWord,
-    IconFolder,
-    IconHelp,
-    IconInnerShadowTop,
-    IconListDetails,
-    IconMist,
-    IconPackage,
-    IconReport,
-    IconSearch,
-    IconSettings,
-    IconUsers,
+  IconBriefcase,
+  IconCamera,
+  IconChartBar,
+  IconDashboard,
+  IconDatabase,
+  IconDatabaseDollar,
+  IconFileAi,
+  IconFileDescription,
+  IconFileWord,
+  IconFolder,
+  IconHelp,
+  IconInnerShadowTop,
+  IconListDetails,
+  IconMist,
+  IconPackage,
+  IconReport,
+  IconSearch,
+  IconSettings,
+  IconUsers
 } from "@tabler/icons-react";
 import * as React from "react";
 
 import {
-    Sidebar,
-    SidebarContent,
-    SidebarFooter,
-    SidebarHeader,
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { NavDocuments } from "./nav-document";
@@ -68,6 +69,11 @@ const data = {
       title: "Support",
       url: "/dashboard/support",
       icon: IconMist,
+    },
+    {
+      title: "Careers",
+      url: "/dashboard/careers",
+      icon: IconBriefcase,
     },
     {
       title: "Analytics",

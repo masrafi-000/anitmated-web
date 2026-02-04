@@ -22,13 +22,16 @@ import DashboardCard from "./_components/dashboard-card";
 
 export default function Page() {
   const { data: inquiries, isLoading: inquiriesLoading } = useInquiries();
-  const { data: applications, isLoading: applicationsLoading } =
+  const { data: applicationsData, isLoading: applicationsLoading } =
     useApplications();
   const { data: blogs, isLoading: blogsLoading } = useBlogs();
   const { data: support, isLoading: supportLoading } = useSupport();
   const { data: pricingInquiries, isLoading: pricingLoading } =
     usePricingInquiry();
   const { data: packages, isLoading: packagesLoading } = usePackages();
+
+  // Extract applications array from new response structure
+  const applications = applicationsData?.data?.all || [];
 
   const isLoading =
     inquiriesLoading ||

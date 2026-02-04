@@ -1,16 +1,48 @@
+import { ApplicationStatus, Prisma } from "@/app/generated/client";
 import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
+    const { searchParams } = new URL(request.url);
+    const department = searchParams.get("department");
+    const status = searchParams.get("status");
+    const search = searchParams.get("search");
+
+    // Build where clause
+    const where: Prisma.ApplicationWhereInput = {};
+
+    // Filter by search (name or email)
+    if (search) {
+      where.OR = [
+        { fullName: { contains: search, mode: "insensitive" } },
+        { email: { contains: search, mode: "insensitive" } },
+      ];
+    }
+
+    // Filter by status
+    if (status) {
+      where.status = status as ApplicationStatus;
+    }
+
+    // Filter by department (via job relation)
+    if (department && department !== "All") {
+      where.job = {
+        department: department,
+      };
+    }
+
     const applications = await prisma.application.findMany({
+      where,
       orderBy: {
         createdAt: "desc",
       },
       include: {
         job: {
           select: {
+            id: true,
+            slug: true,
             title: true,
             department: true,
           },
@@ -18,19 +50,81 @@ export async function GET() {
       },
     });
 
+    // Define Application type from the query result
+    type ApplicationWithJob = Prisma.ApplicationGetPayload<{
+      include: {
+        job: {
+          select: {
+            id: true;
+            slug: true;
+            title: true;
+            department: true;
+          };
+        };
+      };
+    }>;
+
+    // Group by department
+    const byDepartment: Record<string, ApplicationWithJob[]> = {};
+    const byStatus: Record<string, ApplicationWithJob[]> = {};
+
+    applications.forEach((app) => {
+      // Add null check for job
+      if (!app.job) {
+        console.warn(`Application ${app.id} has no associated job`);
+        return;
+      }
+
+      const dept = app.job.department;
+      const appStatus = app.status;
+
+      if (!byDepartment[dept]) {
+        byDepartment[dept] = [];
+      }
+      byDepartment[dept].push(app);
+
+      if (!byStatus[appStatus]) {
+        byStatus[appStatus] = [];
+      }
+      byStatus[appStatus].push(app);
+    });
+
+    // Count statistics
+    const counts = {
+      total: applications.length,
+      pending: byStatus.PENDING?.length || 0,
+      reviewing: byStatus.REVIEWING?.length || 0,
+      interviewing: byStatus.INTERVIEWING?.length || 0,
+      offered: byStatus.OFFERED?.length || 0,
+      rejected: byStatus.REJECTED?.length || 0,
+      withdrawn: byStatus.WITHDRAWN?.length || 0,
+    };
+
     return NextResponse.json(
       {
         success: true,
         message: "Applications fetched successfully",
-        count: applications.length,
-        data: applications,
+        data: {
+          all: applications,
+          byDepartment,
+          byStatus,
+        },
+        count: counts,
       },
       { status: 200 }
     );
   } catch (error) {
     console.error("Error fetching applications:", error);
+    // Log the full error for debugging
+    if (error instanceof Error) {
+      console.error("Error details:", error.message, error.stack);
+    }
     return NextResponse.json(
-      { success: false, message: "Failed to fetch applications" },
+      { 
+        success: false, 
+        message: "Failed to fetch applications",
+        error: error instanceof Error ? error.message : "Unknown error"
+      },
       { status: 500 }
     );
   }

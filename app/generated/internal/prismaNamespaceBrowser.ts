@@ -172,7 +172,11 @@ export const ApplicationScalarFieldEnum = {
   codeChef: 'codeChef',
   hackerrank: 'hackerrank',
   leetCode: 'leetCode',
-  status: 'status'
+  status: 'status',
+  rejectedAt: 'rejectedAt',
+  rejectedBy: 'rejectedBy',
+  rejectionReason: 'rejectionReason',
+  slug: 'slug'
 } as const
 
 export type ApplicationScalarFieldEnum = (typeof ApplicationScalarFieldEnum)[keyof typeof ApplicationScalarFieldEnum]

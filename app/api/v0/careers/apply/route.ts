@@ -33,22 +33,35 @@ export async function GET(request: NextRequest) {
       };
     }
 
-    const applications = await prisma.application.findMany({
-      where,
-      orderBy: {
-        createdAt: "desc",
-      },
-      include: {
-        job: {
-          select: {
-            id: true,
-            slug: true,
-            title: true,
-            department: true,
+    // Separate counts query - remove status filter but keep other filters
+    const countWhere = { ...where };
+    delete countWhere.status;
+
+    const [applications, statusCounts] = await Promise.all([
+      prisma.application.findMany({
+        where,
+        orderBy: {
+          createdAt: "desc",
+        },
+        include: {
+          job: {
+            select: {
+              id: true,
+              slug: true,
+              title: true,
+              department: true,
+            },
           },
         },
-      },
-    });
+      }),
+      prisma.application.groupBy({
+        by: ["status"],
+        _count: {
+          _all: true,
+        },
+        where: countWhere,
+      }),
+    ]);
 
     // Define Application type from the query result
     type ApplicationWithJob = Prisma.ApplicationGetPayload<{
@@ -89,15 +102,24 @@ export async function GET(request: NextRequest) {
       byStatus[appStatus].push(app);
     });
 
-    // Count statistics
+    // Map aggregation results to counts object
+    const countMap = statusCounts.reduce((acc, curr) => {
+      acc[curr.status] = curr._count._all;
+      return acc;
+    }, {} as Record<string, number>);
+
+    // Calculate total from aggregation
+    const totalCount = statusCounts.reduce((acc, curr) => acc + curr._count._all, 0);
+
+    // Count statistics using the aggregated data
     const counts = {
-      total: applications.length,
-      pending: byStatus.PENDING?.length || 0,
-      reviewing: byStatus.REVIEWING?.length || 0,
-      interviewing: byStatus.INTERVIEWING?.length || 0,
-      offered: byStatus.OFFERED?.length || 0,
-      rejected: byStatus.REJECTED?.length || 0,
-      withdrawn: byStatus.WITHDRAWN?.length || 0,
+      total: totalCount,
+      pending: countMap.PENDING || 0,
+      reviewing: countMap.REVIEWING || 0,
+      interviewing: countMap.INTERVIEWING || 0,
+      offered: countMap.OFFERED || 0,
+      rejected: countMap.REJECTED || 0,
+      withdrawn: countMap.WITHDRAWN || 0,
     };
 
     return NextResponse.json(

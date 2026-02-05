@@ -5,8 +5,25 @@ import { HiringProcess } from "@/app/(main)/careers/_components/HiringProcess";
 import { OpenPositions } from "@/app/(main)/careers/_components/OpenPositions";
 import { WhyRubyStudio } from "@/app/(main)/careers/_components/WhyRubyStudio";
 import PageHeader from "@/components/parts/pageHeader";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect } from "react";
 
-export default function CareersPage() {
+function CareersContent() {
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const action = searchParams.get("action");
+    if (action === "scroll-to-jobs") {
+      // Small timeout to ensure DOM is ready
+      setTimeout(() => {
+        const element = document.getElementById("all-jobs");
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    }
+  }, [searchParams]);
+
   return (
     <>
       {/* Section 1: Hero/Header */}
@@ -28,5 +45,13 @@ export default function CareersPage() {
       {/* Section 5: Application Process & CTA */}
       <HiringProcess />
     </>
+  );
+}
+
+export default function CareersPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CareersContent />
+    </Suspense>
   );
 }

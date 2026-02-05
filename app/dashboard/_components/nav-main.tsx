@@ -11,6 +11,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar"
 
 export function NavMain({
@@ -23,6 +24,8 @@ export function NavMain({
   }[]
 }) {
   const pathname = usePathname()
+  const { isMobile, setOpenMobile } = useSidebar()
+
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
@@ -52,6 +55,11 @@ export function NavMain({
                 asChild
                 tooltip={item.title}
                 isActive={pathname === item.url}
+                onClick={() => {
+                  if (isMobile) {
+                    setOpenMobile(false)
+                  }
+                }}
               >
                 <Link href={item.url}>
                   {item.icon && <item.icon />}

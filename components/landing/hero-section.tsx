@@ -1,10 +1,8 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import Autoplay from "embla-carousel-autoplay";
-import useEmblaCarousel from "embla-carousel-react";
-import { motion } from "motion/react";
-import { useCallback, useEffect, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { useEffect, useState } from "react";
 
 // Placeholder images - using abstract/architecture themes for a "Ruby Studio" vibe
 const SLIDES = [
@@ -21,44 +19,36 @@ const SLIDES = [
 ];
 
 const HeroRefactored = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel(
-    { loop: true, duration: 60 },
-    [Autoplay({ delay: 4000, stopOnInteraction: false })]
-  );
-  
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-  }, [emblaApi]);
-
   useEffect(() => {
-    if (!emblaApi) return;
-    onSelect();
-    emblaApi.on("select", onSelect);
-    return () => {
-      emblaApi.off("select", onSelect);
-    };
-  }, [emblaApi, onSelect]);
+    const interval = setInterval(() => {
+      setSelectedIndex((prev) => (prev + 1) % SLIDES.length);
+    }, 5000); // 5 seconds per slide
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="relative h-screen w-full overflow-hidden bg-neutral-950">
-      {/* Carousel Layer */}
-      <div className="absolute inset-0 z-0 h-full w-full" ref={emblaRef}>
-        <div className="flex h-full">
-          {SLIDES.map((src, index) => (
-            <div className="relative h-full min-w-full flex-[0_0_100%]" key={index}>
-              <div 
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out"
-                style={{ backgroundImage: `url(${src})` }}
-              />
-              {/* Overlay for better text contrast - Adaptive to light/dark if needed, but Hero usually looks best dark */}
-              <div className="absolute inset-0 bg-black/40 dark:bg-black/60" />
-            </div>
-          ))}
-        </div>
-      </div>
+      {/* Background Slideshow Layer */}
+      <AnimatePresence mode="popLayout">
+        <motion.div
+          key={selectedIndex}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+          className="absolute inset-0 z-0 h-full w-full"
+        >
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${SLIDES[selectedIndex]})` }}
+          />
+          {/* Overlay for better text contrast */}
+          <div className="absolute inset-0 bg-black/40 dark:bg-black/60" />
+        </motion.div>
+      </AnimatePresence>
 
       {/* Content Layer */}
       <div className="relative z-10 flex h-full items-center justify-center px-4">
@@ -70,7 +60,7 @@ const HeroRefactored = () => {
           >
             <h1 className="mb-6 font-sans text-5xl font-bold tracking-tight text-white md:text-7xl lg:text-8xl">
               We Architect <br />
-              <span className="bg-gradient-to-r from-rose-400 to-orange-300 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-rose-400 to-orange-300 bg-clip-text text-transparent">
                 Digital Dreams
               </span>
             </h1>
@@ -98,9 +88,10 @@ const HeroRefactored = () => {
                     <div 
                         key={idx}
                         className={cn(
-                            "h-2 rounded-full transition-all duration-300",
+                            "h-2 rounded-full transition-all duration-300 cursor-pointer", // Added cursor-pointer
                             idx === selectedIndex ? "w-8 bg-rose-500" : "w-2 bg-white/50"
                         )}
+                        onClick={() => setSelectedIndex(idx)} // Added manual control
                     />
                 ))}
             </div>
@@ -109,7 +100,7 @@ const HeroRefactored = () => {
       </div>
 
        {/* Decorative Bottom Fade */}
-       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-20 pointer-events-none" />
+       <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-background to-transparent z-20 pointer-events-none" />
     </div>
   );
 };

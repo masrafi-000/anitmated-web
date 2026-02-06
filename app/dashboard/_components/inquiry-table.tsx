@@ -13,7 +13,7 @@ import {
   useReactTable,
   VisibilityState,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, Loader2 } from "lucide-react";
+import { ArrowUpDown, ChevronDown } from "lucide-react";
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -42,6 +42,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Inquiry, useInquiries } from "@/hooks/use-inquiries";
 import { DeleteInquiryDialog } from "./delete-inquiry-dialog";
 import { EditInquiryDialog } from "./edit-inquiry-dialog";
@@ -256,9 +257,9 @@ export default function InquiryTable() {
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
                     </TableHead>
                   );
                 })}
@@ -266,7 +267,17 @@ export default function InquiryTable() {
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows.length > 0 ? (
+            {isLoading ? (
+              Array.from({ length: 5 }).map((_, index) => (
+                <TableRow key={index} className="hover:bg-transparent">
+                  {columns.map((column, colIndex) => (
+                    <TableCell key={colIndex}>
+                      <Skeleton className="h-6 w-full" />
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : table.getRowModel().rows.length > 0 ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
@@ -288,14 +299,7 @@ export default function InquiryTable() {
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  {isLoading ? (
-                    <span className="inline-flex items-center gap-2 text-lg font-medium tracking-normal">
-                      <Loader2 strokeWidth={2} className="size-5 animate-spin" />
-                      Loading...
-                    </span>
-                  ) : (
-                    "No results found"
-                  )}
+                  No results found
                 </TableCell>
               </TableRow>
             )}

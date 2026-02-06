@@ -16,9 +16,8 @@ import {
 import {
   ArrowUpDown,
   ChevronDown,
-  Loader2,
   Pencil,
-  Trash2,
+  Trash2
 } from "lucide-react";
 import * as React from "react";
 
@@ -49,6 +48,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useSupport } from "@/hooks/use-support";
 
 export default function SupportTable() {
@@ -257,9 +257,9 @@ export default function SupportTable() {
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
                     </TableHead>
                   );
                 })}
@@ -267,7 +267,17 @@ export default function SupportTable() {
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows.length ? (
+            {isLoading ? (
+              Array.from({ length: 5 }).map((_, index) => (
+                <TableRow key={index} className="hover:bg-transparent">
+                  {columns.map((_, colIndex) => (
+                    <TableCell key={colIndex}>
+                      <Skeleton className="h-6 w-full" />
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : table.getRowModel().rows.length > 0 ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
@@ -289,17 +299,7 @@ export default function SupportTable() {
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  {isLoading ? (
-                    <span className="inline-flex items-center gap-2">
-                      <Loader2
-                        strokeWidth={2}
-                        className="size-5 animate-spin"
-                      />
-                      Loading...
-                    </span>
-                  ) : (
-                    "No results."
-                  )}
+                  No results.
                 </TableCell>
               </TableRow>
             )}

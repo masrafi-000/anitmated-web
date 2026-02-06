@@ -18,6 +18,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -34,7 +35,7 @@ import {
 } from "@/hooks/use-packages";
 import { Package } from "@/schema/ts/pricing";
 import { TCPackages } from "@/schema/zod/pricing";
-import { Edit2Icon, LoaderIcon, Plus, Trash2 } from "lucide-react";
+import { Edit2Icon, Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -129,27 +130,51 @@ export default function PackagesPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {isLoading ? (
-            <div className="flex justify-center items-center gap-2 p-4 text-lg">
-              <LoaderIcon className="size-4 animate-spin" /> Loading...
-            </div>
-          ) : packagesData?.length === 0 ? (
-            <div className="text-center py-6 text-muted-foreground">
-              No packages found. Create one to get started.
-            </div>
-          ) : (
-            <Table>
-              <TableHeader>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Title</TableHead>
+                <TableHead>Price</TableHead>
+                <TableHead>Slug</TableHead>
+                <TableHead>Features</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {isLoading ? (
+                Array.from({ length: 3 }).map((_, index) => (
+                  <TableRow key={index}>
+                    <TableCell>
+                      <Skeleton className="h-6 w-32" />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton className="h-6 w-16" />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton className="h-6 w-24" />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton className="h-6 w-20" />
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <div className="flex justify-end gap-2">
+                        <Skeleton className="h-8 w-8" />
+                        <Skeleton className="h-8 w-8" />
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))
+              ) : packagesData?.length === 0 ? (
                 <TableRow>
-                  <TableHead>Title</TableHead>
-                  <TableHead>Price</TableHead>
-                  <TableHead>Slug</TableHead>
-                  <TableHead>Features</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
+                  <TableCell
+                    colSpan={5}
+                    className="h-24 text-center text-muted-foreground"
+                  >
+                    No packages found. Create one to get started.
+                  </TableCell>
                 </TableRow>
-              </TableHeader>
-              <TableBody>
-                {packagesData?.map((pkg: Package) => (
+              ) : (
+                packagesData?.map((pkg: Package) => (
                   <TableRow key={pkg.id}>
                     <TableCell className="font-medium">
                       {pkg.title}{" "}
@@ -179,10 +204,10 @@ export default function PackagesPage() {
                       </Button>
                     </TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          )}
+                ))
+              )}
+            </TableBody>
+          </Table>
         </CardContent>
       </Card>
 

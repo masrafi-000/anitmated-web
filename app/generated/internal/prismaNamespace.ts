@@ -386,7 +386,6 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   User: 'User',
   Blog: 'Blog',
-  Author: 'Author',
   JobOpportunity: 'JobOpportunity',
   Application: 'Application',
   InternalNote: 'InternalNote',
@@ -411,7 +410,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "blog" | "author" | "jobOpportunity" | "application" | "internalNote" | "inquiry" | "package" | "feature" | "checkout" | "pricingInquiry" | "support"
+    modelProps: "user" | "blog" | "jobOpportunity" | "application" | "internalNote" | "inquiry" | "package" | "feature" | "checkout" | "pricingInquiry" | "support"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -560,80 +559,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.BlogCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.BlogCountAggregateOutputType> | number
-        }
-      }
-    }
-    Author: {
-      payload: Prisma.$AuthorPayload<ExtArgs>
-      fields: Prisma.AuthorFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.AuthorFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuthorPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.AuthorFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuthorPayload>
-        }
-        findFirst: {
-          args: Prisma.AuthorFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuthorPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.AuthorFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuthorPayload>
-        }
-        findMany: {
-          args: Prisma.AuthorFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuthorPayload>[]
-        }
-        create: {
-          args: Prisma.AuthorCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuthorPayload>
-        }
-        createMany: {
-          args: Prisma.AuthorCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.AuthorCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuthorPayload>[]
-        }
-        delete: {
-          args: Prisma.AuthorDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuthorPayload>
-        }
-        update: {
-          args: Prisma.AuthorUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuthorPayload>
-        }
-        deleteMany: {
-          args: Prisma.AuthorDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.AuthorUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.AuthorUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuthorPayload>[]
-        }
-        upsert: {
-          args: Prisma.AuthorUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AuthorPayload>
-        }
-        aggregate: {
-          args: Prisma.AuthorAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateAuthor>
-        }
-        groupBy: {
-          args: Prisma.AuthorGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AuthorGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.AuthorCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AuthorCountAggregateOutputType> | number
         }
       }
     }
@@ -1346,7 +1271,11 @@ export const UserScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  name: 'name',
+  username: 'username',
   email: 'email',
+  designation: 'designation',
+  avaterImage: 'avaterImage',
   password: 'password'
 } as const
 
@@ -1363,21 +1292,11 @@ export const BlogScalarFieldEnum = {
   published: 'published',
   description: 'description',
   imageUrl: 'imageUrl',
-  Links: 'Links',
-  authoId: 'authoId'
+  readTime: 'readTime',
+  authorId: 'authorId'
 } as const
 
 export type BlogScalarFieldEnum = (typeof BlogScalarFieldEnum)[keyof typeof BlogScalarFieldEnum]
-
-
-export const AuthorScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  email: 'email',
-  designation: 'designation'
-} as const
-
-export type AuthorScalarFieldEnum = (typeof AuthorScalarFieldEnum)[keyof typeof AuthorScalarFieldEnum]
 
 
 export const JobOpportunityScalarFieldEnum = {
@@ -1795,7 +1714,6 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   blog?: Prisma.BlogOmit
-  author?: Prisma.AuthorOmit
   jobOpportunity?: Prisma.JobOpportunityOmit
   application?: Prisma.ApplicationOmit
   internalNote?: Prisma.InternalNoteOmit

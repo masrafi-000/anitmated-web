@@ -1,26 +1,16 @@
 model Blog {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   title       String
   slug        String   @unique
-  content     String
+  content     String   @db.Text 
   published   Boolean  @default(false)
   description String?
-  imageUrl    String?
-  Links       String[]
+  imageUrl    String?  
+  readTime    String?
 
-  authoId String
-  author  Author @relation(fields: [authoId], references: [id], onDelete: Cascade)
-}
-
-model Author {
-  id String @id @default(cuid())
-
-  name        String
-  email       String  @unique
-  designation String?
-
-  bologs Blog[]
+  authorId    String   
+  author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
 }

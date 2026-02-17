@@ -28,11 +28,6 @@ export type User = Prisma.UserModel
  */
 export type Blog = Prisma.BlogModel
 /**
- * Model Author
- * 
- */
-export type Author = Prisma.AuthorModel
-/**
  * Model JobOpportunity
  * 
  */

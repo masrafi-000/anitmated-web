@@ -80,6 +80,8 @@ export async function GET() {
       select: {
         name: true,
         email: true,
+        username: true,
+        designation: true,
         avaterImage: true,
       },
     });
@@ -114,4 +116,110 @@ export async function DELETE() {
   });
 
   return response;
+}
+
+export async function PUT(req: Request) {
+  try {
+    const token = (await (await import("next/headers")).cookies()).get("token");
+
+    if (!token) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized" },
+        { status: 401 },
+      );
+    }
+
+    const decoded = jwt.verify(token.value, process.env.JWT_SECRET!) as {
+      id: string;
+    };
+
+    const body = await req.json();
+    const { name, designation, avaterImage, username, password, newPassword } =
+      body;
+
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.id },
+    });
+
+    if (!user) {
+      return NextResponse.json(
+        { success: false, error: "User not found" },
+        { status: 404 },
+      );
+    }
+
+    const updateData: {
+      name?: string;
+      designation?: string;
+      avaterImage?: string;
+      username?: string;
+      password?: string;
+    } = {};
+
+    if (name) updateData.name = name;
+    if (designation) updateData.designation = designation;
+    if (avaterImage) updateData.avaterImage = avaterImage;
+
+    if (username && username !== user.username) {
+      const existingUser = await prisma.user.findUnique({
+        where: { username },
+      });
+
+      if (existingUser) {
+        return NextResponse.json(
+          { success: false, error: "Username already taken" },
+          { status: 400 },
+        );
+      }
+      updateData.username = username;
+    }
+
+    if (newPassword) {
+      if (!password) {
+        return NextResponse.json(
+          { success: false, error: "Current password is required" },
+          { status: 400 },
+        );
+      }
+
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (!isPasswordValid) {
+        return NextResponse.json(
+          { success: false, error: "Invalid current password" },
+          { status: 401 },
+        );
+      }
+
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+      updateData.password = hashedPassword;
+    }
+
+    const updatedUser = await prisma.user.update({
+      where: { id: user.id },
+      data: updateData,
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        username: true,
+        designation: true,
+        avaterImage: true,
+      },
+    });
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Profile updated successfully",
+        user: updatedUser,
+      },
+      { status: 200 },
+    );
+  } catch (error) {
+    console.error("Update Error:", error);
+    return NextResponse.json(
+      { success: false, error: "Internal Server Error" },
+      { status: 500 },
+    );
+  }
 }

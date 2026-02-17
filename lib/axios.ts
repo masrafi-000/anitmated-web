@@ -4,6 +4,12 @@ import axios, {
   InternalAxiosRequestConfig,
 } from "axios";
 
+export interface ApiError {
+  message: string;
+  status?: number;
+  data?: unknown;
+}
+
 export const api = axios.create({
   baseURL: "/api",
   timeout: 10000,
@@ -26,7 +32,7 @@ api.interceptors.request.use(
   },
   (error: AxiosError) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 api.interceptors.response.use(
@@ -44,7 +50,7 @@ api.interceptors.response.use(
     };
 
     console.error(
-      `❌ [Error Response] ${customError.status}: ${customError.message}`
+      `❌ [Error Response] ${customError.status}: ${customError.message}`,
     );
 
     // Global Error Handling Examples:
@@ -57,5 +63,5 @@ api.interceptors.response.use(
     }
 
     return Promise.reject(customError);
-  }
+  },
 );

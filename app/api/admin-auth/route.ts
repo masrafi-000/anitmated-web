@@ -58,3 +58,60 @@ export async function POST(body: Request) {
     );
   }
 }
+
+export async function GET() {
+  const token = (await (await import("next/headers")).cookies()).get("token");
+
+  if (!token) {
+    return NextResponse.json(
+      { success: false, error: "Unauthorized" },
+      { status: 401 },
+    );
+  }
+
+  try {
+    const decoded = jwt.verify(token.value, process.env.JWT_SECRET!) as {
+      id: string;
+      email: string;
+    };
+
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.id },
+      select: {
+        name: true,
+        email: true,
+        avaterImage: true,
+      },
+    });
+
+    if (!user) {
+      return NextResponse.json(
+        { success: false, error: "User not found" },
+        { status: 404 },
+      );
+    }
+
+    return NextResponse.json({ success: true, user }, { status: 200 });
+  } catch {
+    return NextResponse.json(
+      { success: false, error: "Invalid token" },
+      { status: 401 },
+    );
+  }
+}
+
+export async function DELETE() {
+  const response = NextResponse.json(
+    { success: true, message: "Logged out successfully" },
+    { status: 200 },
+  );
+
+  response.cookies.set("token", "", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    path: "/",
+    maxAge: 0,
+  });
+
+  return response;
+}

@@ -24,6 +24,10 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { useVerifyOtp, useForgotPassword } from "@/hooks/use-auth"
+import { useSearchParams } from "next/navigation"
+import { Suspense } from "react"
+import { toast } from "sonner"
 
 const formSchema = z.object({
   otp: z.string().min(6, {
@@ -31,8 +35,13 @@ const formSchema = z.object({
   }),
 })
 
-export default function VerifyOtpPage() {
+function VerifyOtpForm() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const email = searchParams.get("email") || ""
+  const mutation = useVerifyOtp()
+  const resendMutation = useForgotPassword()
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,10 +50,36 @@ export default function VerifyOtpPage() {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
-    // Verify OTP logic here
-    // On success:
-    router.push("/reset-password")
+    if (!email) {
+      toast.error("Email not found. Please try requesting OTP again.")
+      return
+    }
+
+    mutation.mutate({ email, otp: values.otp }, {
+      onSuccess: () => {
+        toast.success("Verification code verified successfully")
+        router.push(`/reset-password?email=${encodeURIComponent(email)}&otp=${encodeURIComponent(values.otp)}`)
+      },
+      onError: (error) => {
+        toast.error(error.message || "Something went wrong")
+      },
+    })
+  }
+
+  const handleResend = () => {
+    if (!email) {
+      toast.error("Email not found. Please try requesting OTP again.")
+      return
+    }
+
+    resendMutation.mutate({ email }, {
+      onSuccess: () => {
+        toast.success("New verification code sent!")
+      },
+      onError: (error) => {
+        toast.error(error.message || "Something went wrong")
+      },
+    })
   }
 
   return (
@@ -53,7 +88,7 @@ export default function VerifyOtpPage() {
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center">Verify OTP</CardTitle>
           <CardDescription className="text-center">
-            Enter the 6-digit code sent to your email
+            Enter the 6-digit code sent to {email ? <span className="font-semibold">{email}</span> : "your email"}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -77,8 +112,8 @@ export default function VerifyOtpPage() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full">
-                Verify
+              <Button type="submit" className="w-full" disabled={mutation.isPending}>
+                {mutation.isPending ? "Verifying..." : "Verify"}
               </Button>
             </form>
           </Form>
@@ -86,8 +121,13 @@ export default function VerifyOtpPage() {
         <CardFooter className="flex flex-col gap-2">
             <div className="text-sm text-center text-muted-foreground">
                 Didn&apos;t receive a code?{" "}
-                <button type="button" className="text-primary hover:underline underline-offset-4" onClick={() => console.log('Resend OTP')}>
-                    Resend
+                <button 
+                  type="button" 
+                  className="text-primary hover:underline underline-offset-4 disabled:opacity-50" 
+                  onClick={handleResend}
+                  disabled={resendMutation.isPending}
+                >
+                    {resendMutation.isPending ? "Resending..." : "Resend"}
                 </button>
             </div>
             <Link href="/login" className="text-sm text-center text-muted-foreground hover:text-primary underline underline-offset-4">
@@ -96,5 +136,13 @@ export default function VerifyOtpPage() {
         </CardFooter>
       </Card>
     </div>
+  )
+}
+
+export default function VerifyOtpPage() {
+  return (
+    <Suspense fallback={<div className="flex min-h-screen items-center justify-center text-muted-foreground">Loading...</div>}>
+      <VerifyOtpForm />
+    </Suspense>
   )
 }

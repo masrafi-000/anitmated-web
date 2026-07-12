@@ -24,6 +24,10 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { useResetPassword } from "@/hooks/use-auth"
+import { useSearchParams } from "next/navigation"
+import { Suspense } from "react"
+import { toast } from "sonner"
 
 const formSchema = z.object({
   password: z.string().min(8, {
@@ -37,8 +41,13 @@ const formSchema = z.object({
   path: ["confirmPassword"],
 })
 
-export default function ResetPasswordPage() {
+function ResetPasswordForm() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const email = searchParams.get("email") || ""
+  const otp = searchParams.get("otp") || ""
+  const mutation = useResetPassword()
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -48,10 +57,20 @@ export default function ResetPasswordPage() {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
-    // API call to reset password
-    // On success:
-    router.push("/login")
+    if (!email || !otp) {
+      toast.error("Invalid reset request. Please start over from the forgot password page.")
+      return
+    }
+
+    mutation.mutate({ email, otp, password: values.password }, {
+      onSuccess: () => {
+        toast.success("Password reset successfully! You can now log in.")
+        router.push("/login")
+      },
+      onError: (error) => {
+        toast.error(error.message || "Something went wrong")
+      },
+    })
   }
 
   return (
@@ -92,8 +111,8 @@ export default function ResetPasswordPage() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full">
-                Reset Password
+              <Button type="submit" className="w-full" disabled={mutation.isPending}>
+                {mutation.isPending ? "Resetting..." : "Reset Password"}
               </Button>
             </form>
           </Form>
@@ -105,5 +124,13 @@ export default function ResetPasswordPage() {
         </CardFooter>
       </Card>
     </div>
+  )
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={<div className="flex min-h-screen items-center justify-center text-muted-foreground">Loading...</div>}>
+      <ResetPasswordForm />
+    </Suspense>
   )
 }

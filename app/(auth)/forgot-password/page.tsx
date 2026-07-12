@@ -24,6 +24,8 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { useForgotPassword } from "@/hooks/use-auth"
+import { toast } from "sonner"
 
 const formSchema = z.object({
   email: z.string().email({
@@ -33,6 +35,7 @@ const formSchema = z.object({
 
 export default function ForgotPasswordPage() {
   const router = useRouter()
+  const mutation = useForgotPassword()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,10 +44,15 @@ export default function ForgotPasswordPage() {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
-    // API call to send OTP would go here
-    // On success, redirect to OTP verification page
-    router.push("/verify-otp")
+    mutation.mutate(values, {
+      onSuccess: () => {
+        toast.success("Verification code sent to your email")
+        router.push(`/verify-otp?email=${encodeURIComponent(values.email)}`)
+      },
+      onError: (error) => {
+        toast.error(error.message || "Something went wrong")
+      },
+    })
   }
 
   return (
@@ -72,8 +80,8 @@ export default function ForgotPasswordPage() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full">
-                Send OTP
+              <Button type="submit" className="w-full" disabled={mutation.isPending}>
+                {mutation.isPending ? "Sending OTP..." : "Send OTP"}
               </Button>
             </form>
           </Form>
